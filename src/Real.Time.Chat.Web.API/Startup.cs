@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Real.Time.Chat.Web.API.Config;
 using System;
 
 namespace Real.Time.Chat.Web.API
@@ -25,6 +26,8 @@ namespace Real.Time.Chat.Web.API
             {
                 options.AddPolicy("CorsPolicy", builder => builder.SetIsOriginAllowed(_ => true).AllowAnyMethod().AllowAnyHeader().AllowCredentials().Build());
             });
+
+            services.AddSwaggerSetup();
 
             services.AddMvc();
             services.AddLogging();
@@ -48,6 +51,9 @@ namespace Real.Time.Chat.Web.API
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseGlobalExceptionMiddleware();
+            app.UseSwaggerSetup();
 
             app.UseRouting();
 

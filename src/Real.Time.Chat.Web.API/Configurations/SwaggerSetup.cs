@@ -19,7 +19,7 @@ namespace Real.Time.Chat.Web.API.Config
                     Version = "v1",
                     Title = "Real.Time Chat",
                     Description = "Real.Time Chat API",
-                    Contact = new OpenApiContact { Name = "Yago Oliveira", Email = "yago.oliveira.ce@live.com" },
+                    Contact = new OpenApiContact { Name = "Pablo Christian Pereira Nazareth", Email = "pablo.nazareth@itau-unibanco.com.br" },
                 });
                 var securitySchema = new OpenApiSecurityScheme
                 {
