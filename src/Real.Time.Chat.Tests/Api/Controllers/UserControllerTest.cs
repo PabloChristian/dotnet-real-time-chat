@@ -1,10 +1,9 @@
 ﻿using AutoMapper;
 using Real.Time.Chat.Application.AutoMapper;
-using Real.Time.Chat.Application.Interfaces;
+using Real.Time.Chat.Domain.Interfaces;
 using Real.Time.Chat.Application.Services;
 using Real.Time.Chat.Application.SignalR;
 using Real.Time.Chat.Domain.Entity;
-using Real.Time.Chat.Domain.Interfaces;
 using Real.Time.Chat.Shared.Kernel.Entity;
 using Real.Time.Chat.Shared.Kernel.Handler;
 using Real.Time.Chat.Shared.Kernel.Notifications;
@@ -16,10 +15,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using System;
-using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
+using Real.Time.Chat.Domain.Interfaces.Messaging;
 
 namespace Real.Time.Chat.Tests.Controllers
 {

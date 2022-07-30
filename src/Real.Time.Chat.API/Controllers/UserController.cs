@@ -1,5 +1,4 @@
-﻿using Real.Time.Chat.Application.Interfaces;
-using Real.Time.Chat.Application.SignalR;
+﻿using Real.Time.Chat.Application.SignalR;
 using Real.Time.Chat.Domain.Commands;
 using Real.Time.Chat.Domain.Commands.Message;
 using Real.Time.Chat.Domain.Interfaces.Services;
@@ -12,6 +11,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
 using Real.Time.Chat.Bot;
+using Real.Time.Chat.Domain.Interfaces.Messaging;
 
 namespace Real.Time.Chat.Api.Controllers
 {
@@ -110,7 +110,7 @@ namespace Real.Time.Chat.Api.Controllers
             return Response(true);
         }
 
-        [HttpPost("signin")]
+        [HttpPost("sign-in")]
         [AllowAnonymous]
         public async Task<IActionResult> Post([FromBody]UserAddCommand command)
         {

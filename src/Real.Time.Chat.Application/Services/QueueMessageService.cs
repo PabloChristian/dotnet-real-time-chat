@@ -1,13 +1,7 @@
-﻿using AutoMapper.Configuration;
-using Real.Time.Chat.Application.Interfaces;
-using Real.Time.Chat.Shared.Kernel.Entity;
+﻿using Real.Time.Chat.Shared.Kernel.Entity;
 using MassTransit;
 using Microsoft.Extensions.Options;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Real.Time.Chat.Domain.Interfaces.Messaging;
 
 namespace Real.Time.Chat.Application.Services
 {
