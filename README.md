@@ -59,36 +59,41 @@ I have recorded some GIFs to demonstrate how the application works:
 🛠 These are all the technologies and patterns i used to develop this application
 ##### BackEnd
 <ul>
-	<li>C# .NET 6.0 Web API</li>
-	<li>SignalR</li>
-	<li>RabbitMQ</li>
-	<li>Identity</li>
-	<li>DDD</li>
-	<li>CQRS</li>
-	<li>Mediator</li>
-	<li>Middlewares: Error, Request and Response</li>
-	<li>FluentValidation</li>
-	<li>AutoMapper</li>
-	<li>Dependency Injection</li>
-	<li>MassTransit</li>
+	<li><a url="https://dotnet.microsoft.com/en-us/download/dotnet/6.0">C# .NET 6.0 Web API</a></li>
+	<li><a url="https://www.nuget.org/packages/Microsoft.AspNetCore.SignalR">SignalR</a></li>
+	<li><a url="https://www.nuget.org/packages/MassTransit.RabbitMQ/8.0.6-develop.537">RabbitMQ</a></li>
+	<li><a url="https://www.nuget.org/packages/Microsoft.AspNetCore.Identity">Identity</a></li>
+	<li><a url="https://www.nuget.org/packages/MediatR">Mediator</a></li>
+	<li><a url="https://www.nuget.org/packages/FluentValidation">FluentValidation</a></li>
+	<li><a url="https://www.nuget.org/packages/AutoMapper">AutoMapper</a></li>
+	<li><a url="https://www.nuget.org/packages/MassTransit/8.0.6-develop.537">MassTransit</a></li>
+	<li><a url=""></a>DDD</li>
+	<li><a url=""></a>CQRS</li>
+	<li><a url=""></a>Middlewares: Error, Request and Response</li>
+	<li><a url=""></a>Dependency Injection</li>
 </ul>
 
 ##### FrontEnd
 <ul>
-	<li>C# .NET 6.0 Web</li>
-	<li>Blazor</li>
-	<li>CSS</li>
-	<li>Bootstrap</li>
-	<li>Javascript</li>
+	<li><a url="https://dotnet.microsoft.com/en-us/download/dotnet/6.0">C# .NET 6.0 Web</a></li>
+	<li><a url="https://docs.microsoft.com/pt-br/aspnet/core/blazor/?view=aspnetcore-6.0">Blazor</a></li>
+	<li><a url="https://www.w3schools.com/css/">CSS</a></li>
+	<li><a url="https://getbootstrap.com/">Bootstrap</a></li>
+	<li><a url="https://developer.mozilla.org/pt-BR/docs/Web/JavaScript">Javascript</a></li>
 </ul>
 
 ## Requirements
-To execute and run the application you will need to download the following:
+To execute and run the local application, you will need to download and install the following:
 <ul>
-	<li>.NET 6.0 SDK</li>
-	<li>Docker</li>
-	<li>SQLServer</li>
+	<li><a url="https://dotnet.microsoft.com/en-us/download/dotnet/6.0">.NET 6.0</a></li>
+	<li><a url="https://docs.docker.com/compose/install/compose-desktop/">Docker Compose</a></li>
+	<li><a url="https://www.microsoft.com/pt-br/sql-server/sql-server-downloads">SQLServer</a></li>
 </ul>
 
 ## Executing the Project
 To execute the project, follow the steps below:
+1. Inside the base directory, open the command prompt (cmd) and type: "docker-compose build" to build the application.
+2. Type "docker-compose up -d" to start the application containers.
+3. Now you can execute the application.
+   3.1 To run the Web Application, navigate to http://localhost:8080
+   3.2 To run the Web Api, navigate to http://localhost:8082/swagger 
