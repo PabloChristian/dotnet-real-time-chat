@@ -1,5 +1,5 @@
 <h1 align="center">
-Real Time Chat
+⭐ Real Time Chat⭐ 
 </h1>
 💬 A real time chat using C# dotnet, SignalR, RabbitMQ, Identity and some other technologies and patterns. This is a coding challenge 👨‍💻
 
