@@ -28,6 +28,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "FrontEnd", "FrontEnd", "{80
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Real.Time.Chat.Web", "Real.Time.Chat.Web\Real.Time.Chat.Web.csproj", "{A86D8ABA-5B8E-42DA-AF59-EB4F17A3CAB9}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Real.Time.Chat.Api", "Real.Time.Chat.Api\Real.Time.Chat.Api.csproj", "{9B6157E1-9F3D-4961-8949-8538EED4F12E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -77,6 +79,12 @@ Global
 		{A86D8ABA-5B8E-42DA-AF59-EB4F17A3CAB9}.Production|Any CPU.Build.0 = Production|Any CPU
 		{A86D8ABA-5B8E-42DA-AF59-EB4F17A3CAB9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A86D8ABA-5B8E-42DA-AF59-EB4F17A3CAB9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9B6157E1-9F3D-4961-8949-8538EED4F12E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9B6157E1-9F3D-4961-8949-8538EED4F12E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9B6157E1-9F3D-4961-8949-8538EED4F12E}.Production|Any CPU.ActiveCfg = Debug|Any CPU
+		{9B6157E1-9F3D-4961-8949-8538EED4F12E}.Production|Any CPU.Build.0 = Debug|Any CPU
+		{9B6157E1-9F3D-4961-8949-8538EED4F12E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9B6157E1-9F3D-4961-8949-8538EED4F12E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -90,6 +98,7 @@ Global
 		{6B4E52A3-BBF0-495A-AC8C-B76617C94E6C} = {64ED3CDB-CBCE-46C4-8471-E851200787DB}
 		{BE35B634-746B-485E-9B7D-1472EB569BE4} = {64ED3CDB-CBCE-46C4-8471-E851200787DB}
 		{A86D8ABA-5B8E-42DA-AF59-EB4F17A3CAB9} = {808C1CBA-F0CD-45F1-896A-421660C59887}
+		{9B6157E1-9F3D-4961-8949-8538EED4F12E} = {64ED3CDB-CBCE-46C4-8471-E851200787DB}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {79FA73C7-86D8-4FE1-A038-2AE346060923}
