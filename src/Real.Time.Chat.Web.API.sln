@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Real.Time.Chat.API", "Real.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Real.Time.Chat.Application", "Real.Time.Chat.Application\Real.Time.Chat.Application.csproj", "{A21C5B25-D2A2-4D94-A026-CCA830FF6516}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Real.Time.Chat.Infrastructure.Data", "Real.Time.Chat.Infrastructure.Data\Real.Time.Chat.Infrastructure.Data.csproj", "{EFC8DC6E-0702-45B3-A331-AC9D664B4972}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Real.Time.Chat.Infrastructure", "Real.Time.Chat.Infrastructure.Data\Real.Time.Chat.Infrastructure.csproj", "{EFC8DC6E-0702-45B3-A331-AC9D664B4972}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Real.Time.Chat.Domain", "Real.Time.Chat.Domain\Real.Time.Chat.Domain.csproj", "{F8D6020D-A7EA-44E2-A0D1-59E4EA751E81}"
 EndProject

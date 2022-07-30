@@ -1,7 +1,7 @@
 ﻿using Real.Time.Chat.Domain.Interfaces;
 using Real.Time.Chat.Infra.Data.Context;
 
-namespace Real.Time.Chat.Infra.Data
+namespace Real.Time.Chat.Infrastructure.Data
 {
     public class UnitOfWork : IUnitOfWork
     {
