@@ -1,7 +1,7 @@
 <h1 align="center">
-⭐ Real Time Chat⭐ 
+⭐ Real Time Chat ⭐ 
 </h1>
-💬 A real time chat using C# dotnet, SignalR, RabbitMQ, Identity and some other technologies and patterns. This is a coding challenge 👨‍💻
+💬 A real time chat application using C# dotnet, SignalR, RabbitMQ, Identity and some other technologies and patterns. This is a coding challenge 👨‍💻
 
 ## Code Challenge
 
@@ -93,7 +93,7 @@ To execute the project, follow the steps below:
 2. Open the command prompt (cmd), navigate inside the project "\src" folder, and type: "docker-compose build" to build the application.
 3. Type "docker-compose up -d" to start the application containers.
 4. Now you can execute the application:
-   4.1 To run the Web Application, navigate to http://localhost:8080
-   4.2 To run the Web Api, navigate to http://localhost:8082/swagger 
+	1. To run the Web Application, navigate to http://localhost:8080
+	2. To run the Web Api, navigate to http://localhost:8082/swagger 
 
 to stop the execution of the containers, type "docker-compose down"
