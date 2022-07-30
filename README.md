@@ -58,31 +58,27 @@ I have recorded some GIFs to demonstrate how the application works:
 ## Technologies and Patterns
 🛠 These are all the technologies and patterns i used to develop this application
 ##### BackEnd
-<ul>
-	<li>[C# .NET 6.0 Web API](https://dotnet.microsoft.com/en-us/download/dotnet/6.0)</li>
-	<li><a url="https://www.nuget.org/packages/Microsoft.AspNetCore.SignalR">SignalR</a></li>
-	<li><a url="https://www.nuget.org/packages/MassTransit.RabbitMQ/8.0.6-develop.537">RabbitMQ</a></li>
-	<li><a url="https://www.nuget.org/packages/Microsoft.AspNetCore.Identity">Identity</a></li>
-	<li><a url="https://www.nuget.org/packages/MediatR">Mediator</a></li>
-	<li><a url="https://www.nuget.org/packages/FluentValidation">FluentValidation</a></li>
-	<li><a url="https://www.nuget.org/packages/AutoMapper">AutoMapper</a></li>
-	<li><a url="https://www.nuget.org/packages/MassTransit/8.0.6-develop.537">MassTransit</a></li>
-	<li><a url="https://www.nuget.org/packages/Refit">Refit</a></li>
-	<li><a url="https://www.nuget.org/packages/Polly">Polly</a></li>
-	<li><a url=""></a>DDD</li>
-	<li><a url=""></a>CQRS</li>
-	<li><a url=""></a>Middlewares: Error, Request and Response</li>
-	<li><a url=""></a>Dependency Injection</li>
-</ul>
+- [C# .NET 6.0 Web API](https://dotnet.microsoft.com/en-us/download/dotnet/6.0)
+- [SignalR](https://www.nuget.org/packages/Microsoft.AspNetCore.SignalR)
+- [RabbitMQ](https://www.nuget.org/packages/MassTransit.RabbitMQ/8.0.6-develop.537)
+- [Identity](https://www.nuget.org/packages/Microsoft.AspNetCore.Identity)
+- [Mediator](https://www.nuget.org/packages/MediatR)
+- [FluentValidation](https://www.nuget.org/packages/FluentValidation)
+- [AutoMapper](https://www.nuget.org/packages/AutoMapper)
+- [MassTransit](https://www.nuget.org/packages/MassTransit/8.0.6-develop.537)
+- [Refit](https://www.nuget.org/packages/Refit)
+- [Polly](https://www.nuget.org/packages/Polly)
+- DDD
+- CQRS
+- Middlewares: Error, Request and Response
+- Dependency Injection
 
 ##### FrontEnd
-<ul>
-	<li><a url="https://dotnet.microsoft.com/en-us/download/dotnet/6.0">C# .NET 6.0 Web</a></li>
-	<li><a url="https://docs.microsoft.com/pt-br/aspnet/core/blazor/?view=aspnetcore-6.0">Blazor</a></li>
-	<li><a url="https://www.w3schools.com/css/">CSS</a></li>
-	<li><a url="https://getbootstrap.com/">Bootstrap</a></li>
-	<li><a url="https://developer.mozilla.org/pt-BR/docs/Web/JavaScript">Javascript</a></li>
-</ul>
+- [C# .NET 6.0 Web](https://dotnet.microsoft.com/en-us/download/dotnet/6.0)
+- [Blazor](https://docs.microsoft.com/pt-br/aspnet/core/blazor/?view=aspnetcore-6.0)
+- [CSS](https://www.w3schools.com/css/)
+- [Bootstrap](https://getbootstrap.com/)
+- [Javascript](https://developer.mozilla.org/pt-BR/docs/Web/JavaScript)
 
 ## Requirements
 To execute and run the local application, you will need to download and install the following:
