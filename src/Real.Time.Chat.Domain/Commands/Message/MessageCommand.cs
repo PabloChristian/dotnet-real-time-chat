@@ -4,9 +4,9 @@ namespace Real.Time.Chat.Domain.Commands.Message
 {
     public class MessageCommand<TResult> : GenericCommandResult<TResult>
     {
-        public string Message { get; set; }
-        public string Consumer { get; set; }
-        public string Sender { get; set; }
+        public string Message { get; set; } = string.Empty;
+        public string Consumer { get; set; } = string.Empty;
+        public string Sender { get; set; } = string.Empty;
 
         public override bool IsValid()
         {

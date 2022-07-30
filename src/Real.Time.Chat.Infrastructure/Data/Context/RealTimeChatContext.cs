@@ -1,25 +1,23 @@
 ﻿using Real.Time.Chat.Domain.Entity;
-using Real.Time.Chat.Infra.Data.Mapping;
+using Real.Time.Chat.Infrastructure.Data.Mapping;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using System.IO;
 
-namespace Real.Time.Chat.Infra.Data.Context
+namespace Real.Time.Chat.Infrastructure.Data.Context
 {
     public class RealTimeChatContext : DbContext
     {
-        public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Messages> Messages { get; set; }
-        public RealTimeChatContext(DbContextOptions<RealTimeChatContext> options) : base(options)
-        {
-        }
+        public virtual DbSet<User> Users { get; set; }
+
+        public RealTimeChatContext(DbContextOptions<RealTimeChatContext> options) : base(options) {}
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new UserMapping());
-
             base.OnModelCreating(modelBuilder);
         }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             var config = new ConfigurationBuilder()

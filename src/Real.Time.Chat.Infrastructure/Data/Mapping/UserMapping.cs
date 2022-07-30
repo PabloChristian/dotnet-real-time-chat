@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Real.Time.Chat.Infra.Data.Mapping
+namespace Real.Time.Chat.Infrastructure.Data.Mapping
 {
     public class UserMapping : IEntityTypeConfiguration<User>
     {

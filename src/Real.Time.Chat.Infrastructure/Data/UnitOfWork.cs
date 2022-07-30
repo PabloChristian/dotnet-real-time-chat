@@ -1,5 +1,5 @@
 ﻿using Real.Time.Chat.Domain.Interfaces;
-using Real.Time.Chat.Infra.Data.Context;
+using Real.Time.Chat.Infrastructure.Data.Context;
 
 namespace Real.Time.Chat.Infrastructure.Data
 {

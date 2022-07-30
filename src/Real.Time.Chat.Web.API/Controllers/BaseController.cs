@@ -7,12 +7,12 @@ using Microsoft.AspNetCore.Mvc;
 namespace Real.Time.Chat.Web.API.Controllers
 {
     [ApiController]
-    public class ApiController : Controller
+    public class BaseController : Controller
     {
         protected readonly DomainNotificationHandler _notifications;
         protected readonly IMediatorHandler _mediator;
 
-        protected ApiController(INotificationHandler<DomainNotification> notifications,
+        protected BaseController(INotificationHandler<DomainNotification> notifications,
                                 IMediatorHandler mediator)
         {
             _notifications = (DomainNotificationHandler)notifications;

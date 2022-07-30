@@ -1,8 +1,4 @@
-﻿using System;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-using Real.Time.Chat.Application.Interfaces;
+﻿using Real.Time.Chat.Application.Interfaces;
 using Real.Time.Chat.Application.SignalR;
 using Real.Time.Chat.Domain.Commands;
 using Real.Time.Chat.Domain.Commands.Message;
@@ -20,13 +16,15 @@ using Real.Time.Chat.Bot;
 namespace Real.Time.Chat.Web.API.Controllers
 {
     [ApiController]
-    [Route("api/user")]
-    public class UserController : ApiController
+    [Route("api/users")]
+    public class UserController : BaseController
     {
         private readonly IUserService _userService;
         private readonly IHubContext<ChatHub> _chatHub;
         private readonly IQueueMessageService _queueMessageService;
-        public UserController(IUserService userService, IHubContext<ChatHub> chatHub, IQueueMessageService queueMessageService, INotificationHandler<DomainNotification> notifications, IMediatorHandler mediator) : base(notifications, mediator)
+
+        public UserController(IUserService userService, IHubContext<ChatHub> chatHub, IQueueMessageService queueMessageService, INotificationHandler<DomainNotification> notifications, IMediatorHandler mediator) 
+            : base(notifications, mediator)
         {
             _userService = userService;
             _chatHub = chatHub;
@@ -78,7 +76,9 @@ namespace Real.Time.Chat.Web.API.Controllers
                 });
             }
             else
-                await _chatHub.Clients.Groups(messageAddCommand.Sender).SendAsync("ReceiveMessage", messageAddCommand.Sender, "Was not delivered. please, select an user");
+                await _chatHub.Clients
+                    .Groups(messageAddCommand.Sender)
+                    .SendAsync("ReceiveMessage", messageAddCommand.Sender, "Message was not delivered. please, select an user");
 
             return Response(true);
         }
@@ -88,10 +88,12 @@ namespace Real.Time.Chat.Web.API.Controllers
         public async Task<IActionResult> ReceiveMessage([FromBody] MessageDto message)
         {
             var bot = new BotCall();
+
             if (BotCall.IsStockCall(message.Message))
             {
                 var msg = bot.CallServiceStock(message.Message[7..]);
                 await _chatHub.Clients.Groups(message.Sender).SendAsync("ReceiveMessage", "Bot", msg);
+
                 if (!string.IsNullOrEmpty(message.Consumer) && bot.VerifyResponse())
                     await _chatHub.Clients.Groups(message.Consumer).SendAsync("ReceiveMessage", "Bot", msg);
             }
@@ -104,6 +106,7 @@ namespace Real.Time.Chat.Web.API.Controllers
                 else
                     await _chatHub.Clients.Groups(message.Sender).SendAsync("ReceiveMessage", message.Sender, "Was not delivered. please, select an user");
             }
+
             return Response(true);
         }
 

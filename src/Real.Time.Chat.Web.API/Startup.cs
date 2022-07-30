@@ -2,7 +2,7 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Real.Time.Chat.API.Configurations;
 using Real.Time.Chat.Application.AutoMapper;
-using Real.Time.Chat.Infra.Data.Context;
+using Real.Time.Chat.Infrastructure.Data.Context;
 using Real.Time.Chat.Shared.Kernel.Entity;
 using Real.Time.Chat.Web.API.Config;
 
@@ -10,12 +10,9 @@ namespace Real.Time.Chat.Web.API
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
-        {
-            Configuration = configuration;
-        }
-
         public IConfiguration Configuration { get; }
+
+        public Startup(IConfiguration configuration) => Configuration = configuration;
 
         public void ConfigureServices(IServiceCollection services)
         {
@@ -58,9 +55,7 @@ namespace Real.Time.Chat.Web.API
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
-            {
                 app.UseDeveloperExceptionPage();
-            }
 
             app.UseGlobalExceptionMiddleware();
             app.UseSwaggerSetup();

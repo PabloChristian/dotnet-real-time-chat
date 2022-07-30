@@ -1,10 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Threading.Tasks;
+﻿using System.Net;
 
 namespace Real.Time.Chat.Web.API.Middlewares
 {
@@ -12,10 +6,7 @@ namespace Real.Time.Chat.Web.API.Middlewares
     {
         private readonly RequestDelegate _next;
 
-        public ExceptionHandlerMiddleware(RequestDelegate next)
-        {
-            _next = next;
-        }
+        public ExceptionHandlerMiddleware(RequestDelegate next) => _next = next;
 
         public async Task InvokeAsync(HttpContext httpContext)
         {
@@ -29,15 +20,11 @@ namespace Real.Time.Chat.Web.API.Middlewares
             }
         }
 
-        private Task HandleExceptionAsync(HttpContext httpContext, Exception e)
+        private Task HandleExceptionAsync(HttpContext httpContext, Exception _)
         {
             httpContext.Response.ContentType = "application/json";
             httpContext.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
-            return httpContext.Response.WriteAsync(new 
-            {
-                StatusCode = httpContext.Response.StatusCode,
-                Message = "Something went wrong !Internal Server Error"
-            }.ToString());
+            return httpContext.Response.WriteAsync("Request could not be processed, internal Server Error");
         }
     }
 }

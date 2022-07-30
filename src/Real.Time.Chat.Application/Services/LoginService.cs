@@ -5,10 +5,7 @@ using Real.Time.Chat.Shared.Kernel.Entity;
 using Real.Time.Chat.Shared.Kernel.Helper;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
-using System;
-using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
 using System.Security.Claims;
 using System.Text;
 
@@ -25,11 +22,9 @@ namespace Real.Time.Chat.Application.Services
             _config = config;
         }
 
-        public User Authenticate(string email, string password)
-        {
-            var passwordEncrypt = Cryptography.PasswordEncrypt(password);
-            return _userRepository.GetByExpression(x => x.Email == email && x.Password == passwordEncrypt).FirstOrDefault();
-        }
+        public User Authenticate(string email, string password) =>
+            _userRepository.GetByExpression(x => x.Email == email && x.Password == Cryptography.PasswordEncrypt(password))?.FirstOrDefault();
+
 
         public TokenJWT GetToken(Guid id, string email)
         {

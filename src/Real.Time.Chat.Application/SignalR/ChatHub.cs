@@ -14,6 +14,6 @@ namespace Real.Time.Chat.Application.SignalR
             await base.OnConnectedAsync();
         }
 
-        public async override Task OnDisconnectedAsync(Exception e) => await base.OnDisconnectedAsync(e);
+        public async override Task OnDisconnectedAsync(Exception? e) => await base.OnDisconnectedAsync(e);
     }
 }

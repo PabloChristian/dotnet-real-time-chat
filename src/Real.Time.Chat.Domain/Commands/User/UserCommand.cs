@@ -4,6 +4,11 @@ namespace Real.Time.Chat.Domain.Commands.User
 {
     public class UserCommand<TResult> : GenericCommandResult<TResult>
     {
+        public string Name { get; set; } = string.Empty;
+        public string Email { get; set; } = string.Empty;
+        public string Password { get; set; } = string.Empty;
+        public string SecondPassword { get; set; } = string.Empty;
+
         public UserCommand() { }
         public UserCommand(string name, string email, string password, string secondPassword)
         {
@@ -13,10 +18,6 @@ namespace Real.Time.Chat.Domain.Commands.User
             SecondPassword = secondPassword;
         }
 
-        public string Name { get; set; }
-        public string Email { get; set; }
-        public string Password { get; set; }
-        public string SecondPassword { get; set; }
         public override bool IsValid()
         {
             ValidationResult = new UserValidator<UserCommand<TResult>>().Validate(this);
@@ -25,16 +26,14 @@ namespace Real.Time.Chat.Domain.Commands.User
 
         internal class UserValidator<T> : AbstractValidator<T> where T : UserCommand<TResult>
         {
-            public UserValidator()
-            {
-                StartRules();
-            }
+            public UserValidator() => StartRules();
 
             protected virtual void StartRules()
             {
                 RuleFor(x => x.Name)
                     .NotEmpty()
                     .NotNull().WithMessage("The name is required.");
+
                 RuleFor(x => x.Email)
                     .NotEmpty().WithMessage("The email is required.")
                     .EmailAddress().WithMessage("A valid email address is required.");
@@ -44,6 +43,7 @@ namespace Real.Time.Chat.Domain.Commands.User
                     {
                         if (string.IsNullOrEmpty(x.Password))
                             context.AddFailure("A password is required");
+
                         if(string.IsNullOrEmpty(x.SecondPassword))
                             context.AddFailure("Repeat the password");
 
