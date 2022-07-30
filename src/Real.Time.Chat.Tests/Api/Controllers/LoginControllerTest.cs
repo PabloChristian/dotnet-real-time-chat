@@ -3,14 +3,14 @@ using Real.Time.Chat.Domain.Commands;
 using Real.Time.Chat.Shared.Kernel.Entity;
 using Real.Time.Chat.Shared.Kernel.Handler;
 using Real.Time.Chat.Shared.Kernel.Notifications;
-using Real.Time.Chat.Tests.ContextDb;
+using Real.Time.Chat.Tests.Infrastructure.Data.ContextDb;
 using Real.Time.Chat.Api.Controllers;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using System.Net;
 
-namespace Real.Time.Chat.Tests.Controllers
+namespace Real.Time.Chat.Tests.Api.Controllers
 {
     [TestClass]
     public class LoginControllerTest : RealTimeChatDbContextFixure

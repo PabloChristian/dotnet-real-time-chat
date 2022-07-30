@@ -9,7 +9,7 @@ using Real.Time.Chat.Shared.Kernel.Handler;
 using Real.Time.Chat.Shared.Kernel.Notifications;
 using Real.Time.Chat.Infrastructure.Data;
 using Real.Time.Chat.Infrastructure.Data.Repositories;
-using Real.Time.Chat.Tests.ContextDb;
+using Real.Time.Chat.Tests.Infrastructure.Data.ContextDb;
 using Real.Time.Chat.Api.Controllers;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
@@ -17,7 +17,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using Real.Time.Chat.Domain.Interfaces.Messaging;
 
-namespace Real.Time.Chat.Tests.Controllers
+namespace Real.Time.Chat.Tests.Api.Controllers
 {
     [TestClass]
     public class UserControllerTest : RealTimeChatDbContextFixure

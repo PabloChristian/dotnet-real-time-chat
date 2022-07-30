@@ -10,12 +10,12 @@ using Real.Time.Chat.Shared.Kernel.Helper;
 using Real.Time.Chat.Shared.Kernel.Notifications;
 using Real.Time.Chat.Infrastructure.Data;
 using Real.Time.Chat.Infrastructure.Data.Repositories;
-using Real.Time.Chat.Tests.ContextDb;
+using Real.Time.Chat.Tests.Infrastructure.Data.ContextDb;
 using Microsoft.Extensions.Configuration;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 
-namespace Real.Time.Chat.Tests.CommandHandlers
+namespace Real.Time.Chat.Tests.Domain.CommandHandlers
 {
     [TestClass]
     public class LoginHandlerTest : RealTimeChatDbContextFixure
