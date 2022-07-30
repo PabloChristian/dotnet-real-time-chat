@@ -8,7 +8,7 @@ using Real.Time.Chat.Api.Configurations;
 using Real.Time.Chat.Infrastructure.Security;
 using Real.Time.Chat.Infrastructure.InversionOfControl;
 
-namespace Real.Time.Chat.Web.API
+namespace Real.Time.Chat.Web.Api
 {
     public class Startup
     {
