@@ -59,7 +59,7 @@ I have recorded some GIFs to demonstrate how the application works:
 🛠 These are all the technologies and patterns i used to develop this application
 ##### BackEnd
 <ul>
-	<li><a url="https://dotnet.microsoft.com/en-us/download/dotnet/6.0">C# .NET 6.0 Web API</a></li>
+	<li>[C# .NET 6.0 Web API](https://dotnet.microsoft.com/en-us/download/dotnet/6.0)</li>
 	<li><a url="https://www.nuget.org/packages/Microsoft.AspNetCore.SignalR">SignalR</a></li>
 	<li><a url="https://www.nuget.org/packages/MassTransit.RabbitMQ/8.0.6-develop.537">RabbitMQ</a></li>
 	<li><a url="https://www.nuget.org/packages/Microsoft.AspNetCore.Identity">Identity</a></li>
