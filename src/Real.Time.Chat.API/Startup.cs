@@ -5,6 +5,7 @@ using Real.Time.Chat.Application.AutoMapper;
 using Real.Time.Chat.Infrastructure.Data.Context;
 using Real.Time.Chat.Shared.Kernel.Entity;
 using Real.Time.Chat.Api.Configurations;
+using Real.Time.Chat.Infrastructure.Security;
 
 namespace Real.Time.Chat.Web.API
 {
@@ -23,22 +24,14 @@ namespace Real.Time.Chat.Web.API
             });
 
             services.AddDbContext<RealTimeChatContext>(options => options.UseSqlServer(Configuration.GetConnectionString("RealTimeChatConnection")));
-
-            //services.AddIdentitySetup(Configuration);
-
+            services.AddIdentitySetup(Configuration);
             AutoMapperConfig.RegisterMappings();
-
             services.AddSwaggerSetup();
-
             services.AddSingleton(AutoMapperConfig.RegisterMappings().CreateMapper());
-
             services.AddMvc();
             services.AddLogging();
-
             services.AddHttpClient("RealTimeChat", cfg => { cfg.Timeout = TimeSpan.FromSeconds(60); });
-
             services.AddHttpContextAccessor();
-
             services.AddMediatR(typeof(Startup));
             services.Configure<RabbitMqOptions>(options => Configuration.GetSection("RabbitMqConfig").Bind(options));
             services.AddMassTransitSetup(Configuration.GetSection("RabbitMqConfig").Get<RabbitMqOptions>());
