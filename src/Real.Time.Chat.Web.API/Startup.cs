@@ -1,11 +1,10 @@
 using MediatR;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
+using Microsoft.EntityFrameworkCore;
+using Real.Time.Chat.API.Configurations;
+using Real.Time.Chat.Application.AutoMapper;
+using Real.Time.Chat.Infra.Data.Context;
+using Real.Time.Chat.Shared.Kernel.Entity;
 using Real.Time.Chat.Web.API.Config;
-using System;
 
 namespace Real.Time.Chat.Web.API
 {
@@ -22,22 +21,33 @@ namespace Real.Time.Chat.Web.API
         {
             services.AddControllers();
 
-            services.AddCors(options =>
-            {
+            services.AddCors(options => {
                 options.AddPolicy("CorsPolicy", builder => builder.SetIsOriginAllowed(_ => true).AllowAnyMethod().AllowAnyHeader().AllowCredentials().Build());
             });
 
+            services.AddDbContext<RealTimeChatContext>(options => options.UseSqlServer(Configuration.GetConnectionString("RealTimeChatConnection")));
+
+            //services.AddIdentitySetup(Configuration);
+
+            AutoMapperConfig.RegisterMappings();
+
             services.AddSwaggerSetup();
+
+            services.AddSingleton(AutoMapperConfig.RegisterMappings().CreateMapper());
 
             services.AddMvc();
             services.AddLogging();
 
-            services.AddHttpClient("Real.TimeChat", cfg => { cfg.Timeout = TimeSpan.FromSeconds(60); });
+            services.AddHttpClient("RealTimeChat", cfg => { cfg.Timeout = TimeSpan.FromSeconds(60); });
 
             services.AddHttpContextAccessor();
 
             services.AddMediatR(typeof(Startup));
-            
+            services.Configure<RabbitMqOptions>(options => Configuration.GetSection("RabbitMqConfig").Bind(options));
+            services.AddMassTransitSetup(Configuration.GetSection("RabbitMqConfig").Get<RabbitMqOptions>());
+
+            //DependencyInjectionResolver.RegisterServices(services);
+
             services.AddSignalR(hubOptions =>
             {
                 hubOptions.EnableDetailedErrors = true;
@@ -61,9 +71,17 @@ namespace Real.Time.Chat.Web.API
             app.UseAuthentication();
             app.UseAuthorization();
 
+            app.EnsureMigrationOfContext<RealTimeChatContext>();
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapHub<Application.SignalR.ChatHub>("/chatHub", options =>
+                {
+                    options.TransportMaxBufferSize = 36000;
+                    options.ApplicationMaxBufferSize = 36000;
+                    options.Transports = Microsoft.AspNetCore.Http.Connections.HttpTransportType.LongPolling;
+                });
             });
         }
     }

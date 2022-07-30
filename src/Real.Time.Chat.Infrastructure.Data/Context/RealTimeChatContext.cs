@@ -31,7 +31,7 @@ namespace Real.Time.Chat.Infra.Data.Context
 #endif
                  .Build();
 
-            optionsBuilder.UseSqlServer(config.GetConnectionString("FinancialChatConnection"));
+            optionsBuilder.UseSqlServer(config.GetConnectionString("RealTimeChatConnection"));
         }
     }
 }

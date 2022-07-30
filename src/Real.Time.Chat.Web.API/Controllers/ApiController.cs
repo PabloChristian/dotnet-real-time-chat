@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Real.Time.Chat.Shared.Kernel.Entity;
+﻿using Real.Time.Chat.Shared.Kernel.Entity;
 using Real.Time.Chat.Shared.Kernel.Handler;
 using Real.Time.Chat.Shared.Kernel.Notifications;
 using MediatR;
@@ -22,20 +20,16 @@ namespace Real.Time.Chat.Web.API.Controllers
         }
 
         protected IEnumerable<DomainNotification> Notifications => _notifications.GetNotifications();
+        protected bool IsValidOperation() => !_notifications.HasNotifications();
 
-        protected bool IsValidOperation()
-        {
-            return (!_notifications.HasNotifications());
-        }
-
-        protected new IActionResult Response(object result = null)
+        protected new IActionResult Response(object result)
         {
             if (IsValidOperation())
             {
                 return Ok(new ApiOkReturn
                 {
-                    success = true,
-                    data = result
+                    Success = true,
+                    Data = result
                 });
             }
 
@@ -56,9 +50,6 @@ namespace Real.Time.Chat.Web.API.Controllers
             }
         }
 
-        protected void NotifyError(string code, string message)
-        {
-            _mediator.RaiseEvent(new DomainNotification(code, message));
-        }
+        protected void NotifyError(string code, string message) => _mediator.RaiseEvent(new DomainNotification(code, message));
     }
 }

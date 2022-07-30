@@ -2,7 +2,7 @@
 {
     public class ApiOkReturn
     {
-        public bool success { get; set; }
-        public object data { get; set; }
+        public bool Success { get; set; }
+        public object? Data { get; set; }
     }
 }

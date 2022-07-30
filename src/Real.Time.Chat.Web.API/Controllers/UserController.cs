@@ -15,7 +15,6 @@ using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
-using Microsoft.EntityFrameworkCore.Internal;
 using Real.Time.Chat.Bot;
 
 namespace Real.Time.Chat.Web.API.Controllers
@@ -24,9 +23,9 @@ namespace Real.Time.Chat.Web.API.Controllers
     [Route("api/user")]
     public class UserController : ApiController
     {
-        private IUserService _userService;
-        private IHubContext<ChatHub> _chatHub;
-        private IQueueMessageService _queueMessageService;
+        private readonly IUserService _userService;
+        private readonly IHubContext<ChatHub> _chatHub;
+        private readonly IQueueMessageService _queueMessageService;
         public UserController(IUserService userService, IHubContext<ChatHub> chatHub, IQueueMessageService queueMessageService, INotificationHandler<DomainNotification> notifications, IMediatorHandler mediator) : base(notifications, mediator)
         {
             _userService = userService;
@@ -81,7 +80,7 @@ namespace Real.Time.Chat.Web.API.Controllers
             else
                 await _chatHub.Clients.Groups(messageAddCommand.Sender).SendAsync("ReceiveMessage", messageAddCommand.Sender, "Was not delivered. please, select an user");
 
-            return Response();
+            return Response(true);
         }
 
         [HttpPost("receive")]
@@ -91,7 +90,7 @@ namespace Real.Time.Chat.Web.API.Controllers
             var bot = new BotCall();
             if (bot.IsStockCall(message.Message))
             {
-                var msg = bot.CallServiceStock(message.Message.Substring(7, message.Message.Length - 7));
+                var msg = bot.CallServiceStock(message.Message[7..]);
                 await _chatHub.Clients.Groups(message.Sender).SendAsync("ReceiveMessage", "Bot", msg);
                 if (!string.IsNullOrEmpty(message.Consumer) && bot.VerifyResponse())
                     await _chatHub.Clients.Groups(message.Consumer).SendAsync("ReceiveMessage", "Bot", msg);

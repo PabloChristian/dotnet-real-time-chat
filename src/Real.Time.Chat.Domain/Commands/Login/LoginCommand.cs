@@ -4,8 +4,8 @@ namespace Real.Time.Chat.Domain.Commands.User
 {
     public class LoginCommand<TResult> : GenericCommandResult<TResult>
     {
-        public string Email { get; set; }
-        public string Password { get; set; }
+        public string Email { get; set; } = string.Empty;
+        public string Password { get; set; } = string.Empty;
 
         public override bool IsValid()
         {
@@ -27,13 +27,6 @@ namespace Real.Time.Chat.Domain.Commands.User
 
                 RuleFor(x => x.Password).NotEmpty()
                     .WithMessage("The password is required");
-
-                //RuleFor(x => x.Password)
-                //    .Custom((x, context) =>
-                //    {
-                //        if (x.Length < 6)
-                //            context.AddFailure("Password must have minimum 6 characters");
-                //    });
             }
         }
     }
