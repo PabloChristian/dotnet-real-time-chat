@@ -11,14 +11,15 @@
             try
             {
                 Console.WriteLine(
-                    $"Response completed - ID: {httpContext.Connection.Id} - IP: {httpContext.Connection.RemoteIpAddress}"
-                    + $" - StatusCode: {httpContext.Response.StatusCode} - Response: {httpContext.Response.Body.ToString}");
+                    $"Response completed - ID: {httpContext.Connection.Id}"
+                    + $" - StatusCode: {httpContext.Response.StatusCode}"
+                );
                 await _next(httpContext);
             }
             catch (Exception e)
             {
                 Console.WriteLine(
-                    $"Something went wrong with Response ID: {httpContext.Connection.Id} - IP: {httpContext.Connection.RemoteIpAddress}"
+                    $"Something went wrong with Response ID: {httpContext.Connection.Id}"
                     + $" - StatusCode: {httpContext.Response.StatusCode} - Error: {e.Message}"
                 );
             }

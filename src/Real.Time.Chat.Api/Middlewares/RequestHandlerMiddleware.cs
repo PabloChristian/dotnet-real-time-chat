@@ -10,13 +10,13 @@
         {
             try
             {
-                Console.WriteLine($"Request received - ID: {httpContext.Connection.Id} - IP: {httpContext.Connection.RemoteIpAddress}");
+                Console.WriteLine($"Request received - ID: {httpContext.Connection.Id}");
                 await _next(httpContext);
             }
             catch (Exception e)
             {
                 Console.WriteLine(
-                    $"Something went wrong with Request ID: {httpContext.Connection.Id} - IP: {httpContext.Connection.RemoteIpAddress}"
+                    $"Something went wrong with Request ID: {httpContext.Connection.Id}"
                     + $" - StatusCode: {httpContext.Response.StatusCode} - Error: {e.Message}"
                 );
             }
