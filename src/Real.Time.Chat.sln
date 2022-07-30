@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32630.192
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Real.Time.Chat.Api", "Real.Time.Chat.API\Real.Time.Chat.Api.csproj", "{CF365BF6-B972-4380-834A-A4E44925117C}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Real.Time.Chat.Application", "Real.Time.Chat.Application\Real.Time.Chat.Application.csproj", "{A21C5B25-D2A2-4D94-A026-CCA830FF6516}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Real.Time.Chat.Infrastructure", "Real.Time.Chat.Infrastructure\Real.Time.Chat.Infrastructure.csproj", "{EFC8DC6E-0702-45B3-A331-AC9D664B4972}"
@@ -37,12 +35,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{CF365BF6-B972-4380-834A-A4E44925117C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CF365BF6-B972-4380-834A-A4E44925117C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CF365BF6-B972-4380-834A-A4E44925117C}.Production|Any CPU.ActiveCfg = Production|Any CPU
-		{CF365BF6-B972-4380-834A-A4E44925117C}.Production|Any CPU.Build.0 = Production|Any CPU
-		{CF365BF6-B972-4380-834A-A4E44925117C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CF365BF6-B972-4380-834A-A4E44925117C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A21C5B25-D2A2-4D94-A026-CCA830FF6516}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A21C5B25-D2A2-4D94-A026-CCA830FF6516}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A21C5B25-D2A2-4D94-A026-CCA830FF6516}.Production|Any CPU.ActiveCfg = Debug|Any CPU
@@ -90,7 +82,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{CF365BF6-B972-4380-834A-A4E44925117C} = {64ED3CDB-CBCE-46C4-8471-E851200787DB}
 		{A21C5B25-D2A2-4D94-A026-CCA830FF6516} = {64ED3CDB-CBCE-46C4-8471-E851200787DB}
 		{EFC8DC6E-0702-45B3-A331-AC9D664B4972} = {64ED3CDB-CBCE-46C4-8471-E851200787DB}
 		{F8D6020D-A7EA-44E2-A0D1-59E4EA751E81} = {64ED3CDB-CBCE-46C4-8471-E851200787DB}
