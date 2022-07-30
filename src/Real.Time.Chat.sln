@@ -15,7 +15,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Real.Time.Chat.Shared.Kerne
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Real.Time.Chat.Bot", "Real.Time.Chat.Bot\Real.Time.Chat.Bot.csproj", "{1CF87808-9F57-4F3E-809F-15C3FA01D3B7}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web Api", "Web Api", "{64ED3CDB-CBCE-46C4-8471-E851200787DB}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BackEnd", "BackEnd", "{64ED3CDB-CBCE-46C4-8471-E851200787DB}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Bot", "Bot", "{6B4E52A3-BBF0-495A-AC8C-B76617C94E6C}"
 EndProject
@@ -25,6 +25,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Real.Time.Chat.Tests", "Real.Time.Chat.Tests\Real.Time.Chat.Tests.csproj", "{BE35B634-746B-485E-9B7D-1472EB569BE4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "FrontEnd", "FrontEnd", "{808C1CBA-F0CD-45F1-896A-421660C59887}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Real.Time.Chat.Web", "Real.Time.Chat.Web\Real.Time.Chat.Web.csproj", "{A86D8ABA-5B8E-42DA-AF59-EB4F17A3CAB9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -75,6 +79,12 @@ Global
 		{BE35B634-746B-485E-9B7D-1472EB569BE4}.Production|Any CPU.Build.0 = Debug|Any CPU
 		{BE35B634-746B-485E-9B7D-1472EB569BE4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BE35B634-746B-485E-9B7D-1472EB569BE4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A86D8ABA-5B8E-42DA-AF59-EB4F17A3CAB9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A86D8ABA-5B8E-42DA-AF59-EB4F17A3CAB9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A86D8ABA-5B8E-42DA-AF59-EB4F17A3CAB9}.Production|Any CPU.ActiveCfg = Production|Any CPU
+		{A86D8ABA-5B8E-42DA-AF59-EB4F17A3CAB9}.Production|Any CPU.Build.0 = Production|Any CPU
+		{A86D8ABA-5B8E-42DA-AF59-EB4F17A3CAB9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A86D8ABA-5B8E-42DA-AF59-EB4F17A3CAB9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -88,6 +98,7 @@ Global
 		{1CF87808-9F57-4F3E-809F-15C3FA01D3B7} = {6B4E52A3-BBF0-495A-AC8C-B76617C94E6C}
 		{6B4E52A3-BBF0-495A-AC8C-B76617C94E6C} = {64ED3CDB-CBCE-46C4-8471-E851200787DB}
 		{BE35B634-746B-485E-9B7D-1472EB569BE4} = {64ED3CDB-CBCE-46C4-8471-E851200787DB}
+		{A86D8ABA-5B8E-42DA-AF59-EB4F17A3CAB9} = {808C1CBA-F0CD-45F1-896A-421660C59887}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {79FA73C7-86D8-4FE1-A038-2AE346060923}
