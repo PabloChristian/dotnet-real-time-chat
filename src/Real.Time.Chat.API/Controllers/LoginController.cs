@@ -38,8 +38,7 @@ namespace Real.Time.Chat.Api.Controllers
         {
             var token = await _mediator.SendCommandResult(command);
 
-            if (token != null)
-                return Response(token);
+            if (token != null) return Response(token);
 
             return Unauthorized();
         }

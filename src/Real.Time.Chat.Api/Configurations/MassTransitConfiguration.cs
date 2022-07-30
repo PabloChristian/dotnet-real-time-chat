@@ -3,9 +3,9 @@ using Real.Time.Chat.Shared.Kernel.Entity;
 
 namespace Real.Time.Chat.Api.Configurationsurations
 {
-    public static class MassTransitSetup
+    public static class MassTransitConfiguration
     {
-        public static void AddMassTransitSetup(this IServiceCollection services, RabbitMqOptions options)
+        public static void AddMassTransit(this IServiceCollection services, RabbitMqOptions options)
         {
             var busControl = Bus.Factory.CreateUsingRabbitMq(cfg =>
             {

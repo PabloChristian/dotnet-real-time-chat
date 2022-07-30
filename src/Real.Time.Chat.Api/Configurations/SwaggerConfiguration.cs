@@ -6,9 +6,9 @@ using System.Collections.Generic;
 
 namespace Real.Time.Chat.Api.Configurations
 {
-    public static class SwaggerSetup
+    public static class SwaggerConfiguration
     {
-        public static void AddSwaggerSetup(this IServiceCollection services)
+        public static void AddSwagger(this IServiceCollection services)
         {
             if (services == null) throw new ArgumentNullException(nameof(services));
 

@@ -7,11 +7,13 @@ using System.Threading.Tasks;
 
 namespace Real.Time.Chat.Api.Configurations
 {
-    public static class GlobalExceptionMiddleware
+    public static class MiddlewareConfiguration
     {
-        public static void UseGlobalExceptionMiddleware(this IApplicationBuilder app)
+        public static void AddMiddlewares(this IApplicationBuilder app)
         {
+            app.UseMiddleware<RequestHandlerMiddleware>();
             app.UseMiddleware<ExceptionHandlerMiddleware>();
+            app.UseMiddleware<ResponseHandlerMiddleware>();
         }
     }
 }

@@ -4,9 +4,9 @@ using Real.Time.Chat.Infrastructure.Data;
 
 namespace Real.Time.Chat.Api.Configurationsurations
 {
-    public static class EnsureMigration
+    public static class MigrationConfiguration
     {
-        public static void EnsureMigrationOfContext<T>(this IApplicationBuilder app) where T : DbContext
+        public static void AddMigration<T>(this IApplicationBuilder app) where T : DbContext
         {
             using var scope = app.ApplicationServices.CreateScope();
             var dbContext = scope.ServiceProvider.GetService<T>();

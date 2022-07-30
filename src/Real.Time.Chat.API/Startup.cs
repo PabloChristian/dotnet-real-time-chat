@@ -6,6 +6,7 @@ using Real.Time.Chat.Infrastructure.Data.Context;
 using Real.Time.Chat.Shared.Kernel.Entity;
 using Real.Time.Chat.Api.Configurations;
 using Real.Time.Chat.Infrastructure.Security;
+using Real.Time.Chat.Infrastructure.InversionOfControl;
 
 namespace Real.Time.Chat.Web.API
 {
@@ -26,7 +27,7 @@ namespace Real.Time.Chat.Web.API
             services.AddDbContext<RealTimeChatContext>(options => options.UseSqlServer(Configuration.GetConnectionString("RealTimeChatConnection")));
             services.AddIdentitySetup(Configuration);
             AutoMapperConfig.RegisterMappings();
-            services.AddSwaggerSetup();
+            services.AddSwagger();
             services.AddSingleton(AutoMapperConfig.RegisterMappings().CreateMapper());
             services.AddMvc();
             services.AddLogging();
@@ -34,9 +35,9 @@ namespace Real.Time.Chat.Web.API
             services.AddHttpContextAccessor();
             services.AddMediatR(typeof(Startup));
             services.Configure<RabbitMqOptions>(options => Configuration.GetSection("RabbitMqConfig").Bind(options));
-            services.AddMassTransitSetup(Configuration.GetSection("RabbitMqConfig").Get<RabbitMqOptions>());
+            services.AddMassTransit(Configuration.GetSection("RabbitMqConfig").Get<RabbitMqOptions>());
 
-            //DependencyInjectionResolver.RegisterServices(services);
+            services.RegisterServices();
 
             services.AddSignalR(hubOptions =>
             {
@@ -50,7 +51,7 @@ namespace Real.Time.Chat.Web.API
             if (env.IsDevelopment())
                 app.UseDeveloperExceptionPage();
 
-            app.UseGlobalExceptionMiddleware();
+            app.AddMiddlewares();
             app.UseSwaggerSetup();
 
             app.UseRouting();
@@ -59,7 +60,7 @@ namespace Real.Time.Chat.Web.API
             app.UseAuthentication();
             app.UseAuthorization();
 
-            app.EnsureMigrationOfContext<RealTimeChatContext>();
+            app.AddMigration<RealTimeChatContext>();
 
             app.UseEndpoints(endpoints =>
             {

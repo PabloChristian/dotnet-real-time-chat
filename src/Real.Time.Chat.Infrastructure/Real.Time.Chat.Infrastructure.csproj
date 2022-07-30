@@ -22,9 +22,11 @@
     <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="6.0.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions" Version="6.0.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="6.0.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="6.0.0" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Real.Time.Chat.Application\Real.Time.Chat.Application.csproj" />
     <ProjectReference Include="..\Real.Time.Chat.Domain\Real.Time.Chat.Domain.csproj" />
   </ItemGroup>
 
