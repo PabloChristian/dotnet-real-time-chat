@@ -1,14 +1,13 @@
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using Real.Time.Chat.Api.Configurationsurations;
+using Real.Time.Chat.Api.Configurations;
 using Real.Time.Chat.Application.AutoMapper;
 using Real.Time.Chat.Infrastructure.Data.Context;
 using Real.Time.Chat.Shared.Kernel.Entity;
-using Real.Time.Chat.Api.Configurations;
 using Real.Time.Chat.Infrastructure.Security;
 using Real.Time.Chat.Infrastructure.InversionOfControl;
 
-namespace Real.Time.Chat.Web.Api
+namespace Real.Time.Chat.Api
 {
     public class Startup
     {

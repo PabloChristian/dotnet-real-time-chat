@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Real.Time.Chat.Infrastructure.Data;
 
-namespace Real.Time.Chat.Api.Configurationsurations
+namespace Real.Time.Chat.Api.Configurations
 {
     public static class MigrationConfiguration
     {

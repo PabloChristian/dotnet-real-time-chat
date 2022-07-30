@@ -18,7 +18,7 @@ namespace Real.Time.Chat.Api.Configurations
                 {
                     Version = "v1",
                     Title = "Real.Time Chat",
-                    Description = "Real.Time Chat API",
+                    Description = "Real.Time Chat Api",
                     Contact = new OpenApiContact { Name = "Pablo Christian Pereira Nazareth", Email = "pablo.nazareth@itau-unibanco.com.br" },
                 });
                 var securitySchema = new OpenApiSecurityScheme
@@ -61,14 +61,8 @@ namespace Real.Time.Chat.Api.Configurations
         {
             if (app == null) throw new ArgumentNullException(nameof(app));
 
-            app.UseSwagger(c =>
-            {
-                c.RouteTemplate = "/swagger/{documentName}/swagger.json";
-            });
-            app.UseSwaggerUI(s =>
-            {
-                s.SwaggerEndpoint("/swagger/v1/swagger.json", "Real.Time Chat v1.0");
-            });
+            app.UseSwagger(c => { c.RouteTemplate = "/swagger/{documentName}/swagger.json"; });
+            app.UseSwaggerUI(s => { s.SwaggerEndpoint("/swagger/v1/swagger.json", "Real.Time Chat v1.0");});
         }
     }
 }

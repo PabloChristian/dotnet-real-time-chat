@@ -1,7 +1,7 @@
 ﻿using MassTransit;
 using Real.Time.Chat.Shared.Kernel.Entity;
 
-namespace Real.Time.Chat.Api.Configurationsurations
+namespace Real.Time.Chat.Api.Configurations
 {
     public static class MassTransitConfiguration
     {

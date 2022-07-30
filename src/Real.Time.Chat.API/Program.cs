@@ -3,7 +3,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using System;
 
-namespace Real.Time.Chat.Web.Api
+namespace Real.Time.Chat.Api
 {
     public class Program
     {
