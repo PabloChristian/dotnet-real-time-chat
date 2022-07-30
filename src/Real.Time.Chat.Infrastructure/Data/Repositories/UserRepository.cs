@@ -8,7 +8,7 @@ namespace Real.Time.Chat.Infrastructure.Data.Repositories
 {
     public class UserRepository : RepositoryBase<User>, IUserRepository
     {
-        public UserRepository(RealTimeChatContext financialChatContext) : base(financialChatContext) {}
+        public UserRepository(RealTimeChatContext realtimeChatContext) : base(realtimeChatContext) {}
 
         public void Add(Messages messages) => Db.Messages.Add(messages);
         public IEnumerable<Messages> GetMessages() => Db.Messages.Take(50);

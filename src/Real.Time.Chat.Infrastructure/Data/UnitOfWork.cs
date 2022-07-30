@@ -5,13 +5,13 @@ namespace Real.Time.Chat.Infrastructure.Data
 {
     public class UnitOfWork : IUnitOfWork
     {
-        private readonly RealTimeChatContext _financialChatContext;
+        private readonly RealTimeChatContext _realtimeChatContext;
 
-        public UnitOfWork(RealTimeChatContext financialChatContext)
+        public UnitOfWork(RealTimeChatContext realtimeChatContext)
         {
-            _financialChatContext = financialChatContext;
+            _realtimeChatContext = realtimeChatContext;
         }
 
-        public bool Commit() => _financialChatContext.SaveChanges() > 0;
+        public bool Commit() => _realtimeChatContext.SaveChanges() > 0;
     }
 }

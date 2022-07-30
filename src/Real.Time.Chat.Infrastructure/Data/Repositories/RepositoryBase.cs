@@ -10,9 +10,9 @@ namespace Real.Time.Chat.Infrastructure.Data.Repositories
         protected readonly RealTimeChatContext Db;
         protected readonly DbSet<T> DbSet;
 
-        public RepositoryBase(RealTimeChatContext financialChatContext)
+        public RepositoryBase(RealTimeChatContext realtimeChatContext)
         {
-            Db = financialChatContext;
+            Db = realtimeChatContext;
             DbSet = Db.Set<T>();
         }
 
