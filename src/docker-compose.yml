@@ -1,0 +1,67 @@
+version: "3"
+services:
+    realtime-db:
+        image: "mcr.microsoft.com/mssql/server:2019-CU8-ubuntu-16.04"
+        container_name: "realtime-db"
+        ports:
+            - "1435:1433"
+        volumes: 
+            - sqlsystem:/var/opt/mssql/
+            - sqldata:/var/opt/sqlserver/data
+            - sqllog:/var/opt/sqlserver/log
+            - sqlbackup:/var/opt/sqlserver/backup
+        environment:
+            SA_PASSWORD: "dev@1234"
+            ACCEPT_EULA: "Y"
+    realtimechat:
+        container_name: "realtimechat"
+        build: .
+        environment:
+            - ASPNETCORE_ENVIRONMENT=Production
+            - DB_CONNECTION_STRING=Server=realtime-db;Database=realtime;User=sa;Password=dev@1234
+        ports: 
+            - "8082:5001"
+        networks:
+            default:
+                aliases: 
+                    - realtime-chat.api
+        depends_on: 
+            - realtime-db
+    rabbitmq-service:
+        image: rabbitmq:3-management
+        container_name: rabbitmq-service
+        ports:
+            - 15672:15672
+            - 5672:5672
+        depends_on: 
+            - realtime-db
+            - realtimechat
+    #realtimechat-worker:
+        #container_name: "realtimechat-worker"
+        #build: 
+            #context: .
+            #dockerfile: ./Worker.Dockerfile
+        #environment: 
+            #- ASPNETCORE_ENVIRONMENT=Production
+        #depends_on: 
+            #- realtimechat
+            #- realtime-db
+            #- rabbitmq-service
+    web-app:
+        container_name: "realtimechat-webapp"
+        build: 
+            context: .
+            dockerfile: ./App.Dockerfile
+        environment: 
+            - ASPNETCORE_ENVIRONMENT=Release
+        ports: 
+            - "8080:5002"
+        depends_on: 
+            - realtime-db
+            - realtimechat
+            - rabbitmq-service
+volumes:
+    sqlsystem:
+    sqldata:
+    sqllog:
+    sqlbackup:
