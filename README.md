@@ -82,12 +82,10 @@ I have recorded some GIFs to demonstrate how the application works:
 
 ## Requirements
 To execute and run the local application, you will need to download and install the following:
-<ul>
-	<li><a url="https://dotnet.microsoft.com/en-us/download/dotnet/6.0">.NET 6.0</a></li>
-	<li><a url="https://docs.docker.com/desktop/#download-and-install">Docker Desktop</a></li>
-	<li><a url="https://docs.docker.com/compose/install/compose-desktop/">Docker Compose</a></li>
-	<li><a url="https://www.microsoft.com/pt-br/sql-server/sql-server-downloads">SQLServer</a></li>
-</ul>
+- [.NET 6.0](https://dotnet.microsoft.com/en-us/download/dotnet/6.0)
+- [Docker Desktop](https://docs.docker.com/desktop/#download-and-install)
+- [Docker Compose](https://docs.docker.com/compose/install/compose-desktop/)
+- [SQLServer](https://www.microsoft.com/pt-br/sql-server/sql-server-downloads)
 
 ## Executing the Project
 To execute the project, follow the steps below:
