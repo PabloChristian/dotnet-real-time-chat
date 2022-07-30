@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Real.Time.Chat.Domain", "Re
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Real.Time.Chat.Shared.Kernel", "Real.Time.Chat.Shared.Kernel\Real.Time.Chat.Shared.Kernel.csproj", "{DBAD3F82-D815-429D-B464-2093DA3FB9FC}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Real.Time.Chat.Bot", "Real.Time.Chat.Bot\Real.Time.Chat.Bot.csproj", "{1CF87808-9F57-4F3E-809F-15C3FA01D3B7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -50,6 +52,12 @@ Global
 		{DBAD3F82-D815-429D-B464-2093DA3FB9FC}.Production|Any CPU.Build.0 = Production|Any CPU
 		{DBAD3F82-D815-429D-B464-2093DA3FB9FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DBAD3F82-D815-429D-B464-2093DA3FB9FC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1CF87808-9F57-4F3E-809F-15C3FA01D3B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1CF87808-9F57-4F3E-809F-15C3FA01D3B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1CF87808-9F57-4F3E-809F-15C3FA01D3B7}.Production|Any CPU.ActiveCfg = Debug|Any CPU
+		{1CF87808-9F57-4F3E-809F-15C3FA01D3B7}.Production|Any CPU.Build.0 = Debug|Any CPU
+		{1CF87808-9F57-4F3E-809F-15C3FA01D3B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1CF87808-9F57-4F3E-809F-15C3FA01D3B7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,6 +1,6 @@
-﻿using FluentValidation.Results;
+﻿using Real.Time.Chat.Shared.Kernel.Commands;
+using FluentValidation.Results;
 using System.Collections.Generic;
-using Real.Time.Chat.Shared.Kernel.Commands;
 
 namespace Real.Time.Chat.Domain.Commands
 {

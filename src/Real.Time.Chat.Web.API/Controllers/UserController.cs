@@ -16,7 +16,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore.Internal;
-using Real.Time.Chat.Domain.Interfaces.Services;
+using Real.Time.Chat.Bot;
 
 namespace Real.Time.Chat.Web.API.Controllers
 {
@@ -101,9 +101,7 @@ namespace Real.Time.Chat.Web.API.Controllers
                 await _mediator.SendCommandResult(new MessageAddCommand { Consumer = message.Consumer, Message = message.Message, Sender = message.Sender });
 
                 if (!string.IsNullOrEmpty(message.Consumer))
-                {
                     await _chatHub.Clients.Groups(message.Consumer).SendAsync("ReceiveMessage", message.Sender, message.Message);
-                }
                 else
                     await _chatHub.Clients.Groups(message.Sender).SendAsync("ReceiveMessage", message.Sender, "Was not delivered. please, select an user");
             }
