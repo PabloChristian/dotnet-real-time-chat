@@ -7,7 +7,7 @@ using Real.Time.Chat.Shared.Kernel.Entity;
 using Real.Time.Chat.Shared.Kernel.Handler;
 using Real.Time.Chat.Shared.Kernel.Notifications;
 
-namespace Real.Time.Chat.API.Controllers
+namespace Real.Time.Chat.Api.Controllers
 {
     [ApiController]
     [Route("api/logins")]

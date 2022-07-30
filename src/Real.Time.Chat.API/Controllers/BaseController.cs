@@ -4,7 +4,7 @@ using Real.Time.Chat.Shared.Kernel.Notifications;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Real.Time.Chat.API.Controllers
+namespace Real.Time.Chat.Api.Controllers
 {
     [ApiController]
     public class BaseController : Controller

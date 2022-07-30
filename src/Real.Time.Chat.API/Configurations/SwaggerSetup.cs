@@ -4,7 +4,7 @@ using Microsoft.OpenApi.Models;
 using System;
 using System.Collections.Generic;
 
-namespace Real.Time.Chat.API.Config
+namespace Real.Time.Chat.Api.Configurations
 {
     public static class SwaggerSetup
     {

@@ -13,7 +13,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
 using Real.Time.Chat.Bot;
 
-namespace Real.Time.Chat.API.Controllers
+namespace Real.Time.Chat.Api.Controllers
 {
     [ApiController]
     [Route("api/users")]

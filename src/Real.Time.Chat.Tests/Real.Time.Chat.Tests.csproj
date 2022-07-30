@@ -27,7 +27,7 @@
     <ProjectReference Include="..\Real.Time.Chat.Application\Real.Time.Chat.Application.csproj" />
     <ProjectReference Include="..\Real.Time.Chat.Bot\Real.Time.Chat.Bot.csproj" />
     <ProjectReference Include="..\Real.Time.Chat.Infrastructure\Real.Time.Chat.Infrastructure.csproj" />
-    <ProjectReference Include="..\Real.Time.Chat.API\Real.Time.Chat.API.csproj" />
+    <ProjectReference Include="..\Real.Time.Chat.Api\Real.Time.Chat.Api.csproj" />
   </ItemGroup>
 
 </Project>

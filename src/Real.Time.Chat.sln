@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32630.192
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Real.Time.Chat.API", "Real.Time.Chat.API\Real.Time.Chat.API.csproj", "{CF365BF6-B972-4380-834A-A4E44925117C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Real.Time.Chat.Api", "Real.Time.Chat.API\Real.Time.Chat.Api.csproj", "{CF365BF6-B972-4380-834A-A4E44925117C}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Real.Time.Chat.Application", "Real.Time.Chat.Application\Real.Time.Chat.Application.csproj", "{A21C5B25-D2A2-4D94-A026-CCA830FF6516}"
 EndProject
@@ -15,7 +15,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Real.Time.Chat.Shared.Kerne
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Real.Time.Chat.Bot", "Real.Time.Chat.Bot\Real.Time.Chat.Bot.csproj", "{1CF87808-9F57-4F3E-809F-15C3FA01D3B7}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web API", "Web API", "{64ED3CDB-CBCE-46C4-8471-E851200787DB}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web Api", "Web Api", "{64ED3CDB-CBCE-46C4-8471-E851200787DB}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Bot", "Bot", "{6B4E52A3-BBF0-495A-AC8C-B76617C94E6C}"
 EndProject

@@ -1,11 +1,11 @@
-﻿using Real.Time.Chat.API.Middlewares;
+﻿using Real.Time.Chat.Api.Middlewares;
 using Microsoft.AspNetCore.Builder;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Real.Time.Chat.API.Config
+namespace Real.Time.Chat.Api.Configurations
 {
     public static class GlobalExceptionMiddleware
     {

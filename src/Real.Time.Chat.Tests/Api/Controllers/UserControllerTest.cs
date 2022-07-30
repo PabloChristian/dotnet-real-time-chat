@@ -11,7 +11,7 @@ using Real.Time.Chat.Shared.Kernel.Notifications;
 using Real.Time.Chat.Infrastructure.Data;
 using Real.Time.Chat.Infrastructure.Data.Repositories;
 using Real.Time.Chat.Tests.ContextDb;
-using Real.Time.Chat.API.Controllers;
+using Real.Time.Chat.Api.Controllers;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
