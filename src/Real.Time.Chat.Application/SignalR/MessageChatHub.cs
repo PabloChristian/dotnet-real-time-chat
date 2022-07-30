@@ -2,7 +2,7 @@
 
 namespace Real.Time.Chat.Application.SignalR
 {
-    public class ChatHub : Hub
+    public class MessageChatHub : Hub
     {
         public static IDictionary<string, string> users = new Dictionary<string, string>();
 

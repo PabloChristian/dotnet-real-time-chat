@@ -20,10 +20,10 @@ namespace Real.Time.Chat.Api.Controllers
     public class UserController : BaseController
     {
         private readonly IUserService _userService;
-        private readonly IHubContext<ChatHub> _chatHub;
+        private readonly IHubContext<MessageChatHub> _chatHub;
         private readonly IQueueMessageService _queueMessageService;
 
-        public UserController(IUserService userService, IHubContext<ChatHub> chatHub, IQueueMessageService queueMessageService, INotificationHandler<DomainNotification> notifications, IMediatorHandler mediator) 
+        public UserController(IUserService userService, IHubContext<MessageChatHub> chatHub, IQueueMessageService queueMessageService, INotificationHandler<DomainNotification> notifications, IMediatorHandler mediator) 
             : base(notifications, mediator)
         {
             _userService = userService;

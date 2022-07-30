@@ -24,7 +24,7 @@ namespace Real.Time.Chat.Tests.Controllers
     {
         private IUnitOfWork _unitOfWork;
         private Mock<IMediatorHandler> _mockMediator;
-        private Mock<IHubContext<ChatHub>> _mockChat;
+        private Mock<IHubContext<MessageChatHub>> _mockChat;
         private Mock<IQueueMessageService> _mockQueue;
         private IUserRepository _userRepository;
         private DomainNotificationHandler _domainNotificationHandler;
@@ -36,7 +36,7 @@ namespace Real.Time.Chat.Tests.Controllers
         {
             db = GetDbInstance();
             _unitOfWork = new UnitOfWork(db);
-            _mockChat = new Mock<IHubContext<ChatHub>>();
+            _mockChat = new Mock<IHubContext<MessageChatHub>>();
             _userRepository = new UserRepository(db);
             _mockMediator = new Mock<IMediatorHandler>();
             _domainNotificationHandler = new DomainNotificationHandler();
