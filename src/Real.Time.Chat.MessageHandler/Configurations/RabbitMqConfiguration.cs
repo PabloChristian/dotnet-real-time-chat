@@ -1,13 +1,6 @@
 ﻿using Real.Time.Chat.Shared.Kernel.Entity;
 using Real.Time.Chat.MessageHandler.Consumers;
-using GreenPipes;
 using MassTransit;
-using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Real.Time.Chat.MessageHandler.Configurations
 {
@@ -39,7 +32,6 @@ namespace Real.Time.Chat.MessageHandler.Configurations
                     });
                 });
             });
-            services.AddMassTransitHostedService();
         }
     }
 }

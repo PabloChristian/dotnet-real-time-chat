@@ -1,18 +1,15 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
-using Real.Time.Chat.Infrastructure.Data;
 
 namespace Real.Time.Chat.Api.Configurations
 {
     public static class MigrationConfiguration
     {
-        public static void AddMigration<T>(this IApplicationBuilder app) where T : DbContext
+        public static void AddMigration<T>(this IApplicationBuilder app) where T : Real.Time.Chat.Infrastructure.Data.Context.RealTimeChatContext
         {
             using var scope = app.ApplicationServices.CreateScope();
             var dbContext = scope.ServiceProvider.GetService<T>();
-
-            if(dbContext != null) 
-                dbContext.Database.Migrate();
+            dbContext?.Database.Migrate();
         }
     }
 }

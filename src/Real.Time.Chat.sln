@@ -30,7 +30,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Real.Time.Chat.Web", "Real.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Real.Time.Chat.Api", "Real.Time.Chat.Api\Real.Time.Chat.Api.csproj", "{9B6157E1-9F3D-4961-8949-8538EED4F12E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Real.Time.Chat.MessageHandler", "Real.Time.Chat.RabbitMq\Real.Time.Chat.MessageHandler.csproj", "{6BC8E02C-BBA1-4ACF-8F18-468063A93981}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Real.Time.Chat.MessageHandler", "Real.Time.Chat.MessageHandler\Real.Time.Chat.MessageHandler.csproj", "{6BC8E02C-BBA1-4ACF-8F18-468063A93981}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

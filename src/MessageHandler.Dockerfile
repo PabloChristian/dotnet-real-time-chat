@@ -5,7 +5,7 @@ FROM mcr.microsoft.com/dotnet/sdk:6.0-alpine3.13-amd64 AS build-env
 COPY ["./Real.Time.Chat.sln", "./"]
 COPY ["./Real.Time.Chat.Shared.Kernel/Real.Time.Chat.Shared.Kernel.csproj", "./Real.Time.Chat.Shared.Kernel/" ]
 COPY ["./Real.Time.Chat.Infrastructure/Real.Time.Chat.Infrastructure.csproj", "./Real.Time.Chat.Infrastructure/"]
-COPY ["./Real.Time.Chat.MessageHandler/Real.Time.Chat.MessageHandler.csproj", "./Real.TimeC.hat.MessageHandler/"]
+COPY ["./Real.Time.Chat.MessageHandler/Real.Time.Chat.MessageHandler.csproj", "./Real.Time.Chat.MessageHandler/"]
 #RUN dotnet restore "./Real.Time.Chat.Api/Real.Time.Chat.Api.csproj"
 COPY ./ .
 

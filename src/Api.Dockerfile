@@ -20,7 +20,7 @@ COPY ["./Real.Time.Chat.Api/Real.Time.Chat.Api.csproj", "./Real.Time.Chat.Api/" 
 #RUN dotnet restore "./Real.Time.Chat.Api/Real.Time.Chat.Api.csproj"
 COPY ./ .
 
-#RUN dotnet build "./Real.Time.Chat.Api/Real.Time.Chat.Api.csproj" --packages ./.nuget/packages -c Release -o /app/build
+#RUN dotnet build "./Real.Time.Chat.Api/Real.Time.Chat.Api.csproj" --packages ./.nuget/packages -c Production -o /app/build
 
 #RUN dotnet test
 

@@ -17,8 +17,8 @@ namespace Real.Time.Chat.Api.Configurations
                 s.SwaggerDoc("v1", new OpenApiInfo
                 {
                     Version = "v1",
-                    Title = "Real.Time Chat",
-                    Description = "Real.Time Chat Api",
+                    Title = "Real Time Chat Application",
+                    Description = "Real Time Chat Api",
                     Contact = new OpenApiContact { Name = "Pablo Christian Pereira Nazareth", Email = "pablo.nazareth@itau-unibanco.com.br" },
                 });
                 var securitySchema = new OpenApiSecurityScheme

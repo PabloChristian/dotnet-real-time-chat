@@ -11,14 +11,14 @@ FROM mcr.microsoft.com/dotnet/sdk:6.0-alpine3.13-amd64 AS build-env
 COPY ["./Real.Time.Chat.sln", "./"]
 COPY ["./Real.Time.Chat.Bot/Real.Time.Chat.Bot.csproj", "./Real.Time.Chat.Bot/" ]
 COPY ["./Real.Time.Chat.Shared.Kernel/Real.Time.Chat.Shared.Kernel.csproj", "./Real.Time.Chat.Shared.Kernel/" ]
-COPY ["./Real.Time.Chat.Api/Real.Time.Chat.Api.csproj", "./Real.Time.Chat.Api/" ]
-RUN dotnet restore "./Real.Time.Chat.Api/Real.Time.Chat.Api.csproj"
+COPY ["./Real.Time.Chat.Web/Real.Time.Chat.Web.csproj", "./Real.Time.Chat.Web/" ]
+RUN dotnet restore "./Real.Time.Chat.Web/Real.Time.Chat.Web.csproj"
 COPY ./ .
 
-RUN dotnet build "./Real.Time.Chat.Api/Real.Time.Chat.Api.csproj" --packages ./.nuget/packages -c Release -o /app/web
+RUN dotnet build "./Real.Time.Chat.Web/Real.Time.Chat.Web.csproj" --packages ./.nuget/packages -c Release -o /app/web
 
 FROM build-env AS publish
-RUN dotnet publish "./Real.Time.Chat.Api/Real.Time.Chat.Api.csproj" -c Release -o /app/publish
+RUN dotnet publish "./Real.Time.Chat.Web/Real.Time.Chat.Web.csproj" -c Release -o /app/publish
 
 
 FROM base AS final
@@ -27,4 +27,4 @@ RUN chmod +x ./
 
 COPY --from=publish /app/publish .
 
-ENTRYPOINT ["dotnet", "Real.Time.Chat.Api.dll", "--server.urls", "http://*:5002"]
+ENTRYPOINT ["dotnet", "Real.Time.Chat.Web.dll", "--server.urls", "http://*:5002"]
