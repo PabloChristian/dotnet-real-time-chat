@@ -10,6 +10,6 @@ namespace Real.Time.Chat.Domain.Interfaces.Services
         List<UserDto> GetUsers();
         UserDto GetUser(Guid id);
         List<Messages> GetMessages();
-        List<Messages> GetMessages(string email);
+        List<Messages> GetMessages(string username);
     }
 }

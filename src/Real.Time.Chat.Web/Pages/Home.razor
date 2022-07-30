@@ -1,8 +1,9 @@
 ﻿@using Real.Time.Chat.Shared.Kernel.Entity;
 @inject Blazored.LocalStorage.ILocalStorageService LocalStore
-@using Chat.Web.App.Data;
 @using Microsoft.AspNetCore.SignalR.Client;
+@using Real.Time.Chat.Web.Data
 @inject NavigationManager UriHelper;
+
 @page "/home"
 
 <nav class="nav navbar-default">
@@ -24,9 +25,9 @@
                 <label for="users">Send to:</label>
                 <select @bind="@consumer" name="users" class="form-control">
                     <option>Select user</option>
-                    @foreach (var item in users.Where(x => x.Email != sender))
+                    @foreach (var item in users.Where(x => x.UserName != sender))
                     {
-                        <option value="@item.Email">@item.Name</option>
+                        <option value="@item.UserName">@item.Name</option>
                     }
                 </select>
             </div>
@@ -68,15 +69,14 @@
 
     protected async override Task OnInitializedAsync()
     {
-        sender = await GetEmailAsync(sender);
+        sender = await GetUserNameAsync(sender);
 
         hubConnection = new HubConnectionBuilder()
-            .WithUrl($"{new ChatService().GetURL()}chatHub?email=" + sender, (opts) =>
+            .WithUrl($"{new ChatService().GetURL()}chatHub?username=" + sender, (opts) =>
             {
                 opts.HttpMessageHandlerFactory = (message) =>
                 {
                     if (message is HttpClientHandler clientHandler)
-                        // bypass SSL certificate
                         clientHandler.ServerCertificateCustomValidationCallback +=
                             (sender, certificate, chain, sslPolicyErrors) => { return true; };
                     return message;
@@ -108,13 +108,11 @@
     {
         try
         {
-            var token = await LocalStore.GetItemAsync<string>("token");
-
-            return token;
+            return await LocalStore.GetItemAsync<string>("token");
         }
         catch
         {
-            return null;
+            return string.Empty;
         }
     }
 
@@ -136,12 +134,11 @@
         await Task.CompletedTask;
     }
 
-    private async Task<string> GetEmailAsync(string sender = null)
+    private async Task<string> GetUserNameAsync(string sender = "")
     {
         try
         {
-            var email = await LocalStore.GetItemAsync<string>("email");
-            return email;
+            return await LocalStore.GetItemAsync<string>("username");
         }
         catch
         {
@@ -161,7 +158,7 @@
         {
             var token = await GetTokenAsync();
 
-            if (!new Financial.Chat.Domain.Shared.Bot.BotCall().IsStockCall(message))
+            if (!new Real.Time.Chat.Bot.BotCall().IsStockCall(message))
             {
                 messages.Insert(0, new MessageDto()
                 {

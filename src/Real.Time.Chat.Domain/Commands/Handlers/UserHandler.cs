@@ -38,7 +38,7 @@ namespace Real.Time.Chat.Domain.CommandHandlers
                 try
                 {
                     var user = _mapper.Map<User>(request);
-                    var userExisted = _userRepository.GetByExpression(x => x.Email == request.Email).FirstOrDefault();
+                    var userExisted = _userRepository.GetByExpression(x => x.UserName == request.UserName).FirstOrDefault();
                     if (userExisted != null)
                         throw new BusinessException("User already exists");
 

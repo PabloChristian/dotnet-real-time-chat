@@ -117,7 +117,7 @@ namespace Real.Time.Chat.Api.Controllers
             var result = await _mediator.SendCommandResult(command);
 
             if (result)
-                await _chatHub.Clients.All.SendAsync("NewUserRegistered", new UserDto { Email = command.Email, Name = command.Name });
+                await _chatHub.Clients.All.SendAsync("NewUserRegistered", new UserDto { UserName = command.UserName, Name = command.Name });
 
             return Response(result);
         }

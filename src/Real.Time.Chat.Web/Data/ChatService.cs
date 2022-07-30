@@ -1,11 +1,6 @@
 ﻿using Real.Time.Chat.Shared.Kernel.Entity;
 using Real.Time.Chat.Web.ViewModel;
 using Newtonsoft.Json;
-using System;
-using System.Text;
-using System.Collections.Generic;
-using System.Net.Http;
-using System.Threading.Tasks;
 
 namespace Real.Time.Chat.Web.Data
 {
@@ -19,27 +14,27 @@ namespace Real.Time.Chat.Web.Data
         public string GetURL() => URL;
         public async Task<List<UserDto>> GetUser(string token)
         {
-            HttpClientHandler clientHandler = new();
-            clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
-            List<UserDto> users = new();
-            using (HttpClient client = new(clientHandler))
+            HttpClientHandler clientHandler = new()
             {
-                client.BaseAddress = new Uri(URL);
-                client.DefaultRequestHeaders.Accept.Clear();
-                client.DefaultRequestHeaders.Add("Authorization", $"Bearer {token}");
-                var response = await client.GetAsync("api/user");
-                try
-                {
-                    var actionResult = JsonConvert.DeserializeObject<ApiOkReturn>(await response.Content.ReadAsStringAsync());
-                    users = JsonConvert.DeserializeObject<List<UserDto>>(JsonConvert.SerializeObject(actionResult.Data));
-                }
-                catch
-                {
-
-                }
-
-                return users;
+                ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; }
+            };
+            List<UserDto> users = new();
+            using HttpClient client = new(clientHandler);
+            client.BaseAddress = new Uri(URL);
+            client.DefaultRequestHeaders.Accept.Clear();
+            client.DefaultRequestHeaders.Add("Authorization", $"Bearer {token}");
+            var response = await client.GetAsync("api/users");
+            try
+            {
+                var actionResult = JsonConvert.DeserializeObject<ApiOkReturn>(await response.Content.ReadAsStringAsync());
+                users = JsonConvert.DeserializeObject<List<UserDto>>(JsonConvert.SerializeObject(actionResult.Data));
             }
+            catch
+            {
+
+            }
+
+            return users;
         }
 
         public async Task<HttpResponseMessage> PostNewUser(UserViewModel model)
@@ -54,58 +49,60 @@ namespace Real.Time.Chat.Web.Data
 
             var content = new StringContent(content: JsonConvert.SerializeObject(model), encoding: System.Text.Encoding.UTF8, mediaType: "application/json");
 
-            return await client.PostAsync("api/user/signin", content);
+            return await client.PostAsync("api/users/sign-in", content);
         }
 
-        public async Task<HttpResponseMessage> Login(string email, string password)
+        public async Task<HttpResponseMessage> Login(string username, string password)
         {
-            HttpClientHandler clientHandler = new ();
-            clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
+            HttpClientHandler clientHandler = new()
+            {
+                ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; }
+            };
             using HttpClient client = new (clientHandler);
             client.BaseAddress = new Uri(URL);
             client.DefaultRequestHeaders.Accept.Clear();
-            var content = new StringContent(content: JsonConvert.SerializeObject(new { email, password }), encoding: System.Text.Encoding.UTF8, mediaType: "application/json");
+            var content = new StringContent(content: JsonConvert.SerializeObject(new { username, password }), encoding: System.Text.Encoding.UTF8, mediaType: "application/json");
 
-            return await client.PostAsync("api/login", content);
+            return await client.PostAsync("api/logins", content);
         }
 
-        public async Task<List<MessageDto>> GetUseMessages(string token, string email)
+        public async Task<List<MessageDto>> GetUseMessages(string token, string username)
         {
-            HttpClientHandler clientHandler = new();
-            clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
-            using (HttpClient client = new(clientHandler))
+            HttpClientHandler clientHandler = new()
             {
-                List<MessageDto> messages = new();
-                client.BaseAddress = new Uri(URL);
-                client.DefaultRequestHeaders.Accept.Clear();
-                client.DefaultRequestHeaders.Add("Authorization", $"Bearer {token}");
-                var response = await client.GetAsync("api/user/messages/" + email);
-                try
-                {
-                    var actionResult = JsonConvert.DeserializeObject<ApiOkReturn>(await response.Content.ReadAsStringAsync());
-                    messages = JsonConvert.DeserializeObject<List<MessageDto>>(JsonConvert.SerializeObject(actionResult.Data));
-                }
-                catch 
-                {
-
-                }
-
-                return messages;
+                ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; }
+            };
+            using HttpClient client = new(clientHandler);
+            List<MessageDto> messages = new();
+            client.BaseAddress = new Uri(URL);
+            client.DefaultRequestHeaders.Accept.Clear();
+            client.DefaultRequestHeaders.Add("Authorization", $"Bearer {token}");
+            var response = await client.GetAsync("api/users/messages/" + username);
+            try
+            {
+                var actionResult = JsonConvert.DeserializeObject<ApiOkReturn>(await response.Content.ReadAsStringAsync());
+                messages = JsonConvert.DeserializeObject<List<MessageDto>>(JsonConvert.SerializeObject(actionResult.Data));
             }
+            catch
+            {
+
+            }
+
+            return messages;
         }
         public async Task SendMessage(string token, string sender, string consumer, string message)
         {
-            HttpClientHandler clientHandler = new();
-            clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
-            using (HttpClient client = new(clientHandler))
+            HttpClientHandler clientHandler = new()
             {
-                List<UserDto> users = new();
-                client.BaseAddress = new Uri(URL);
-                client.DefaultRequestHeaders.Accept.Clear();
-                var content = new StringContent(content: JsonConvert.SerializeObject(new { sender, consumer, message }), encoding: System.Text.Encoding.UTF8, mediaType: "application/json");
-                client.DefaultRequestHeaders.Add("Authorization", $"Bearer {token}");
-                await client.PostAsync("api/user/send", content);
-            }
+                ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; }
+            };
+            using HttpClient client = new(clientHandler);
+            List<UserDto> users = new();
+            client.BaseAddress = new Uri(URL);
+            client.DefaultRequestHeaders.Accept.Clear();
+            var content = new StringContent(content: JsonConvert.SerializeObject(new { sender, consumer, message }), encoding: System.Text.Encoding.UTF8, mediaType: "application/json");
+            client.DefaultRequestHeaders.Add("Authorization", $"Bearer {token}");
+            await client.PostAsync("api/users/send", content);
         }
     }
 }

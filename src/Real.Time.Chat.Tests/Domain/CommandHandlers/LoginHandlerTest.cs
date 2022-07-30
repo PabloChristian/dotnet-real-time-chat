@@ -45,7 +45,7 @@ namespace Real.Time.Chat.Tests.Domain.CommandHandlers
 
             _userRepository.Add(new User
             {
-                Email = "test@test.com",
+                UserName = "test",
                 Name = "Test",
                 Password = Cryptography.PasswordEncrypt("123456")
             });
@@ -63,7 +63,7 @@ namespace Real.Time.Chat.Tests.Domain.CommandHandlers
         [TestMethod]
         public async Task Should_not_get_authenticated()
         {
-            var result = await handler.Handle(new AuthenticateUserCommand { Email = "test2@test.com", Password = "123356" }, CancellationToken.None);
+            var result = await handler.Handle(new AuthenticateUserCommand { UserName = "test2", Password = "123356" }, CancellationToken.None);
 
             Assert.IsNull(result);
             Assert.IsTrue(_domainNotificationHandler.HasNotifications());
@@ -72,7 +72,7 @@ namespace Real.Time.Chat.Tests.Domain.CommandHandlers
         [TestMethod]
         public async Task Should_not_get_authenticated_invalid_email()
         {
-            var result = await handler.Handle(new AuthenticateUserCommand { Email = "test.com", Password = "123456" }, CancellationToken.None);
+            var result = await handler.Handle(new AuthenticateUserCommand { UserName = "test", Password = "123456" }, CancellationToken.None);
 
             Assert.IsNull(result);
             Assert.IsTrue(_domainNotificationHandler.HasNotifications());
@@ -81,7 +81,7 @@ namespace Real.Time.Chat.Tests.Domain.CommandHandlers
         [TestMethod]
         public async Task Should_get_authenticated()
         {
-            var result = await handler.Handle(new AuthenticateUserCommand { Email = "test@test.com", Password = "123456" }, CancellationToken.None);
+            var result = await handler.Handle(new AuthenticateUserCommand { UserName = "test", Password = "123456" }, CancellationToken.None);
 
             Assert.IsNotNull(result);
             Assert.IsFalse(_domainNotificationHandler.HasNotifications());

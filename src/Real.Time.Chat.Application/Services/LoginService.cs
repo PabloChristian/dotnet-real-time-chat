@@ -22,13 +22,13 @@ namespace Real.Time.Chat.Application.Services
             _config = config;
         }
 
-        public User Authenticate(string email, string password) =>
-            _userRepository.GetByExpression(x => x.Email == email && x.Password == Cryptography.PasswordEncrypt(password))?.FirstOrDefault();
+        public User Authenticate(string username, string password) =>
+            _userRepository.GetByExpression(x => x.UserName == username && x.Password == Cryptography.PasswordEncrypt(password))?.FirstOrDefault();
 
 
-        public TokenJWT GetToken(Guid id, string email)
+        public TokenJWT GetToken(Guid id, string username)
         {
-            if (string.IsNullOrWhiteSpace(email))
+            if (string.IsNullOrWhiteSpace(username))
                 return null;
 
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]));
@@ -36,7 +36,7 @@ namespace Real.Time.Chat.Application.Services
             var claims = new List<Claim>()
                 {
                     new Claim(ClaimTypes.NameIdentifier, id.ToString()),
-                    new Claim(ClaimTypes.Email, email)
+                    new Claim(ClaimTypes.Name, username)
                 };
             var token = new JwtSecurityToken(
                 issuer: _config["Jwt:Issuer"],

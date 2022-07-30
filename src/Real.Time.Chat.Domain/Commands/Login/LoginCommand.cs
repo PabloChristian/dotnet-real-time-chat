@@ -4,7 +4,7 @@ namespace Real.Time.Chat.Domain.Commands.User
 {
     public class LoginCommand<TResult> : GenericCommandResult<TResult>
     {
-        public string Email { get; set; } = string.Empty;
+        public string UserName { get; set; } = string.Empty;
         public string Password { get; set; } = string.Empty;
 
         public override bool IsValid()
@@ -21,11 +21,12 @@ namespace Real.Time.Chat.Domain.Commands.User
 
             protected virtual void StartRules()
             {
-                RuleFor(x => x.Email)
-                    .NotEmpty().WithMessage("The email is required.")
-                    .EmailAddress().WithMessage("A valid email address is required.");
+                RuleFor(x => x.UserName)
+                    .NotEmpty()
+                    .WithMessage("The username is required.");
 
-                RuleFor(x => x.Password).NotEmpty()
+                RuleFor(x => x.Password)
+                    .NotEmpty()
                     .WithMessage("The password is required");
             }
         }

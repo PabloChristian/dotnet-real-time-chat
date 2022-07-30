@@ -5,15 +5,15 @@ namespace Real.Time.Chat.Domain.Commands.User
     public class UserCommand<TResult> : GenericCommandResult<TResult>
     {
         public string Name { get; set; } = string.Empty;
-        public string Email { get; set; } = string.Empty;
+        public string UserName { get; set; } = string.Empty;
         public string Password { get; set; } = string.Empty;
         public string SecondPassword { get; set; } = string.Empty;
 
         public UserCommand() { }
-        public UserCommand(string name, string email, string password, string secondPassword)
+        public UserCommand(string name, string username, string password, string secondPassword)
         {
             Name = name;
-            Email = email;
+            UserName = username;
             Password = password;
             SecondPassword = secondPassword;
         }
@@ -32,11 +32,12 @@ namespace Real.Time.Chat.Domain.Commands.User
             {
                 RuleFor(x => x.Name)
                     .NotEmpty()
-                    .NotNull().WithMessage("The name is required.");
+                    .NotNull()
+                    .WithMessage("The name is required.");
 
-                RuleFor(x => x.Email)
-                    .NotEmpty().WithMessage("The email is required.")
-                    .EmailAddress().WithMessage("A valid email address is required.");
+                RuleFor(x => x.UserName)
+                    .NotEmpty()
+                    .WithMessage("The username is required.");
 
                 RuleFor(x => x)
                     .Custom((x, context) =>

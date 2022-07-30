@@ -3,6 +3,7 @@
 @using Newtonsoft.Json;
 @using Real.Time.Chat.Shared.Kernel.Entity;
 @using ViewModel;
+
 @page "/register"
 
 <h3>Register</h3>
@@ -12,8 +13,8 @@
         <input type="text" name="name" class="form-control" @bind="@name" />
     </div>
     <div class="form-group">
-        <label for="email">E-mail</label>
-        <input type="text" name="email" class="form-control" @bind="@email" />
+        <label for="username">Username</label>
+        <input type="text" name="username" class="form-control" @bind="@username" />
     </div>
 
     <div class="form-group">
@@ -37,58 +38,52 @@
 </div>
 
 @code {
-    string name = "";
-    string email = "";
-    string password = "";
-    string secondPassword = "";
-    string loginErrorMessage = "";
+    string name = string.Empty;
+    string username = string.Empty;
+    string password = string.Empty;
+    string secondPassword = string.Empty;
+    string loginErrorMessage = string.Empty;
     List<string> errors = new List<string>();
 
     protected async Task NewUser()
     {
         var model = new UserViewModel
         {
-            Email = email,
+            UserName = username,
             Password = password,
             SecondPassword = secondPassword,
             Name = name
         };
 
-        var response = await new Chat.Web.App.Data.ChatService().PostNewUser(model);
+        var response = await new Chat.Web.Data.ChatService().PostNewUser(model);
 
         try
         {
             if (response.StatusCode == System.Net.HttpStatusCode.InternalServerError)
             {
                 errors.Add("Internal error");
-
                 await Task.CompletedTask;
             }
             else 
             {
                 var actionResult = JsonConvert.DeserializeObject<ApiOkReturn>(await response.Content.ReadAsStringAsync());
-                if (actionResult.success)
-                {
+                if (actionResult.Success)
                     UriHelper.NavigateTo("Login");
-                }
                 else
                 {
                     var result = JsonConvert.DeserializeObject<ApiBadReturn>(await response.Content.ReadAsStringAsync());
-                    errors = result.errors.ToList();
+                    errors = result?.Errors?.ToList();
                 }
             }
         }
         catch
         {
             var actionResult = JsonConvert.DeserializeObject<ApiBadReturn>(await response.Content.ReadAsStringAsync());
-            errors = actionResult.errors.ToList();
+            errors = actionResult?.Errors?.ToList();
         }
 
         StateHasChanged();
     }
 
-    void Cancel()
-    {
-        UriHelper.NavigateTo("Login");
-    }
+    void Cancel() => UriHelper.NavigateTo("Login");
 }

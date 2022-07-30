@@ -29,11 +29,11 @@ namespace Real.Time.Chat.Domain.CommandHandlers
             {
                 try
                 {
-                    var user = _loginService.Authenticate(request.Email, request.Password);
+                    var user = _loginService.Authenticate(request.UserName, request.Password);
 
                     if (user != null)
                     {
-                        token = _loginService.GetToken(user.Id, user.Email);
+                        token = _loginService.GetToken(user.Id, user.UserName);
                         _unitOfWork.Commit();
                     }
                     else

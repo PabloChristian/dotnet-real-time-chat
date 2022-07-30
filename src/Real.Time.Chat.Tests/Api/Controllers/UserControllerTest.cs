@@ -64,15 +64,15 @@ namespace Real.Time.Chat.Tests.Api.Controllers
         {
             var user = new User
             {
-                Email = "test.one@test.com",
+                UserName = "test",
                 Password = "123456",
-                Name = "test one"
+                Name = "test"
             };
             var userTwo = new User
             {
-                Email = "test.two@live.com",
+                UserName = "test2",
                 Password = "123456",
-                Name = "test two"
+                Name = "test2"
             };
 
             _userRepository.Add(user);
@@ -102,13 +102,13 @@ namespace Real.Time.Chat.Tests.Api.Controllers
         {
             var user = new User
             {
-                Email = "test.one@test.com",
+                UserName = "test",
                 Password = "123456",
                 Name = "test one"
             };
             var userTwo = new User
             {
-                Email = "test.two@live.com",
+                UserName = "test2",
                 Password = "123456",
                 Name = "test two"
             };
@@ -141,15 +141,15 @@ namespace Real.Time.Chat.Tests.Api.Controllers
         {
             var message = new Messages() 
             { 
-                Message = "Hello world one", Sender = "test@teste.com.br",  Consumer = "teste2@teste.com" ,
+                Message = "Hello world one", Sender = "test",  Consumer = "test2" ,
                 Date = DateTime.Now
             };
 
             var messageTwo = new Messages()
             {
                 Message = "Hello world Two",
-                Sender = "test@teste.com.br",
-                Consumer = "teste2@teste.com",
+                Sender = "test",
+                Consumer = "test2",
                 Date = DateTime.Now
             };
 

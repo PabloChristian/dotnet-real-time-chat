@@ -32,7 +32,7 @@ namespace Real.Time.Chat.Tests.Api.Controllers
         [TestMethod]
         public async Task Should_not_get_authenticated_return_unathourized()
         {
-            var obj = new AuthenticateUserCommand { Email = "test@test.com", Password = "123" };
+            var obj = new AuthenticateUserCommand { UserName = "test", Password = "123" };
             _mockMediator.Setup(x => x.SendCommandResult(It.IsAny<GenericCommandResult<bool>>())).Returns(Task.FromResult(false));
             var result = await new LoginController(_domainNotificationHandler, _mockMediator.Object).LoginAsync(obj) as UnauthorizedResult;
 
@@ -43,7 +43,7 @@ namespace Real.Time.Chat.Tests.Api.Controllers
         public async Task Should_get_authenticated_token()
         {
             string tokenExpected = "asASDNdBNASbdaskjdbabksdavbsklDAPsdh";
-            var obj = new AuthenticateUserCommand { Email = "yago.oliveira.ce@live.com", Password = "123456" };
+            var obj = new AuthenticateUserCommand { UserName = "pablo", Password = "123456" };
             _mockMediator.Setup(x => x.SendCommandResult(It.IsAny<GenericCommandResult<TokenJWT>>())).Returns(Task.FromResult(new TokenJWT
             (
                 true,

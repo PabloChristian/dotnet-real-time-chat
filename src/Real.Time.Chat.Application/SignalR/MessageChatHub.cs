@@ -8,9 +8,9 @@ namespace Real.Time.Chat.Application.SignalR
 
         public async override Task OnConnectedAsync()
         {
-            var email = Context.GetHttpContext().Request.Query["email"];
-            users.Add(Context.ConnectionId, email);
-            await Groups.AddToGroupAsync(Context.ConnectionId, email);
+            var username = Context.GetHttpContext().Request.Query["username"];
+            users.Add(Context.ConnectionId, username);
+            await Groups.AddToGroupAsync(Context.ConnectionId, username);
             await base.OnConnectedAsync();
         }
 

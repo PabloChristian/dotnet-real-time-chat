@@ -9,8 +9,8 @@
 
 <div class="container">
     <div class="form-group">
-        <label for="email">E-mail</label>
-        <input type="text" name="email" class="form-control" @bind="@email" />
+        <label for="username">Username</label>
+        <input type="text" name="username" class="form-control" @bind="@username" />
     </div>
 
     <div class="form-group">
@@ -19,27 +19,28 @@
     </div>
 
     <button class="btn btn-primary" @onclick="DoLogin">Log In</button>
-    <button class="btn btn-secondary" @onclick="NavigatetoNextComponent">Register new user</button>
+    <button class="btn btn-secondary" @onclick="NavigatetoNextComponent">Register</button>
     <span class="text-danger">@loginErrorMessage</span>
 </div>
+
 @code {
-    string email = "";
-    string password = "";
-    string loginErrorMessage = "";
+    string username = string.Empty;
+    string password = string.Empty;
+    string loginErrorMessage = string.Empty;
 
     protected async Task DoLogin()
     {
-        var response = await new ChatService().Login(email, password);
+        var response = await new ChatService().Login(username, password);
         var actionResult = JsonConvert.DeserializeObject<ApiOkReturn>(await response.Content.ReadAsStringAsync());
-        var token = JsonConvert.DeserializeObject<TokenJWT>(JsonConvert.SerializeObject(actionResult.data));
+        var token = JsonConvert.DeserializeObject<TokenJWT>(JsonConvert.SerializeObject(actionResult?.Data));
         if (token != null)
         {
             await LocalStore.SetItemAsync("token", token.Token);
-            await LocalStore.SetItemAsync("email", email);
+            await LocalStore.SetItemAsync("username", username);
             UriHelper.NavigateTo("Home");
         }
         else
-            loginErrorMessage = "Unathorized. Are you registered?";
+            loginErrorMessage = "Unauthorized. Are you registered?";
     }
 
     void NavigatetoNextComponent()

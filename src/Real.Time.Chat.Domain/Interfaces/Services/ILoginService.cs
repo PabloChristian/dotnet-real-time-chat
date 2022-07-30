@@ -6,7 +6,7 @@ namespace Real.Time.Chat.Domain.Interfaces.Services
 {
     public interface ILoginService
     {
-        User Authenticate(string email, string password);
-        TokenJWT GetToken(Guid id, string email);
+        User Authenticate(string username, string password);
+        TokenJWT GetToken(Guid id, string username);
     }
 }
