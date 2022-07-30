@@ -1,12 +1,12 @@
 <h1 align="center">
 Real Time Chat
 </h1>
-A real time chat using C# dotnet, SignalR, RabbitMQ, Identity and some other technologies and patterns. This is a coding challenge.
+💬 A real time chat using C# dotnet, SignalR, RabbitMQ, Identity and some other technologies and patterns. This is a coding challenge 👨‍💻
 
 ## Code Challenge
 
 ##### Assignment
-The goal of this exercise is to create a simple browser-based chat application using .NET.
+📌 The goal of this exercise is to create a simple browser-based chat application using .NET.
 This application should allow several users to talk in a chatroom and also to get stock quotes from an API using a specific command.
 
 ##### Mandatory Features
@@ -30,7 +30,7 @@ messages.</li>
 	<li>✔ Have more than one chatroom.</li>
 	<li>✔ Use .NET identity for users authentication.</li>
 	<li>✔ Handle messages that are not understood or any exceptions raised within the bot.</li>
-	<li> Build an installer. <b>=> I used docker-compose to build and run the application, i'm not sure if that counts</b></li>
+	<li>⚠️ Build an installer. <b>=> I used docker-compose to build and run the application, i'm not sure if that counts</b></li>
 </ul>
 
 ##### Considerations
@@ -56,7 +56,7 @@ I have recorded some GIFs to demonstrate how the application works:
 ##### Stock Command
 
 ## Technologies and Patterns
-These are all the technologies and patterns i used to develop this application
+🛠 These are all the technologies and patterns i used to develop this application
 ##### BackEnd
 <ul>
 	<li>C# .NET 6.0 Web API</li>
