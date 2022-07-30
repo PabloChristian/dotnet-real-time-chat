@@ -36,17 +36,17 @@ services:
         depends_on: 
             - realtime-db
             - realtimechat
-    #realtimechat-worker:
-        #container_name: "realtimechat-worker"
-        #build: 
-            #context: .
-            #dockerfile: ./Worker.Dockerfile
-        #environment: 
-            #- ASPNETCORE_ENVIRONMENT=Production
-        #depends_on: 
-            #- realtimechat
-            #- realtime-db
-            #- rabbitmq-service
+    realtimechat-worker:
+        container_name: "realtimechat-worker"
+        build: 
+            context: .
+            dockerfile: ./Worker.Dockerfile
+        environment: 
+            - ASPNETCORE_ENVIRONMENT=Production
+        depends_on: 
+            - realtimechat
+            - realtime-db
+            - rabbitmq-service
     web-app:
         container_name: "realtimechat-webapp"
         build: 

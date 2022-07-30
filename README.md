@@ -67,6 +67,8 @@ I have recorded some GIFs to demonstrate how the application works:
 	<li><a url="https://www.nuget.org/packages/FluentValidation">FluentValidation</a></li>
 	<li><a url="https://www.nuget.org/packages/AutoMapper">AutoMapper</a></li>
 	<li><a url="https://www.nuget.org/packages/MassTransit/8.0.6-develop.537">MassTransit</a></li>
+	<li><a url="https://www.nuget.org/packages/Refit">Refit</a></li>
+	<li><a url="https://www.nuget.org/packages/Polly">Polly</a></li>
 	<li><a url=""></a>DDD</li>
 	<li><a url=""></a>CQRS</li>
 	<li><a url=""></a>Middlewares: Error, Request and Response</li>
@@ -99,3 +101,5 @@ To execute the project, follow the steps below:
 4. Now you can execute the application:
    4.1 To run the Web Application, navigate to http://localhost:8080
    4.2 To run the Web Api, navigate to http://localhost:8082/swagger 
+
+to stop the execution of the containers, type "docker-compose down"

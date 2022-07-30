@@ -7,6 +7,7 @@ namespace Real.Time.Chat.Api.Configurations
     {
         public static void AddMassTransit(this IServiceCollection services, RabbitMqOptions options)
         {
+
             var busControl = Bus.Factory.CreateUsingRabbitMq(cfg =>
             {
                 cfg.Host(new Uri(options.Url), h =>
