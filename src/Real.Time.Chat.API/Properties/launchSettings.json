@@ -17,7 +17,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "Financial.Chat.Web.API": {
+    "Real.Time.Chat.Web.API": {
       "commandName": "Project",
       "launchBrowser": true,
       "launchUrl": "swagger",

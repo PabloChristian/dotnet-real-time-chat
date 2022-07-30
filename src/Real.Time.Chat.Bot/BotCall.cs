@@ -28,6 +28,6 @@ namespace Real.Time.Chat.Bot
             return Task.Run(async () => await result.Content.ReadAsStringAsync()).Result;
         }
 
-        public static bool IsStockCall(string receivedMessage) => string.Compare(receivedMessage, 0, "/stock=", 0, 7) == 0;
+        public bool IsStockCall(string receivedMessage) => string.Compare(receivedMessage, 0, "/stock=", 0, 7) == 0;
     }
 }

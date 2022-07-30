@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Real.Time.Chat.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(RealTimeChatContext))]
-    partial class FinancialChatContextModelSnapshot : ModelSnapshot
+    partial class RealTimeChatContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
         {

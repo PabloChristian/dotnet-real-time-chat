@@ -13,7 +13,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
 using Real.Time.Chat.Bot;
 
-namespace Real.Time.Chat.Web.API.Controllers
+namespace Real.Time.Chat.API.Controllers
 {
     [ApiController]
     [Route("api/users")]
@@ -89,7 +89,7 @@ namespace Real.Time.Chat.Web.API.Controllers
         {
             var bot = new BotCall();
 
-            if (BotCall.IsStockCall(message.Message))
+            if (bot.IsStockCall(message.Message))
             {
                 var msg = bot.CallServiceStock(message.Message[7..]);
                 await _chatHub.Clients.Groups(message.Sender).SendAsync("ReceiveMessage", "Bot", msg);

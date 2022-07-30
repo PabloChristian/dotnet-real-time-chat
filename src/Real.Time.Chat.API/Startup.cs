@@ -4,7 +4,7 @@ using Real.Time.Chat.API.Configurations;
 using Real.Time.Chat.Application.AutoMapper;
 using Real.Time.Chat.Infrastructure.Data.Context;
 using Real.Time.Chat.Shared.Kernel.Entity;
-using Real.Time.Chat.Web.API.Config;
+using Real.Time.Chat.API.Config;
 
 namespace Real.Time.Chat.Web.API
 {
