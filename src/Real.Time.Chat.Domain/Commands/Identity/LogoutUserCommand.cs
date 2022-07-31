@@ -2,7 +2,7 @@
 
 namespace Real.Time.Chat.Domain.CommandHandlers
 {
-    public class LogoutUserCommand : LogoutCommand<TokenJWT>
+    public class LogoutUserCommand : LogoutCommand<bool>
     {
         public override bool IsValid()
         {

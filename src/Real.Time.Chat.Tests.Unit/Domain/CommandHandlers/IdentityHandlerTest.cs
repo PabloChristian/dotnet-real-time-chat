@@ -58,7 +58,7 @@ namespace Real.Time.Chat.Tests.Domain.CommandHandlers
         public async Task Should_not_get_authenticated_invalid_username()
         {
             //Arrange
-            var userAuth = new AuthenticateUserCommand { UserName = "", Password = "123356" };
+            var userAuth = new AuthenticateUserCommand { UserName = string.Empty, Password = "123356" };
 
             //Act
             var result = await handler.Handle(userAuth, CancellationToken.None);
@@ -72,7 +72,7 @@ namespace Real.Time.Chat.Tests.Domain.CommandHandlers
         public async Task Should_not_get_authenticated_invalid_password()
         {
             //Arrange
-            var userAuth = new AuthenticateUserCommand { UserName = "test", Password = "" };
+            var userAuth = new AuthenticateUserCommand { UserName = "test", Password = string.Empty };
 
             //Act
             var result = await handler.Handle(userAuth, CancellationToken.None);
@@ -107,8 +107,7 @@ namespace Real.Time.Chat.Tests.Domain.CommandHandlers
             var result = await handler.Handle(userLogout, CancellationToken.None);
 
             //Assert
-            result.Should().NotBeNull();
-            result.Token.Should().NotBeNullOrEmpty();
+            result.Should().BeTrue();
             _domainNotificationHandler.HasNotifications().Should().BeFalse();
         }
 
@@ -116,13 +115,13 @@ namespace Real.Time.Chat.Tests.Domain.CommandHandlers
         public async Task Should_not_get_logged_out()
         {
             //Arrange
-            var userLogout = new LogoutUserCommand { UserName = "" };
+            var userLogout = new LogoutUserCommand { UserName = string.Empty };
 
             //Act
             var result = await handler.Handle(userLogout, CancellationToken.None);
 
             //Assert
-            result.Token.Should().BeNullOrEmpty();
+            result.Should().BeFalse();
             _domainNotificationHandler.HasNotifications().Should().BeTrue();
         }
     }

@@ -59,15 +59,12 @@ namespace Real.Time.Chat.Api.Controllers
         [Authorize]
         public async Task<IActionResult> LogoutAsync(LogoutUserCommand command)
         {
-            var token = await _mediator.SendCommandResult(command);
+            var result = await _mediator.SendCommandResult(command);
 
-            if (token != null)
-            {
+            if (result)
                 _logger.LogInformation($"{command.UserName} logged out");
-                return Response(token);
-            }
 
-            return Unauthorized();
+            return Response(result);
         }
     }
 }

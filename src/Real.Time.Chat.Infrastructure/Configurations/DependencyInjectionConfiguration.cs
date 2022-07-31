@@ -32,6 +32,7 @@ namespace Real.Time.Chat.Infrastructure.InversionOfControl
             services.AddScoped<IIdentityService, IdentityService>();
             services.AddScoped<IQueueMessageService, QueueMessageService>();
             services.AddScoped<INotificationHandler<DomainNotification>, DomainNotificationHandler>();
+            services.AddScoped<IRequestHandler<LogoutUserCommand, bool>, IdentityHandler>();
         }
     }
 }

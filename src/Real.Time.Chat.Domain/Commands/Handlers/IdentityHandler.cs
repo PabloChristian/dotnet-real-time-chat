@@ -7,7 +7,7 @@ using MediatR;
 
 namespace Real.Time.Chat.Domain.CommandHandlers
 {
-    public class IdentityHandler : IRequestHandler<AuthenticateUserCommand, TokenJWT>
+    public class IdentityHandler : IRequestHandler<AuthenticateUserCommand, TokenJWT>, IRequestHandler<LogoutUserCommand, bool>
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IIdentityService _identityService;
@@ -50,9 +50,9 @@ namespace Real.Time.Chat.Domain.CommandHandlers
             return await Task.FromResult(token);
         }
 
-        public async Task<TokenJWT> Handle(LogoutUserCommand request, CancellationToken cancellationToken)
+        public async Task<bool> Handle(LogoutUserCommand request, CancellationToken cancellationToken)
         {
-            TokenJWT token = new(true, string.Empty);
+            var result = false;
 
             if (request.IsValid())
             {
@@ -62,8 +62,7 @@ namespace Real.Time.Chat.Domain.CommandHandlers
 
                     if (userLoggedout != null)
                     {
-                        token = _identityService.GetToken(userLoggedout.Id, userLoggedout.UserName);
-                        await _unitOfWork.CommitAsync(cancellationToken);
+                        result = await _unitOfWork.CommitAsync(cancellationToken);
                     }
                     else
                         await _mediatorHandler.RaiseEvent(new DomainNotification("Error", Properties.Resources.User_NotFound));
@@ -77,7 +76,7 @@ namespace Real.Time.Chat.Domain.CommandHandlers
                 foreach (var error in request.GetErrors())
                     await _mediatorHandler.RaiseEvent(new DomainNotification(error.ErrorCode, error.ErrorMessage));
 
-            return await Task.FromResult(token);
+            return await Task.FromResult(result);
         }
     }
 }
