@@ -21,17 +21,32 @@ namespace Real.Time.Chat.Infrastructure.InversionOfControl
     {
         public static void RegisterServices(this IServiceCollection services)
         {
+            services.RegisterData();
+            services.RegisterHandlers();
+            services.RegisterApplicationServices();
+        }
+
+        private static void RegisterData(this IServiceCollection services)
+        {
             services.AddDbContext<RealTimeChatContext>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
-            services.AddScoped<IMediatorHandler, MediatorHandler>();
             services.AddScoped<IUserRepository, UserRepository>();
+        }
+
+        private static void RegisterHandlers(this IServiceCollection services)
+        {
+            services.AddScoped<IMediatorHandler, MediatorHandler>();
             services.AddScoped<IRequestHandler<UserAddCommand, bool>, UserHandler>();
             services.AddScoped<IRequestHandler<MessageAddCommand, bool>, UserHandler>();
             services.AddScoped<IRequestHandler<AuthenticateUserCommand, TokenJWT>, IdentityHandler>();
+            services.AddScoped<INotificationHandler<DomainNotification>, DomainNotificationHandler>();
+        }
+
+        private static void RegisterApplicationServices(this IServiceCollection services)
+        {
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IIdentityService, IdentityService>();
             services.AddScoped<IQueueMessageService, QueueMessageService>();
-            services.AddScoped<INotificationHandler<DomainNotification>, DomainNotificationHandler>();
         }
     }
 }
