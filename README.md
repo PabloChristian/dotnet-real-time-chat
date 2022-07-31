@@ -56,7 +56,7 @@ Images showing how the application works:
 ![Register Page](./images/register-page.png)
 
 ##### Two different users logged and chatting
-![Chat Page](./images/message-page.png)
+![Chat Page](./images/message-page2.png)
 
 ##### Stock Command
 ![Chat Page](./images/stock-command.png)
