@@ -1,4 +1,5 @@
-﻿@using Real.Time.Chat.Shared.Kernel.Entity;
+﻿@using Real.Time.Chat.Bot
+@using Real.Time.Chat.Shared.Kernel.Entity;
 @inject Blazored.LocalStorage.ILocalStorageService LocalStore
 @using Microsoft.AspNetCore.SignalR.Client;
 @using Real.Time.Chat.Web.Data
@@ -22,7 +23,7 @@
             <div class="form-group">
                 <label for="users"><b>Select user to send message:</b></label>
                 <select @bind="@consumer" name="users" class="form-control">
-                    <option>Select user</option>
+                    <option></option>
                     @foreach (var item in users.Where(x => x.UserName != sender))
                     {
                         <option value="@item.UserName">@item.Name</option>
@@ -161,7 +162,7 @@
         {
             var token = await GetTokenAsync();
 
-            if (!new Real.Time.Chat.Bot.BotCall().IsStockCall(message))
+            if (!BotHelper.IsStockCall(message))
             {
                 messages.Insert(0, new MessageDto()
                 {
@@ -171,7 +172,8 @@
                 await InvokeAsync(StateHasChanged);
             }
 
-            await new ChatService().SendMessage(token, sender, consumer, message);
+            using(var chat = new ChatService())
+            await chat.SendMessage(token, sender, consumer, message);
 
             message = "";
         }

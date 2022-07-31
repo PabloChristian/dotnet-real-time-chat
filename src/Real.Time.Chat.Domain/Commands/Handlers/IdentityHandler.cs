@@ -37,7 +37,7 @@ namespace Real.Time.Chat.Domain.CommandHandlers
                         _unitOfWork.Commit();
                     }
                     else
-                        _mediatorHandler.RaiseEvent(new DomainNotification("Error", "User not found"));
+                        _mediatorHandler.RaiseEvent(new DomainNotification("Error", Properties.Resources.User_NotFound));
                 }
                 catch (Exception e)
                 {

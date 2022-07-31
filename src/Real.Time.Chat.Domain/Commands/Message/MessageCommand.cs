@@ -23,12 +23,12 @@ namespace Real.Time.Chat.Domain.Commands.Message
                 RuleFor(x => x.Sender)
                     .NotEmpty()
                     .NotNull()
-                    .WithMessage("The sender is required.");
+                    .WithMessage(Properties.Resources.Message_Sender_Required);
 
                 RuleFor(x => x.Message)
                     .NotEmpty()
                     .NotNull()
-                    .WithMessage("The message is required.");
+                    .WithMessage(Properties.Resources.Message_Required);
             }
         }
     }

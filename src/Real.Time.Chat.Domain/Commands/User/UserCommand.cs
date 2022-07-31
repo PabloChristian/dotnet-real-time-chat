@@ -33,27 +33,27 @@ namespace Real.Time.Chat.Domain.Commands.User
                 RuleFor(x => x.Name)
                     .NotEmpty()
                     .NotNull()
-                    .WithMessage("The name is required.");
+                    .WithMessage(Properties.Resources.User_Name_Required);
 
                 RuleFor(x => x.UserName)
                     .NotEmpty()
-                    .WithMessage("The username is required.");
+                    .WithMessage(Properties.Resources.User_UserName_Required);
 
                 RuleFor(x => x)
                     .Custom((x, context) =>
                     {
                         if (string.IsNullOrEmpty(x.Password))
-                            context.AddFailure("A password is required");
+                            context.AddFailure(Properties.Resources.User_Password_Required);
 
                         if(string.IsNullOrEmpty(x.SecondPassword))
-                            context.AddFailure("Repeat the password");
+                            context.AddFailure(Properties.Resources.User_RepeatPassword_Required);
 
                         if (x.Password.Length < 6)
-                            context.AddFailure("The password must have minimum of 6 characters");
+                            context.AddFailure(Properties.Resources.User_Password_MinimumLength);
 
                         if(!string.IsNullOrEmpty(x.Password) && !string.IsNullOrEmpty(x.SecondPassword) 
                             && !x.Password.Equals(x.SecondPassword))
-                                context.AddFailure("The passwords are not equal");
+                                context.AddFailure(Properties.Resources.User_Password_NotEqual);
                     });
             }
         }

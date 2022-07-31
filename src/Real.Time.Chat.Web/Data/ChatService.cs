@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 
 namespace Real.Time.Chat.Web.Data
 {
-    public class ChatService
+    public class ChatService : IDisposable
     {
 #if !DEBUG
         private const string URL = "http://realtime-chat.api:5001/";
@@ -104,5 +104,7 @@ namespace Real.Time.Chat.Web.Data
             client.DefaultRequestHeaders.Add("Authorization", $"Bearer {token}");
             await client.PostAsync("api/users/send", content);
         }
+
+        public void Dispose() => GC.SuppressFinalize(this);
     }
 }

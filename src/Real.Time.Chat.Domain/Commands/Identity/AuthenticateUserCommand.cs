@@ -13,10 +13,7 @@ namespace Real.Time.Chat.Domain.CommandHandlers
 
         internal class AuthenticateUserValidator : LoginValidator<AuthenticateUserCommand>
         {
-            protected override void StartRules()
-            {
-                base.StartRules();
-            }
+            protected override void StartRules() => base.StartRules();
         }
     }
 }

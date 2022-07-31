@@ -17,8 +17,19 @@ namespace Real.Time.Chat.Application.Services
             _mapper = mapper;
         }
 
-        public List<Messages> GetMessages() => _userRepository.GetMessages().OrderByDescending(x => x.Date).Take(50).ToList();
-        public List<Messages> GetMessages(string username) => _userRepository.GetMessages().Where(x => x.Consumer == username || x.Sender == username).OrderByDescending(x => x.Date).Take(50).ToList();
+        public List<Messages> GetMessages() => 
+            _userRepository.GetMessages()
+                .OrderByDescending(x => x.Date)
+                .Take(50)
+                .ToList();
+
+        public List<Messages> GetMessages(string username) => 
+            _userRepository.GetMessages()
+                .Where(x => x.Consumer == username || x.Sender == username)
+                .OrderByDescending(x => x.Date)
+                .Take(50)
+                .ToList();
+
         public UserDto GetUser(Guid id) => _mapper.Map<UserDto>(_userRepository.GetById(id));
         public List<UserDto> GetUsers() => _mapper.Map<List<UserDto>>(_userRepository.GetAll().ToList());
     }

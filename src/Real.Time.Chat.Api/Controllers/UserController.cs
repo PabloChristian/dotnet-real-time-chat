@@ -65,7 +65,7 @@ namespace Real.Time.Chat.Api.Controllers
         [Authorize]
         public async Task<IActionResult> SendMessage([FromBody]MessageAddCommand messageAddCommand)
         {
-            if (!string.IsNullOrEmpty(messageAddCommand.Consumer))
+            if (!string.IsNullOrWhiteSpace(messageAddCommand.Consumer))
             {
                 await _queueMessageService.SendMessageAsync(new MessageDto
                 {
@@ -78,13 +78,13 @@ namespace Real.Time.Chat.Api.Controllers
             else
                 await _chatHub.Clients
                     .Groups(messageAddCommand.Sender)
-                    .SendAsync("ReceiveMessage", messageAddCommand.Sender, "Message was not delivered. please, select an user");
+                    .SendAsync("ReceiveMessage", messageAddCommand.Sender, Domain.Properties.Resources.Message_NotDelivered_SelectUser);
 
             return Response(true);
         }
 
         [HttpPost("receive")]
-        //[Authorize]
+        [Authorize]
         public async Task<IActionResult> ReceiveMessage([FromBody] MessageDto message)
         {
             if (BotHelper.IsStockCall(message.Message))
@@ -103,7 +103,7 @@ namespace Real.Time.Chat.Api.Controllers
                 if (!string.IsNullOrEmpty(message.Consumer))
                     await _chatHub.Clients.Groups(message.Consumer).SendAsync("ReceiveMessage", message.Sender, message.Message);
                 else
-                    await _chatHub.Clients.Groups(message.Sender).SendAsync("ReceiveMessage", message.Sender, "Message was not delivered. please, select an user");
+                    await _chatHub.Clients.Groups(message.Sender).SendAsync("ReceiveMessage", message.Sender, Domain.Properties.Resources.Message_NotDelivered_SelectUser);
             }
 
             return Response(true);

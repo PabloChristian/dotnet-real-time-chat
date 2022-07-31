@@ -47,7 +47,7 @@ services:
         container_name: "realtimechat-worker"
         build: 
             context: .
-            dockerfile: ./MessageHandler.Dockerfile
+            dockerfile: ./MessageBus.Dockerfile
         environment: 
             - ASPNETCORE_ENVIRONMENT=Production
         depends_on: 
