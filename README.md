@@ -47,11 +47,16 @@ can.</li>
 </ul>
 
 ## Demonstrations
-I have recorded some GIFs to demonstrate how the application works:
+Images showing how the application works:
 
-##### Register and Login
+##### Login Page
+![Login Page](./images/main-page.png)
+
+##### Register Page
+![Register Page](./images/register-page.png)
 
 ##### Two different users logged and chatting
+![Chat Page](./images/message-page.png)
 
 ##### Stock Command
 
