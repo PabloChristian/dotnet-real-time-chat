@@ -104,14 +104,16 @@ Example of sending message for stock code USD ("/stock=USD")
 ## Requirements
 I recommend following the option 01, so you wont need to install and run all the other tools needed for the project to work.
 
-**Option 01: Run in Containers -** To run the local application in containers, you will need to download and install the following:
+**Option 01: Run in Containers** 
+To run the local application in containers, you will need to download and install the following:
 - [Docker Desktop](https://docs.docker.com/desktop/#download-and-install)
 - [Docker Compose](https://docs.docker.com/compose/install/compose-desktop/)
 
-**Option 02: Outside Containers -** If you want to run the project outside containers, you must also have the following:
+**Option 02: Outside Containers** 
+If you want to run the project outside containers, you must also have the following:
 - [.NET 6.0](https://dotnet.microsoft.com/en-us/download/dotnet/6.0)
 - [SQLServer](https://www.microsoft.com/pt-br/sql-server/sql-server-downloads)
-- [RabbitMq] (https://www.rabbitmq.com/download.html)
+- [RabbitMq](https://www.rabbitmq.com/download.html)
 
 ## Executing the Project
 To execute the project, follow the steps below:
