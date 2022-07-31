@@ -7,6 +7,5 @@ namespace Real.Time.Chat.Domain.Interfaces.Services
     {
         User Authenticate(string username, string password);
         TokenJWT GetToken(Guid id, string username);
-        User Logout(string username);
     }
 }

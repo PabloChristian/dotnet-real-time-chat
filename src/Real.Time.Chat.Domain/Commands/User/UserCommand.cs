@@ -35,9 +35,21 @@ namespace Real.Time.Chat.Domain.Commands.User
                     .NotNull()
                     .WithMessage(Properties.Resources.User_Name_Required);
 
+                RuleFor(x => x.Name)
+                    .MaximumLength(150)
+                    .WithMessage(Properties.Resources.User_Name_MaximumLength);
+
                 RuleFor(x => x.UserName)
                     .NotEmpty()
                     .WithMessage(Properties.Resources.User_UserName_Required);
+
+                RuleFor(x => x.UserName)
+                    .MaximumLength(50)
+                    .WithMessage(Properties.Resources.User_UserName_MaximumLength);
+
+                RuleFor(x => x.Password)
+                    .MaximumLength(50)
+                    .WithMessage(Properties.Resources.User_Password_MaximumLength);
 
                 RuleFor(x => x)
                     .Custom((x, context) =>

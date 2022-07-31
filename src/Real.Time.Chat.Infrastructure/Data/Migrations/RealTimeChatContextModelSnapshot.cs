@@ -60,7 +60,7 @@ namespace Real.Time.Chat.Infrastructure.Data.Migrations
 
                     b.Property<string>("Password")
                         .IsRequired()
-                        .HasColumnType("nvarchar(15)")
+                        .HasColumnType("nvarchar(150)")
                         .HasMaxLength(15);
 
                     b.HasKey("Id");

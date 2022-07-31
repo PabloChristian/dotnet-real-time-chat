@@ -57,7 +57,7 @@
             Name = name
         };
 
-        var response = await new Chat.Web.Data.ChatService().PostNewUser(model);
+        var response = await new Chat.Web.Service.ChatService().PostNewUser(model);
 
         try
         {

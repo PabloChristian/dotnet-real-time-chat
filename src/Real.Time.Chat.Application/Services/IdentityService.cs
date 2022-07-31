@@ -8,6 +8,8 @@ using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using Microsoft.AspNetCore.SignalR;
+using Real.Time.Chat.Application.SignalR;
 
 namespace Real.Time.Chat.Application.Services
 {
@@ -26,15 +28,6 @@ namespace Real.Time.Chat.Application.Services
             _userRepository.GetByExpression(
                 x => x.UserName == username && x.Password == Cryptography.PasswordEncrypt(password)
             )?.FirstOrDefault();
-
-        public User Logout(string username)
-        {
-            var user = _userRepository.GetByExpression(x => x.UserName == username).FirstOrDefault();
-
-            if(user != null) _userRepository.Remove(user);
-            return user;
-        }
-
 
         public TokenJWT GetToken(Guid id, string username)
         {

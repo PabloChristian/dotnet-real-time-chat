@@ -59,7 +59,7 @@ namespace Real.Time.Chat.Domain.Properties {
                 resourceCulture = value;
             }
         }
-
+        
         /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Message was not delivered. please, select an user.
         /// </summary>
@@ -68,7 +68,7 @@ namespace Real.Time.Chat.Domain.Properties {
                 return ResourceManager.GetString("Message_NotDelivered_SelectUser", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a The message is required..
         /// </summary>
@@ -77,7 +77,7 @@ namespace Real.Time.Chat.Domain.Properties {
                 return ResourceManager.GetString("Message_Required", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a The sender is required..
         /// </summary>
@@ -86,7 +86,7 @@ namespace Real.Time.Chat.Domain.Properties {
                 return ResourceManager.GetString("Message_Sender_Required", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a User already exists.
         /// </summary>
@@ -95,7 +95,16 @@ namespace Real.Time.Chat.Domain.Properties {
                 return ResourceManager.GetString("User_AlreadyExists", resourceCulture);
             }
         }
-
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a The name must have maximum of 150 characters.
+        /// </summary>
+        public static string User_Name_MaximumLength {
+            get {
+                return ResourceManager.GetString("User_Name_MaximumLength", resourceCulture);
+            }
+        }
+        
         /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a The name is required..
         /// </summary>
@@ -104,7 +113,7 @@ namespace Real.Time.Chat.Domain.Properties {
                 return ResourceManager.GetString("User_Name_Required", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a User not found.
         /// </summary>
@@ -113,7 +122,16 @@ namespace Real.Time.Chat.Domain.Properties {
                 return ResourceManager.GetString("User_NotFound", resourceCulture);
             }
         }
-
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a The password must have maximum of 15 characters.
+        /// </summary>
+        public static string User_Password_MaximumLength {
+            get {
+                return ResourceManager.GetString("User_Password_MaximumLength", resourceCulture);
+            }
+        }
+        
         /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a The password must have minimum of 6 characters.
         /// </summary>
@@ -122,7 +140,7 @@ namespace Real.Time.Chat.Domain.Properties {
                 return ResourceManager.GetString("User_Password_MinimumLength", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a The passwords are not equal.
         /// </summary>
@@ -131,7 +149,7 @@ namespace Real.Time.Chat.Domain.Properties {
                 return ResourceManager.GetString("User_Password_NotEqual", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a The password is required.
         /// </summary>
@@ -140,7 +158,7 @@ namespace Real.Time.Chat.Domain.Properties {
                 return ResourceManager.GetString("User_Password_Required", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Repeat the password.
         /// </summary>
@@ -151,9 +169,18 @@ namespace Real.Time.Chat.Domain.Properties {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a The username must have maximum of 50 characters.
+        /// </summary>
+        public static string User_UserName_MaximumLength {
+            get {
+                return ResourceManager.GetString("User_UserName_MaximumLength", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a The username is required..
         /// </summary>
-        internal static string User_UserName_Required {
+        public static string User_UserName_Required {
             get {
                 return ResourceManager.GetString("User_UserName_Required", resourceCulture);
             }

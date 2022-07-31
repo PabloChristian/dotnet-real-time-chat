@@ -129,11 +129,17 @@
   <data name="User_AlreadyExists" xml:space="preserve">
     <value>User already exists</value>
   </data>
+  <data name="User_Name_MaximumLength" xml:space="preserve">
+    <value>The name must have maximum of 150 characters</value>
+  </data>
   <data name="User_Name_Required" xml:space="preserve">
     <value>The name is required.</value>
   </data>
   <data name="User_NotFound" xml:space="preserve">
     <value>User not found</value>
+  </data>
+  <data name="User_Password_MaximumLength" xml:space="preserve">
+    <value>The password must have maximum of 15 characters</value>
   </data>
   <data name="User_Password_MinimumLength" xml:space="preserve">
     <value>The password must have minimum of 6 characters</value>
@@ -146,6 +152,9 @@
   </data>
   <data name="User_RepeatPassword_Required" xml:space="preserve">
     <value>Repeat the password</value>
+  </data>
+  <data name="User_UserName_MaximumLength" xml:space="preserve">
+    <value>The username must have maximum of 50 characters</value>
   </data>
   <data name="User_UserName_Required" xml:space="preserve">
     <value>The username is required.</value>

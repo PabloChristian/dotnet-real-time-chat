@@ -2,7 +2,7 @@
 @using Real.Time.Chat.Shared.Kernel.Entity;
 @inject Blazored.LocalStorage.ILocalStorageService LocalStore
 @using Microsoft.AspNetCore.SignalR.Client;
-@using Real.Time.Chat.Web.Data
+@using Real.Time.Chat.Web.Service
 @inject NavigationManager UriHelper;
 
 @page "/home"
@@ -31,7 +31,6 @@
                         <option value="@item.UserName">@item.Name</option>
                     }
                 </select>
-                <label for="usersTotal"><b>Total of connected users: @usersCount</b></label>
             </div>
             <div class="form-group">
                 <b>Message to send:</b> <input type="text" name="txtmsg" id="txtmsg" @bind="@message" class="form-control" />
@@ -81,7 +80,6 @@
     public string message = "";
     public string sender = "";
     public string name = "";
-    public long usersCount = 0;
     private List<MessageDto> messages = new List<MessageDto>();
 
     protected async override Task OnInitializedAsync()
@@ -111,7 +109,6 @@
         hubConnection.On<UserDto>("NewUserRegistered", (userDto) =>
         {
             users.Insert(0, userDto);
-            usersCount = users.Count();
             InvokeAsync(StateHasChanged);
         });
 
@@ -142,7 +139,6 @@
             {
                 users = await new ChatService().GetUser(token);
                 messages = await new ChatService().GetUseMessages(token, sender);
-                usersCount = users.Count();
                 name = users.Where(x => x.UserName.Equals(sender)).FirstOrDefault()?.Name;
             }
         }
@@ -168,9 +164,6 @@
 
     public async Task DoLogOut()
     {
-        var token = await GetTokenAsync();
-        using (var chat = new ChatService())
-            await chat.Logout(token, @sender);
         await LocalStore.ClearAsync();
         UriHelper.NavigateTo("/login");
     }

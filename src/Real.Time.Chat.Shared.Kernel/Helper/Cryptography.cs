@@ -14,7 +14,7 @@ namespace Real.Time.Chat.Shared.Kernel.Helper
             using MemoryStream memoryStream = new();
 
             byte[] input = Encoding.UTF8.GetBytes(password);
-            byte[] key = Encoding.UTF8.GetBytes(_key.Substring(0, 8));
+            byte[] key = Encoding.UTF8.GetBytes(_key[..8]);
 
             using CryptoStream cryptoStream = new(memoryStream, desCryptoServiceProvider.CreateEncryptor(key, _Iv), CryptoStreamMode.Write);
 

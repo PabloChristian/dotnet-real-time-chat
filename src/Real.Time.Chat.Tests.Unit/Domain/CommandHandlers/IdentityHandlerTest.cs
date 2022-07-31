@@ -96,33 +96,5 @@ namespace Real.Time.Chat.Tests.Domain.CommandHandlers
             result.Token.Should().NotBeNullOrEmpty();
             _domainNotificationHandler.HasNotifications().Should().BeFalse();
         }
-
-        [Fact]
-        public async Task Should_get_logged_out()
-        {
-            //Arrange
-            var userLogout = new LogoutUserCommand { UserName = "test" };
-
-            //Act
-            var result = await handler.Handle(userLogout, CancellationToken.None);
-
-            //Assert
-            result.Should().BeTrue();
-            _domainNotificationHandler.HasNotifications().Should().BeFalse();
-        }
-
-        [Fact]
-        public async Task Should_not_get_logged_out()
-        {
-            //Arrange
-            var userLogout = new LogoutUserCommand { UserName = string.Empty };
-
-            //Act
-            var result = await handler.Handle(userLogout, CancellationToken.None);
-
-            //Assert
-            result.Should().BeFalse();
-            _domainNotificationHandler.HasNotifications().Should().BeTrue();
-        }
     }
 }

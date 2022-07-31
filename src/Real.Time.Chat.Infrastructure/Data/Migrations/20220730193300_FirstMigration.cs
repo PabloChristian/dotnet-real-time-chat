@@ -29,7 +29,7 @@ namespace Real.Time.Chat.Infrastructure.Data.Migrations
                     Id = table.Column<Guid>(nullable: false),
                     Name = table.Column<string>(maxLength: 150, nullable: false),
                     Username = table.Column<string>(maxLength: 150, nullable: false),
-                    Password = table.Column<string>(maxLength: 15, nullable: false)
+                    Password = table.Column<string>(maxLength: 150, nullable: false)
                 },
                 constraints: table =>
                 {

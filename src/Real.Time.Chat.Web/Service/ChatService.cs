@@ -2,7 +2,7 @@
 using Real.Time.Chat.Web.ViewModel;
 using Newtonsoft.Json;
 
-namespace Real.Time.Chat.Web.Data
+namespace Real.Time.Chat.Web.Service
 {
     public class ChatService : IDisposable
     {
@@ -103,20 +103,6 @@ namespace Real.Time.Chat.Web.Data
             var content = new StringContent(content: JsonConvert.SerializeObject(new { sender, consumer, message }), encoding: System.Text.Encoding.UTF8, mediaType: "application/json");
             client.DefaultRequestHeaders.Add("Authorization", $"Bearer {token}");
             await client.PostAsync("api/users/send", content);
-        }
-
-        public async Task<HttpResponseMessage> Logout(string token, string username)
-        {
-            HttpClientHandler clientHandler = new()
-            {
-                ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; }
-            };
-            using HttpClient client = new(clientHandler);
-            client.BaseAddress = new Uri(URL);
-            client.DefaultRequestHeaders.Accept.Clear();
-            var content = new StringContent(content: JsonConvert.SerializeObject(new { username }), encoding: System.Text.Encoding.UTF8, mediaType: "application/json");
-            client.DefaultRequestHeaders.Add("Authorization", $"Bearer {token}");
-            return await client.PostAsync("api/identity/logout", content);
         }
 
         public void Dispose() => GC.SuppressFinalize(this);
