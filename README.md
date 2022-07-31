@@ -65,10 +65,10 @@ Images showing how the application works:
 🛠 These are all the technologies and patterns used to develop this application
 ##### BackEnd
 - [C# .NET 6.0 Web API](https://dotnet.microsoft.com/en-us/download/dotnet/6.0)
-- [SignalR](https://www.nuget.org/packages/Microsoft.AspNetCore.SignalR)
-- [RabbitMQ](https://www.nuget.org/packages/MassTransit.RabbitMQ/8.0.6-develop.537)
-- [Identity](https://www.nuget.org/packages/Microsoft.AspNetCore.Identity)
-- [Mediator](https://www.nuget.org/packages/MediatR)
+- [AspNetCore SignalR 6.0](https://www.nuget.org/packages/Microsoft.AspNetCore.SignalR)
+- [AspNetCore Identity 6.0](https://www.nuget.org/packages/Microsoft.AspNetCore.Identity)
+- [RabbitMQ](https://www.nuget.org/packages/MassTransit.RabbitMQ/)
+- [MediatR](https://www.nuget.org/packages/MediatR)
 - [FluentValidation](https://www.nuget.org/packages/FluentValidation)
 - [AutoMapper](https://www.nuget.org/packages/AutoMapper)
 - [MassTransit](https://www.nuget.org/packages/MassTransit/8.0.6-develop.537)
@@ -77,14 +77,21 @@ Images showing how the application works:
 - [Xunit](https://www.nuget.org/packages/xunit)
 - [FluentAssertions](https://www.nuget.org/packages/FluentAssertions)
 - [Moq](https://www.nuget.org/packages/Moq)
-- TDD
-- DDD
-- CQRS
+
+Patterns and Techniques:
+- TDD (Test Driven Development)
+- DDD (Domain Driven Design)
+- CQRS (Command Query Responsibility Segregation)
 - Middlewares: Error, Request and Response
 - Dependency Injection
+- Repository Pattern
+- Unit of Work Pattern
+- Domain Notification
+- Domain Message
 
 ##### FrontEnd
 - [C# .NET 6.0 Web](https://dotnet.microsoft.com/en-us/download/dotnet/6.0)
+- [AspNetCore Identity Client 6.0](https://www.nuget.org/packages/Microsoft.AspNetCore.SignalR.Client/7.0.0-preview.6.22330.3)
 - [Blazor](https://docs.microsoft.com/pt-br/aspnet/core/blazor/?view=aspnetcore-6.0)
 - [CSS](https://www.w3schools.com/css/)
 - [Bootstrap](https://getbootstrap.com/)
@@ -97,7 +104,6 @@ The project solution was based on DDD (Domain Driven Design) concept.
 Below is the workflow diagram of the solution used:
 ![Workflow Diagram](./images/architecture.png)
 **Explaining:** The users connect to the web application, which will interact to the web API. A channel will be opened with the client using SignalR, and the Web API will use SQLServer as database. A decoupled bot worker was created to communicate with the Stock API, and send messages to the rabbitMQ queue.
-
 
 ## Requirements
 I recommend following the option 01, so you wont need to install and run all the other tools needed for the project to work.
@@ -119,7 +125,6 @@ To execute the project, follow the steps below:
 #### Important Notes
 1. When executing the page for two or more users, you need to open the browser as incognito mode, because the token session is stored on local storage of your browser.
 2. If for any reason you receive error sending message to RabbitMQ, it is because the port couldnt be opened or is in use. To solve the problem go on docker-compose on 'rabbitmq-service', change port number and run the commands again.
-
 
 **Option 01: Run in Containers**
 1. Run Docker Desktop.
