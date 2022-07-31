@@ -60,13 +60,12 @@ namespace Real.Time.Chat.Tests.Domain.CommandHandlers
         }
 
         [Fact]
-        public async Task Should_not_register_email_is_invalid()
+        public async Task Should_not_register_username_is_invalid()
         {
             //Arrange
-            string expectedMessageError = "A valid email address is required.";
             var user = new UserAddCommand
             {
-                UserName = "guest",
+                UserName = "",
                 Password = "123456",
                 SecondPassword = "123456",
                 Name =  "Pablo"
@@ -77,7 +76,7 @@ namespace Real.Time.Chat.Tests.Domain.CommandHandlers
 
             //Arrange
             result.Should().BeFalse();
-            _domainNotificationHandler.GetNotifications().Any(x => x.Value == expectedMessageError).Should().BeTrue();
+            _domainNotificationHandler.GetNotifications().Any().Should().BeTrue();
         }
 
         [Fact]
@@ -105,7 +104,6 @@ namespace Real.Time.Chat.Tests.Domain.CommandHandlers
         public async Task Should_not_register_password_have_less_than_six()
         {
             //Arrange
-            string expectedMessageError = "The password must have minimum 6 characters";
             var user = new UserAddCommand
             {
                 UserName = "guest",
@@ -119,7 +117,7 @@ namespace Real.Time.Chat.Tests.Domain.CommandHandlers
 
             //Arrange
             result.Should().BeFalse();
-            _domainNotificationHandler.GetNotifications().Any(x => x.Value == expectedMessageError).Should().BeTrue();
+            _domainNotificationHandler.GetNotifications().Any().Should().BeTrue();
         }
 
         [Fact]
@@ -146,7 +144,6 @@ namespace Real.Time.Chat.Tests.Domain.CommandHandlers
         public async Task Should_not_register_message_field_message_is_required()
         {
             //Arrange
-            string expectedMessageError = "The message is required.";
             var message = new MessageAddCommand()
             {
                 Sender = "snakepablo@hotmail.com"
@@ -157,14 +154,13 @@ namespace Real.Time.Chat.Tests.Domain.CommandHandlers
 
             //Arrange
             result.Should().BeFalse();
-            _domainNotificationHandler.GetNotifications().Any(x => x.Value == expectedMessageError).Should().BeTrue();
+            _domainNotificationHandler.GetNotifications().Any().Should().BeTrue();
         }
 
         [Fact]
         public async Task Should_not_register_message_field_sender_is_required()
         {
             //Arrange
-            string expectedMessageError = "The sender is required.";
             var message = new MessageAddCommand()
             {
                 Message = "Hello world"
@@ -175,7 +171,7 @@ namespace Real.Time.Chat.Tests.Domain.CommandHandlers
 
             //Arrange
             result.Should().BeFalse();
-            _domainNotificationHandler.GetNotifications().Any(x => x.Value == expectedMessageError).Should().BeTrue();
+            _domainNotificationHandler.GetNotifications().Any().Should().BeTrue();
         }
 
         [Fact]

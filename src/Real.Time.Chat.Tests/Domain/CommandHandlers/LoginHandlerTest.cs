@@ -60,30 +60,30 @@ namespace Real.Time.Chat.Tests.Domain.CommandHandlers
         }
 
         [Fact]
-        public async Task Should_not_get_authenticated()
+        public async Task Should_not_get_authenticated_invalid_username()
         {
             //Arrange
-            var userAuth = new AuthenticateUserCommand { UserName = "test2", Password = "123356" };
+            var userAuth = new AuthenticateUserCommand { UserName = "", Password = "123356" };
 
             //Act
             var result = await handler.Handle(userAuth, CancellationToken.None);
 
             //Assert
-            result.Should().BeNull();
+            result.Token.Should().BeNullOrEmpty();
             _domainNotificationHandler.HasNotifications().Should().BeTrue();
         }
 
         [Fact]
-        public async Task Should_not_get_authenticated_invalid_email()
+        public async Task Should_not_get_authenticated_invalid_password()
         {
             //Arrange
-            var userAuth = new AuthenticateUserCommand { UserName = "test", Password = "123456" };
+            var userAuth = new AuthenticateUserCommand { UserName = "test", Password = "" };
 
             //Act
             var result = await handler.Handle(userAuth, CancellationToken.None);
 
             //Assert
-            result.Should().BeNull();
+            result.Token.Should().BeNullOrEmpty();
             _domainNotificationHandler.HasNotifications().Should().BeTrue();
         }
 
