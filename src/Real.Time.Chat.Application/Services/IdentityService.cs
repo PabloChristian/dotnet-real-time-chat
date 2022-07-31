@@ -11,12 +11,12 @@ using System.Text;
 
 namespace Real.Time.Chat.Application.Services
 {
-    public class LoginService : ILoginService
+    public class IdentityService : ILoginService
     {
         private readonly IUserRepository _userRepository;
         private readonly IConfiguration _config;
 
-        public LoginService(IUserRepository userRepository, IConfiguration config)
+        public IdentityService(IUserRepository userRepository, IConfiguration config)
         {
             _userRepository = userRepository;
             _config = config;

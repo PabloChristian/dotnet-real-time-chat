@@ -18,17 +18,16 @@ using Real.Time.Chat.Tests.Fixture;
 
 namespace Real.Time.Chat.Tests.Domain.CommandHandlers
 {
-    public class LoginHandlerTest : RealTimeChatDbContextFixure
+    public class IdentityHandlerTest : RealTimeChatDbContextFixure
     {
-        private IUnitOfWork _unitOfWork;
-        private Mock<IMediatorHandler> _mockMediator;
-        private IUserRepository _userRepository;
-        private ILoginService _loginService;
-        private DomainNotificationHandler _domainNotificationHandler;
-        private IMapper _mapper;
-        private IdentityHandler handler;
+        private readonly IUnitOfWork _unitOfWork;
+        private readonly Mock<IMediatorHandler> _mockMediator;
+        private readonly IUserRepository _userRepository;
+        private readonly ILoginService _loginService;
+        private readonly DomainNotificationHandler _domainNotificationHandler;
+        private readonly IdentityHandler handler;
 
-        public LoginHandlerTest()
+        public IdentityHandlerTest()
         {
             db = GetDbInstance();
             _unitOfWork = new UnitOfWork(db);
@@ -39,8 +38,6 @@ namespace Real.Time.Chat.Tests.Domain.CommandHandlers
             {
                 _domainNotificationHandler.Handle(x, CancellationToken.None);
             });
-
-            _mapper = AutoMapperConfig.RegisterMappings().CreateMapper();
 
             _userRepository.Add(new User
             {
@@ -55,8 +52,8 @@ namespace Real.Time.Chat.Tests.Domain.CommandHandlers
             mockConfig.Setup(x => x[It.Is<string>(s => s.Equals("Jwt:Duration"))]).Returns("120");
             mockConfig.Setup(x => x[It.Is<string>(s => s.Equals("Jwt:Key"))]).Returns("IZpipYfLNJro403p");
 
-            _loginService = new LoginService(_userRepository, mockConfig.Object);
-            handler = new IdentityHandler(_unitOfWork, _userRepository, _mockMediator.Object, _mapper, _loginService);
+            _loginService = new IdentityService(_userRepository, mockConfig.Object);
+            handler = new IdentityHandler(_unitOfWork, _mockMediator.Object, _loginService);
         }
 
         [Fact]

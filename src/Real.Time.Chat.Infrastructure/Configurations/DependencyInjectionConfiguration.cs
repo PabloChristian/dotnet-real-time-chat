@@ -29,7 +29,7 @@ namespace Real.Time.Chat.Infrastructure.InversionOfControl
             services.AddScoped<IRequestHandler<MessageAddCommand, bool>, UserHandler>();
             services.AddScoped<IRequestHandler<AuthenticateUserCommand, TokenJWT>, IdentityHandler>();
             services.AddScoped<IUserService, UserService>();
-            services.AddScoped<ILoginService, LoginService>();
+            services.AddScoped<ILoginService, IdentityService>();
             services.AddScoped<IQueueMessageService, QueueMessageService>();
             services.AddScoped<INotificationHandler<DomainNotification>, DomainNotificationHandler>();
         }

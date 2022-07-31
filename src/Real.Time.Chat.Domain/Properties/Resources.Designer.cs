@@ -22,21 +22,21 @@ namespace Real.Time.Chat.Domain.Properties {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Resources {
+    public class Resources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Resources() {
+        public Resources() {
         }
         
         /// <summary>
         ///   Retorna a instância de ResourceManager armazenada em cache usada por essa classe.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Real.Time.Chat.Domain.Properties.Resources", typeof(Resources).Assembly);
@@ -51,7 +51,7 @@ namespace Real.Time.Chat.Domain.Properties {
         ///   pesquisas de recursos que usam essa classe de recurso de tipo de alta segurança.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -59,92 +59,92 @@ namespace Real.Time.Chat.Domain.Properties {
                 resourceCulture = value;
             }
         }
-        
+
         /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Message was not delivered. please, select an user.
         /// </summary>
-        internal static string Message_NotDelivered_SelectUser {
+        public static string Message_NotDelivered_SelectUser {
             get {
                 return ResourceManager.GetString("Message_NotDelivered_SelectUser", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a The message is required..
         /// </summary>
-        internal static string Message_Required {
+        public static string Message_Required {
             get {
                 return ResourceManager.GetString("Message_Required", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a The sender is required..
         /// </summary>
-        internal static string Message_Sender_Required {
+        public static string Message_Sender_Required {
             get {
                 return ResourceManager.GetString("Message_Sender_Required", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a User already exists.
         /// </summary>
-        internal static string User_AlreadyExists {
+        public static string User_AlreadyExists {
             get {
                 return ResourceManager.GetString("User_AlreadyExists", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a The name is required..
         /// </summary>
-        internal static string User_Name_Required {
+        public static string User_Name_Required {
             get {
                 return ResourceManager.GetString("User_Name_Required", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a User not found.
         /// </summary>
-        internal static string User_NotFound {
+        public static string User_NotFound {
             get {
                 return ResourceManager.GetString("User_NotFound", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a The password must have minimum of 6 characters.
         /// </summary>
-        internal static string User_Password_MinimumLength {
+        public static string User_Password_MinimumLength {
             get {
                 return ResourceManager.GetString("User_Password_MinimumLength", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a The passwords are not equal.
         /// </summary>
-        internal static string User_Password_NotEqual {
+        public static string User_Password_NotEqual {
             get {
                 return ResourceManager.GetString("User_Password_NotEqual", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a The password is required.
         /// </summary>
-        internal static string User_Password_Required {
+        public static string User_Password_Required {
             get {
                 return ResourceManager.GetString("User_Password_Required", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Repeat the password.
         /// </summary>
-        internal static string User_RepeatPassword_Required {
+        public static string User_RepeatPassword_Required {
             get {
                 return ResourceManager.GetString("User_RepeatPassword_Required", resourceCulture);
             }

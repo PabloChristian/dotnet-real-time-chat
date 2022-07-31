@@ -14,7 +14,7 @@ namespace Real.Time.Chat.Domain.CommandHandlers
         private readonly ILoginService _loginService;
         private readonly IMediatorHandler _mediatorHandler;
 
-        public IdentityHandler(IUnitOfWork unitOfWork, IUserRepository userRepository, IMediatorHandler mediatorHandler, IMapper mapper, ILoginService loginService)
+        public IdentityHandler(IUnitOfWork unitOfWork, IMediatorHandler mediatorHandler, ILoginService loginService)
         {
             _unitOfWork = unitOfWork;
             _mediatorHandler = mediatorHandler;
