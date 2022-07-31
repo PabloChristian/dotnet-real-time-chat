@@ -13,12 +13,12 @@ using Real.Time.Chat.Tests.Fixture;
 
 namespace Real.Time.Chat.Tests.Api.Controllers
 {
-    public class LoginControllerTest : RealTimeChatDbContextFixure
+    public class IdentityControllerTest : RealTimeChatDbContextFixure
     {
         private readonly Mock<IMediatorHandler> _mockMediator;
         private readonly DomainNotificationHandler _domainNotificationHandler;
 
-        public LoginControllerTest()
+        public IdentityControllerTest()
         {
             _mockMediator = new Mock<IMediatorHandler>();
             _domainNotificationHandler = new DomainNotificationHandler();
@@ -36,7 +36,7 @@ namespace Real.Time.Chat.Tests.Api.Controllers
             _mockMediator.Setup(x => x.SendCommandResult(It.IsAny<GenericCommandResult<bool>>())).Returns(Task.FromResult(false));
             
             //Act
-            var result = await new LoginController(_domainNotificationHandler, _mockMediator.Object).LoginAsync(obj) as UnauthorizedResult;
+            var result = await new IdentityController(_domainNotificationHandler, _mockMediator.Object).LoginAsync(obj) as UnauthorizedResult;
 
             //Assert
             result?.StatusCode.Should().Be((int)HttpStatusCode.Unauthorized);
@@ -55,7 +55,7 @@ namespace Real.Time.Chat.Tests.Api.Controllers
             )));
 
             //Act
-            var result = (await new LoginController(_domainNotificationHandler, _mockMediator.Object).LoginAsync(obj) as OkObjectResult)?.Value as ApiOkReturn;
+            var result = (await new IdentityController(_domainNotificationHandler, _mockMediator.Object).LoginAsync(obj) as OkObjectResult)?.Value as ApiOkReturn;
             var token = result?.Data as TokenJWT;
 
             //Assert

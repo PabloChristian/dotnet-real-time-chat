@@ -1,7 +1,7 @@
 ﻿using Real.Time.Chat.Shared.Kernel.Entity;
 using MassTransit;
 
-namespace Real.Time.Chat.MessageHandler.Consumers
+namespace Real.Time.Chat.MessageBus.Consumers
 {
     public class CaptureMessageFaultConsumer : IConsumer<Fault<MessageDto>>
     {

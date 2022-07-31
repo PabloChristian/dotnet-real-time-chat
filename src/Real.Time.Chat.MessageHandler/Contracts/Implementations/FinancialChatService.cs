@@ -10,7 +10,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Real.Time.Chat.MessageHandler.Contracts.Implementations
+namespace Real.Time.Chat.MessageBus.Contracts.Implementations
 {
     public class ChatService : IChatService
     {

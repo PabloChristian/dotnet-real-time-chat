@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Real.Time.Chat.MessageHandler.Contracts
+namespace Real.Time.Chat.MessageBus.Contracts
 {
     public interface IDeliveryMessageRequest
     {

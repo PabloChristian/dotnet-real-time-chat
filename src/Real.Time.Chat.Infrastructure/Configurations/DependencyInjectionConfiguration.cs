@@ -27,7 +27,7 @@ namespace Real.Time.Chat.Infrastructure.InversionOfControl
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IRequestHandler<UserAddCommand, bool>, UserHandler>();
             services.AddScoped<IRequestHandler<MessageAddCommand, bool>, UserHandler>();
-            services.AddScoped<IRequestHandler<AuthenticateUserCommand, TokenJWT>, LoginHandler>();
+            services.AddScoped<IRequestHandler<AuthenticateUserCommand, TokenJWT>, IdentityHandler>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<ILoginService, LoginService>();
             services.AddScoped<IQueueMessageService, QueueMessageService>();

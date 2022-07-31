@@ -26,7 +26,7 @@ namespace Real.Time.Chat.Tests.Domain.CommandHandlers
         private ILoginService _loginService;
         private DomainNotificationHandler _domainNotificationHandler;
         private IMapper _mapper;
-        private LoginHandler handler;
+        private IdentityHandler handler;
 
         public LoginHandlerTest()
         {
@@ -56,7 +56,7 @@ namespace Real.Time.Chat.Tests.Domain.CommandHandlers
             mockConfig.Setup(x => x[It.Is<string>(s => s.Equals("Jwt:Key"))]).Returns("IZpipYfLNJro403p");
 
             _loginService = new LoginService(_userRepository, mockConfig.Object);
-            handler = new LoginHandler(_unitOfWork, _userRepository, _mockMediator.Object, _mapper, _loginService);
+            handler = new IdentityHandler(_unitOfWork, _userRepository, _mockMediator.Object, _mapper, _loginService);
         }
 
         [Fact]

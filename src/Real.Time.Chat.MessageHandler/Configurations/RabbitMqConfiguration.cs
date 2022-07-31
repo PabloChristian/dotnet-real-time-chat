@@ -1,8 +1,8 @@
 ﻿using Real.Time.Chat.Shared.Kernel.Entity;
-using Real.Time.Chat.MessageHandler.Consumers;
+using Real.Time.Chat.MessageBus.Consumers;
 using MassTransit;
 
-namespace Real.Time.Chat.MessageHandler.Configurations
+namespace Real.Time.Chat.MessageBus.Configurations
 {
     public static class RabbitMqConfiguration
     {

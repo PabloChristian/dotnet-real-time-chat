@@ -16,20 +16,19 @@ namespace Real.Time.Chat.Domain.Commands.Message
 
         internal class MessageValidator<T> : AbstractValidator<T> where T : MessageCommand<TResult>
         {
-            public MessageValidator()
-            {
-                StartRules();
-            }
+            public MessageValidator() => StartRules();
 
             protected virtual void StartRules()
             {
                 RuleFor(x => x.Sender)
                     .NotEmpty()
-                    .NotNull().WithMessage("The sender is required.");
+                    .NotNull()
+                    .WithMessage("The sender is required.");
 
                 RuleFor(x => x.Message)
                     .NotEmpty()
-                    .NotNull().WithMessage("The message is required.");
+                    .NotNull()
+                    .WithMessage("The message is required.");
             }
         }
     }

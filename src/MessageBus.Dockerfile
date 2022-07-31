@@ -7,7 +7,7 @@ COPY ["./Real.Time.Chat.Shared.Kernel/Real.Time.Chat.Shared.Kernel.csproj", "./R
 COPY ["./Real.Time.Chat.Domain/Real.Time.Chat.Domain.csproj", "./Real.Time.Chat.Domain/"]
 COPY ["./Real.Time.Chat.Bot/Real.Time.Chat.Bot.csproj", "./Real.Time.Chat.Bot/"]
 COPY ["./Real.Time.Chat.Infrastructure/Real.Time.Chat.Infrastructure.csproj", "./Real.Time.Chat.Infrastructure/"]
-COPY ["./Real.Time.Chat.MessageHandler/Real.Time.Chat.MessageHandler.csproj", "./Real.Time.Chat.MessageHandler/"]
+COPY ["./Real.Time.Chat.MessageBus/Real.Time.Chat.MessageBus.csproj", "./Real.Time.Chat.MessageBus/"]
 #RUN dotnet restore "./Real.Time.Chat.Api/Real.Time.Chat.Api.csproj"
 COPY ./ .
 
@@ -16,7 +16,7 @@ COPY ./ .
 #RUN dotnet test
 
 FROM build-env AS publish
-RUN dotnet publish "./Real.Time.Chat.MessageHandler/Real.Time.Chat.MessageHandler.csproj" -c Production -o /app/publish
+RUN dotnet publish "./Real.Time.Chat.MessageBus/Real.Time.Chat.MessageBus.csproj" -c Production -o /app/publish
 
 
 FROM base AS final
@@ -25,4 +25,4 @@ RUN chmod +x ./
 
 COPY --from=publish /app/publish .
 
-ENTRYPOINT ["dotnet", "Real.Time.Chat.MessageHandler.dll"]
+ENTRYPOINT ["dotnet", "Real.Time.Chat.MessageBus.dll"]

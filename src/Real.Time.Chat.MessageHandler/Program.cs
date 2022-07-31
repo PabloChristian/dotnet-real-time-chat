@@ -1,9 +1,9 @@
 using Real.Time.Chat.Shared.Kernel.Entity;
 using Real.Time.Chat.Shared.Kernel.Handler;
 using Real.Time.Chat.Infrastructure.Security;
-using Real.Time.Chat.MessageHandler.Configurations;
-using Real.Time.Chat.MessageHandler.Contracts;
-using Real.Time.Chat.MessageHandler.Contracts.Implementations;
+using Real.Time.Chat.MessageBus.Configurations;
+using Real.Time.Chat.MessageBus.Contracts;
+using Real.Time.Chat.MessageBus.Contracts.Implementations;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;

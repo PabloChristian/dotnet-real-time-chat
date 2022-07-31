@@ -6,13 +6,13 @@ dotnet build
 
 dotnet tool install --global dotnet-ef
 
-dotnet ef database update --startup-project .\Financial.Chat.Web.Api
+dotnet ef database update --startup-project .\Real.Time.Chat.Api
 
-start dotnet watch run --project .\Financial.Chat.Web.API
+start dotnet watch run --project .\Real.Time.Chat.Api
 
-start dotnet watch run --project .\Financial.Chat.Web.App
+start dotnet watch run --project .\Real.Time.Chat.Web
 
-start dotnet watch run --project .\FinancialChat.MessageBroker
+start dotnet watch run --project .\Real.Time.Chat.MessageBus
 
 echo "Chrome will start in"
 
@@ -22,4 +22,4 @@ start chrome https://localhost:5002/login
 
 start chrome -incognito https://localhost:5002/login
 
-echo "Project running";
+echo "Project started and running";

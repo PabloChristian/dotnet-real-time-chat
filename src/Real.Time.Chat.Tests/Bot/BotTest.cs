@@ -9,14 +9,20 @@ namespace Real.Time.Chat.Tests.Bot
         [Fact]
         public void Is_message_invalid_to_call_stock()
         {
-            var result = new BotCall().IsStockCall("Hello world");
+            //Act
+            var result = BotHelper.IsStockCall("Hello world");
+
+            //Assert
             result.Should().BeFalse();
         }
 
         [Fact]
         public void Is_message_valid_to_call_stock()
         {
-            var result = new BotCall().IsStockCall("/stock=stock_code");
+            //Act
+            var result = BotHelper.IsStockCall("/stock=stock_code");
+            
+            //Assert
             result.Should().BeTrue();
         }
     }

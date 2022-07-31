@@ -1,7 +1,7 @@
 ﻿using Real.Time.Chat.Shared.Kernel.Entity;
 using Polly;
 
-namespace Real.Time.Chat.MessageHandler.Contracts.Implementations
+namespace Real.Time.Chat.MessageBus.Contracts.Implementations
 {
     public class DeliveryMessageRequest : IDeliveryMessageRequest
     {

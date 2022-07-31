@@ -8,13 +8,13 @@ using MediatR;
 
 namespace Real.Time.Chat.Domain.CommandHandlers
 {
-    public class LoginHandler : IRequestHandler<AuthenticateUserCommand, TokenJWT>
+    public class IdentityHandler : IRequestHandler<AuthenticateUserCommand, TokenJWT>
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly ILoginService _loginService;
         private readonly IMediatorHandler _mediatorHandler;
 
-        public LoginHandler(IUnitOfWork unitOfWork, IUserRepository userRepository, IMediatorHandler mediatorHandler, IMapper mapper, ILoginService loginService)
+        public IdentityHandler(IUnitOfWork unitOfWork, IUserRepository userRepository, IMediatorHandler mediatorHandler, IMapper mapper, ILoginService loginService)
         {
             _unitOfWork = unitOfWork;
             _mediatorHandler = mediatorHandler;

@@ -49,7 +49,7 @@ namespace Real.Time.Chat.Web.Data
 
             var content = new StringContent(content: JsonConvert.SerializeObject(model), encoding: System.Text.Encoding.UTF8, mediaType: "application/json");
 
-            return await client.PostAsync("api/users/sign-in", content);
+            return await client.PostAsync("api/users/register", content);
         }
 
         public async Task<HttpResponseMessage> Login(string username, string password)
@@ -63,7 +63,7 @@ namespace Real.Time.Chat.Web.Data
             client.DefaultRequestHeaders.Accept.Clear();
             var content = new StringContent(content: JsonConvert.SerializeObject(new { username, password }), encoding: System.Text.Encoding.UTF8, mediaType: "application/json");
 
-            return await client.PostAsync("api/logins", content);
+            return await client.PostAsync("api/identity/login", content);
         }
 
         public async Task<List<MessageDto>> GetUseMessages(string token, string username)

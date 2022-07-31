@@ -84,13 +84,12 @@ namespace Real.Time.Chat.Api.Controllers
         }
 
         [HttpPost("receive")]
-        [Authorize]
+        //[Authorize]
         public async Task<IActionResult> ReceiveMessage([FromBody] MessageDto message)
         {
-            var bot = new BotCall();
-
-            if (bot.IsStockCall(message.Message))
+            if (BotHelper.IsStockCall(message.Message))
             {
+                using BotCall bot = new();
                 var msg = bot.CallServiceStock(message.Message[7..]);
                 await _chatHub.Clients.Groups(message.Sender).SendAsync("ReceiveMessage", "Bot", msg);
 
@@ -110,9 +109,9 @@ namespace Real.Time.Chat.Api.Controllers
             return Response(true);
         }
 
-        [HttpPost("sign-in")]
+        [HttpPost("register")]
         [AllowAnonymous]
-        public async Task<IActionResult> Post([FromBody]UserAddCommand command)
+        public async Task<IActionResult> Post([FromBody] UserAddCommand command)
         {
             var result = await _mediator.SendCommandResult(command);
 
