@@ -10,14 +10,14 @@ using Real.Time.Chat.Shared.Kernel.Helper;
 using Real.Time.Chat.Shared.Kernel.Notifications;
 using Real.Time.Chat.Infrastructure.Data;
 using Real.Time.Chat.Infrastructure.Data.Repositories;
-using Real.Time.Chat.Tests.Infrastructure.Data.ContextDb;
 using Microsoft.Extensions.Configuration;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using Xunit;
+using FluentAssertions;
+using Real.Time.Chat.Tests.Fixture;
 
 namespace Real.Time.Chat.Tests.Domain.CommandHandlers
 {
-    [TestClass]
     public class LoginHandlerTest : RealTimeChatDbContextFixure
     {
         private IUnitOfWork _unitOfWork;
@@ -28,8 +28,7 @@ namespace Real.Time.Chat.Tests.Domain.CommandHandlers
         private IMapper _mapper;
         private LoginHandler handler;
 
-        [TestInitialize]
-        public void InitTests()
+        public LoginHandlerTest()
         {
             db = GetDbInstance();
             _unitOfWork = new UnitOfWork(db);
@@ -60,31 +59,46 @@ namespace Real.Time.Chat.Tests.Domain.CommandHandlers
             handler = new LoginHandler(_unitOfWork, _userRepository, _mockMediator.Object, _mapper, _loginService);
         }
 
-        [TestMethod]
+        [Fact]
         public async Task Should_not_get_authenticated()
         {
-            var result = await handler.Handle(new AuthenticateUserCommand { UserName = "test2", Password = "123356" }, CancellationToken.None);
+            //Arrange
+            var userAuth = new AuthenticateUserCommand { UserName = "test2", Password = "123356" };
 
-            Assert.IsNull(result);
-            Assert.IsTrue(_domainNotificationHandler.HasNotifications());
+            //Act
+            var result = await handler.Handle(userAuth, CancellationToken.None);
+
+            //Assert
+            result.Should().BeNull();
+            _domainNotificationHandler.HasNotifications().Should().BeTrue();
         }
 
-        [TestMethod]
+        [Fact]
         public async Task Should_not_get_authenticated_invalid_email()
         {
-            var result = await handler.Handle(new AuthenticateUserCommand { UserName = "test", Password = "123456" }, CancellationToken.None);
+            //Arrange
+            var userAuth = new AuthenticateUserCommand { UserName = "test", Password = "123456" };
 
-            Assert.IsNull(result);
-            Assert.IsTrue(_domainNotificationHandler.HasNotifications());
+            //Act
+            var result = await handler.Handle(userAuth, CancellationToken.None);
+
+            //Assert
+            result.Should().BeNull();
+            _domainNotificationHandler.HasNotifications().Should().BeTrue();
         }
 
-        [TestMethod]
+        [Fact]
         public async Task Should_get_authenticated()
         {
-            var result = await handler.Handle(new AuthenticateUserCommand { UserName = "test", Password = "123456" }, CancellationToken.None);
+            //Arrange
+            var userAuth = new AuthenticateUserCommand { UserName = "test", Password = "123456" };
 
-            Assert.IsNotNull(result);
-            Assert.IsFalse(_domainNotificationHandler.HasNotifications());
+            //Act
+            var result = await handler.Handle(userAuth, CancellationToken.None);
+
+            //Assert
+            result.Should().NotBeNull();
+            _domainNotificationHandler.HasNotifications().Should().BeFalse();
         }
     }
 }

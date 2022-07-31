@@ -3,23 +3,22 @@ using Real.Time.Chat.Domain.Commands;
 using Real.Time.Chat.Shared.Kernel.Entity;
 using Real.Time.Chat.Shared.Kernel.Handler;
 using Real.Time.Chat.Shared.Kernel.Notifications;
-using Real.Time.Chat.Tests.Infrastructure.Data.ContextDb;
-using Real.Time.Chat.Api.Controllers;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using System.Net;
+using Xunit;
+using FluentAssertions;
+using Real.Time.Chat.Api.Controllers;
+using Real.Time.Chat.Tests.Fixture;
 
 namespace Real.Time.Chat.Tests.Api.Controllers
 {
-    [TestClass]
     public class LoginControllerTest : RealTimeChatDbContextFixure
     {
-        private Mock<IMediatorHandler> _mockMediator;
-        private DomainNotificationHandler _domainNotificationHandler;
+        private readonly Mock<IMediatorHandler> _mockMediator;
+        private readonly DomainNotificationHandler _domainNotificationHandler;
 
-        [TestInitialize]
-        public void InitTests()
+        public LoginControllerTest()
         {
             _mockMediator = new Mock<IMediatorHandler>();
             _domainNotificationHandler = new DomainNotificationHandler();
@@ -29,19 +28,24 @@ namespace Real.Time.Chat.Tests.Api.Controllers
             });
         }
 
-        [TestMethod]
+        [Fact]
         public async Task Should_not_get_authenticated_return_unathourized()
         {
+            //Arrange
             var obj = new AuthenticateUserCommand { UserName = "test", Password = "123" };
             _mockMediator.Setup(x => x.SendCommandResult(It.IsAny<GenericCommandResult<bool>>())).Returns(Task.FromResult(false));
+            
+            //Act
             var result = await new LoginController(_domainNotificationHandler, _mockMediator.Object).LoginAsync(obj) as UnauthorizedResult;
 
-            Assert.IsTrue(result?.StatusCode == (int)HttpStatusCode.Unauthorized);
+            //Assert
+            result?.StatusCode.Should().Be((int)HttpStatusCode.Unauthorized);
         }
 
-        [TestMethod]
+        [Fact]
         public async Task Should_get_authenticated_token()
         {
+            //Arrange
             string tokenExpected = "asASDNdBNASbdaskjdbabksdavbsklDAPsdh";
             var obj = new AuthenticateUserCommand { UserName = "pablo", Password = "123456" };
             _mockMediator.Setup(x => x.SendCommandResult(It.IsAny<GenericCommandResult<TokenJWT>>())).Returns(Task.FromResult(new TokenJWT
@@ -49,11 +53,14 @@ namespace Real.Time.Chat.Tests.Api.Controllers
                 true,
                 "asASDNdBNASbdaskjdbabksdavbsklDAPsdh"
             )));
+
+            //Act
             var result = (await new LoginController(_domainNotificationHandler, _mockMediator.Object).LoginAsync(obj) as OkObjectResult)?.Value as ApiOkReturn;
             var token = result?.Data as TokenJWT;
 
-            Assert.IsTrue(result?.Success);
-            Assert.AreEqual(tokenExpected, token?.Token);
+            //Assert
+            result?.Success.Should().BeTrue();
+            tokenExpected.Should().Be(token?.Token);
         }
     }
 }

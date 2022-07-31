@@ -28,17 +28,17 @@ services:
             default:
                 aliases: 
                     - realtime-chat.api
-        command: >
-          bash -c "dotnet watch run"
         depends_on: 
             - realtime-db
 
     rabbitmq-service:
-        image: rabbitmq:3-management
-        container_name: rabbitmq-service
+        container_name: rabbitmq-service2
+        tty: true
+        hostname: rabbitmq
         ports:
-            - 15672:15672
-            - 5672:5672
+            - 15673:15673
+            - 5673:5673
+        image: rabbitmq:3-management
         depends_on: 
             - realtime-db
             - realtimechat
@@ -64,8 +64,6 @@ services:
             - ASPNETCORE_ENVIRONMENT=Production
         ports: 
             - "8080:5002"
-        command: >
-          bash -c "dotnet watch run"
         depends_on: 
             - realtime-db
             - realtimechat

@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <NoWarn>$(NoWarn);CS8618;</NoWarn>
+    <NoWarn>$(NoWarn);CS8618;CS8602;</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>
@@ -15,15 +15,16 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="6.0.7" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.2.0" />
     <PackageReference Include="Moq" Version="4.18.1" />
-    <PackageReference Include="MSTest.TestAdapter" Version="2.2.10" />
-    <PackageReference Include="MSTest.TestFramework" Version="2.2.10" />
     <PackageReference Include="coverlet.collector" Version="3.1.2">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="xunit" Version="2.4.1" />
+    <PackageReference Include="FluentAssertions" Version="6.7.0" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Real.Time.Chat.Api\Real.Time.Chat.Api.csproj" />
     <ProjectReference Include="..\Real.Time.Chat.Application\Real.Time.Chat.Application.csproj" />
     <ProjectReference Include="..\Real.Time.Chat.Bot\Real.Time.Chat.Bot.csproj" />
     <ProjectReference Include="..\Real.Time.Chat.Infrastructure\Real.Time.Chat.Infrastructure.csproj" />

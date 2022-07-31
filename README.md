@@ -63,7 +63,7 @@ I have recorded some GIFs to demonstrate how the application works:
 ##### Stock Command
 
 ## Technologies and Patterns
-🛠 These are all the technologies and patterns i used to develop this application
+🛠 These are all the technologies and patterns used to develop this application
 ##### BackEnd
 - [C# .NET 6.0 Web API](https://dotnet.microsoft.com/en-us/download/dotnet/6.0)
 - [SignalR](https://www.nuget.org/packages/Microsoft.AspNetCore.SignalR)
@@ -75,6 +75,10 @@ I have recorded some GIFs to demonstrate how the application works:
 - [MassTransit](https://www.nuget.org/packages/MassTransit/8.0.6-develop.537)
 - [Refit](https://www.nuget.org/packages/Refit)
 - [Polly](https://www.nuget.org/packages/Polly)
+- [Xunit](https://www.nuget.org/packages/xunit)
+- [FluentAssertions](https://www.nuget.org/packages/FluentAssertions)
+- [Moq](https://www.nuget.org/packages/Moq)
+- TDD
 - DDD
 - CQRS
 - Middlewares: Error, Request and Response
@@ -103,6 +107,8 @@ To execute the project, follow the steps below:
 3. Type "docker-compose up -d" to start the application containers.
 4. Now you can execute the application:
 	1. To run the Web Application, navigate to http://localhost:8080
-	2. To run the Web Api, navigate to http://localhost:8082/swagger 
+	2. To view the Web Api Swagger documentation, navigate to http://localhost:8082/swagger
+
+**Important:** if for any reason you receive error sending message to RabbitMQ, it is because the port couldnt be opened or is in use. To solve the problem go on docker-compose on 'rabbitmq-service', change port number and run the commands again.
 
 to stop the execution of the containers, type "docker-compose down"

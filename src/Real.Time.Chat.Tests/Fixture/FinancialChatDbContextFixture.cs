@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Real.Time.Chat.Tests.Infrastructure.Data.ContextDb
+namespace Real.Time.Chat.Tests.Fixture
 {
     public class RealTimeChatDbContextFixure
     {

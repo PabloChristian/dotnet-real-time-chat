@@ -9,30 +9,29 @@ using Real.Time.Chat.Shared.Kernel.Handler;
 using Real.Time.Chat.Shared.Kernel.Notifications;
 using Real.Time.Chat.Infrastructure.Data;
 using Real.Time.Chat.Infrastructure.Data.Repositories;
-using Real.Time.Chat.Tests.Infrastructure.Data.ContextDb;
 using Real.Time.Chat.Api.Controllers;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using Real.Time.Chat.Domain.Interfaces.Messaging;
+using Xunit;
+using FluentAssertions;
+using Real.Time.Chat.Tests.Fixture;
 
 namespace Real.Time.Chat.Tests.Api.Controllers
 {
-    [TestClass]
     public class UserControllerTest : RealTimeChatDbContextFixure
     {
-        private IUnitOfWork _unitOfWork;
-        private Mock<IMediatorHandler> _mockMediator;
-        private Mock<IHubContext<MessageChatHub>> _mockChat;
-        private Mock<IQueueMessageService> _mockQueue;
-        private IUserRepository _userRepository;
-        private DomainNotificationHandler _domainNotificationHandler;
-        private IMapper _mapper;
+        private readonly IUnitOfWork _unitOfWork;
+        private readonly Mock<IMediatorHandler> _mockMediator;
+        private readonly Mock<IHubContext<MessageChatHub>> _mockChat;
+        private readonly Mock<IQueueMessageService> _mockQueue;
+        private readonly IUserRepository _userRepository;
+        private readonly DomainNotificationHandler _domainNotificationHandler;
+        private readonly IMapper _mapper;
         private UserController _controller;
 
-        [TestInitialize]
-        public void InitTests()
+        public UserControllerTest()
         {
             db = GetDbInstance();
             _unitOfWork = new UnitOfWork(db);
@@ -49,19 +48,25 @@ namespace Real.Time.Chat.Tests.Api.Controllers
 
             _mapper = AutoMapperConfig.RegisterMappings().CreateMapper();
         }
-        [TestMethod]
+
+        [Fact]
         public async Task Should_not_return_list_of_users()
         {
+            //Arrange
             _controller = new UserController(new UserService(_userRepository, _mapper), _mockChat.Object, _mockQueue.Object, _domainNotificationHandler, _mockMediator.Object); ;
 
+            //Act
             var result = (await _controller.Get() as OkObjectResult)?.Value as ApiOkReturn;
             var list = result?.Data as List<UserDto>;
-            Assert.AreEqual(0, list?.Count);
+
+            //Assert
+            list?.Count.Should().Be(0);
         }
 
-        [TestMethod]
+        [Fact]
         public async Task Should_return_list_of_users()
         {
+            //Arrange
             var user = new User
             {
                 UserName = "test",
@@ -81,25 +86,31 @@ namespace Real.Time.Chat.Tests.Api.Controllers
 
             _controller = new UserController(new UserService(_userRepository, _mapper), _mockChat.Object, _mockQueue.Object, _domainNotificationHandler, _mockMediator.Object);
 
+            //Act
             var result = (await _controller.Get() as OkObjectResult)?.Value as ApiOkReturn;
             var list = result?.Data as List<UserDto>;
 
-            
-            Assert.AreEqual(2, list?.Count);
+            //Assert
+            list?.Count.Should().Be(2);
         }
-        [TestMethod]
+
+        [Fact]
         public async Task Should_not_return_a_user()
         {
+            //Arrange
             _controller = new UserController(new UserService(_userRepository, _mapper), _mockChat.Object, _mockQueue.Object, _domainNotificationHandler, _mockMediator.Object);
 
+            //Act
             var result = (await _controller.Get(Guid.NewGuid()) as OkObjectResult)?.Value as ApiOkReturn;
 
-            Assert.IsNull(result?.Data);
+            //Assert
+            result?.Data.Should().BeNull();
         }
 
-        [TestMethod]
+        [Fact]
         public async Task Should_return_a_user()
         {
+            //Arrange
             var user = new User
             {
                 UserName = "test",
@@ -119,26 +130,31 @@ namespace Real.Time.Chat.Tests.Api.Controllers
 
             _controller = new UserController(new UserService(_userRepository, _mapper), _mockChat.Object, _mockQueue.Object, _domainNotificationHandler, _mockMediator.Object);
 
+            //Act
             var result = (await _controller.Get(user.Id) as OkObjectResult)?.Value as ApiOkReturn;
             var getUser = result?.Data as UserDto;
 
-
-            Assert.AreEqual(user.Id, getUser?.Id);
+            //Assert
+            user.Id.Should().Be(getUser.Id);
         }
 
-        [TestMethod]
+        [Fact]
         public async Task Should_not_return_list_of_messages()
         {
             _controller = new UserController(new UserService(_userRepository, _mapper), _mockChat.Object, _mockQueue.Object, _domainNotificationHandler, _mockMediator.Object);
 
+            //Act
             var result = (await _controller.GetMessages() as OkObjectResult)?.Value as ApiOkReturn;
             var list = result?.Data as List<Messages>;
-            Assert.AreEqual(0, list?.Count);
+
+            //Assert
+            list?.Count.Should().Be(0);
         }
 
-        [TestMethod]
+        [Fact]
         public async Task Should_return_list_of_messages()
         {
+            //Arrange
             var message = new Messages() 
             { 
                 Message = "Hello world one", Sender = "test",  Consumer = "test2" ,
@@ -162,7 +178,7 @@ namespace Real.Time.Chat.Tests.Api.Controllers
             var result = (await _controller.GetMessages() as OkObjectResult)?.Value as ApiOkReturn;
             var list = result?.Data as List<Messages>;
 
-            Assert.AreEqual(2, list?.Count);
+            list?.Count.Should().Be(2);
         }
     }
 }

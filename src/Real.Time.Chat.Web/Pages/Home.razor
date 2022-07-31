@@ -9,7 +9,7 @@
 <div class="container">
     <nav class="nav navbar-default">
         <div class="navbar-brand">
-            <span><b>User Logged:</b> @sender</span>
+            <span><b>User logged:</b> @sender</span>
         </div>
     </nav>
     <br />
@@ -35,7 +35,7 @@
             <div class="form-group">
                 <input type="button" value="Send Message" class="btn btn-success" @onclick="SendMessage" name="btnsend" id="btnsend" />
                 <br />
-                <input type="button" class="btn btn-block btn-secondary" @onclick="DoLogOut">Leave Chat</input>
+                <button class="btn btn-primary" @onclick="DoLogOut">Leave Chat</button>
             </div>
 
             <div class="panel panel-success">
