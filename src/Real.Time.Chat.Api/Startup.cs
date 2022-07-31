@@ -64,6 +64,7 @@ namespace Real.Time.Chat.Api
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapSwagger();
                 endpoints.MapHub<Application.SignalR.MessageChatHub>("/chatHub", options =>
                 {
                     options.TransportMaxBufferSize = 36000;

@@ -1,7 +1,7 @@
-FROM mcr.microsoft.com/dotnet/aspnet:6.0-alpine3.13-amd64 AS base
+FROM mcr.microsoft.com/dotnet/aspnet:6.0-alpine3.15-amd64 AS base
 WORKDIR /app
 
-FROM mcr.microsoft.com/dotnet/sdk:6.0-alpine3.13-amd64 AS build-env
+FROM mcr.microsoft.com/dotnet/sdk:6.0-alpine3.15-amd64 AS build-env
 COPY ["./Real.Time.Chat.sln", "./"]
 COPY ["./Real.Time.Chat.Shared.Kernel/Real.Time.Chat.Shared.Kernel.csproj", "./Real.Time.Chat.Shared.Kernel/" ]
 COPY ["./Real.Time.Chat.Infrastructure/Real.Time.Chat.Infrastructure.csproj", "./Real.Time.Chat.Infrastructure/"]

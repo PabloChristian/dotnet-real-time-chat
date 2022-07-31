@@ -49,7 +49,7 @@ namespace Real.Time.Chat.MessageBroker
                     var rabbitMqOptions = configuration.GetSection("RabbitMqConfig").Get<RabbitMqOptions>();
                     services.AddRabbitMq(rabbitMqOptions);
                     services.AddIdentitySetup(configuration);
-                    services.AddHttpClient("financialchat", c =>
+                    services.AddHttpClient("realtimechat", c =>
                     {
                         c.Timeout = TimeSpan.FromSeconds(5);
                         c.BaseAddress = new Uri(configuration.GetValue<string>("ApiUrl"));

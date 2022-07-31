@@ -10,7 +10,7 @@ namespace Real.Time.Chat.MessageHandler.Contracts
 {
     public interface IChatApi
     {
-        [Post("/user/receive")]
+        [Post("/users/receive")]
         Task<ApiOkReturn> DeliveryMessage([Body] MessageDto transaction);
     }
 }

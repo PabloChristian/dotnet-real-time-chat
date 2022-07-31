@@ -28,6 +28,8 @@ services:
             default:
                 aliases: 
                     - realtime-chat.api
+        command: >
+          bash -c "dotnet watch run"
         depends_on: 
             - realtime-db
 
@@ -62,6 +64,8 @@ services:
             - ASPNETCORE_ENVIRONMENT=Production
         ports: 
             - "8080:5002"
+        command: >
+          bash -c "dotnet watch run"
         depends_on: 
             - realtime-db
             - realtimechat

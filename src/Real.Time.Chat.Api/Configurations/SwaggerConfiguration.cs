@@ -17,10 +17,11 @@ namespace Real.Time.Chat.Api.Configurations
                 s.SwaggerDoc("v1", new OpenApiInfo
                 {
                     Version = "v1",
-                    Title = "Real Time Chat Application",
-                    Description = "Real Time Chat Api",
+                    Title = "Real Time Chat",
+                    Description = "Real Time Chat API",
                     Contact = new OpenApiContact { Name = "Pablo Christian Pereira Nazareth", Email = "pablo.nazareth@itau-unibanco.com.br" },
                 });
+                s.ResolveConflictingActions(apiDescriptions => apiDescriptions.First());
                 var securitySchema = new OpenApiSecurityScheme
                 {
                     Description = "JWT Authorization header using the Bearer scheme. Example: \"Authorization: Bearer {token}\"",
@@ -62,7 +63,7 @@ namespace Real.Time.Chat.Api.Configurations
             if (app == null) throw new ArgumentNullException(nameof(app));
 
             app.UseSwagger(c => { c.RouteTemplate = "/swagger/{documentName}/swagger.json"; });
-            app.UseSwaggerUI(s => { s.SwaggerEndpoint("/swagger/v1/swagger.json", "Real.Time Chat v1.0");});
+            app.UseSwaggerUI(s => { s.SwaggerEndpoint("/swagger/v1/swagger.json", "Real Time Chat v1.0");});
         }
     }
 }

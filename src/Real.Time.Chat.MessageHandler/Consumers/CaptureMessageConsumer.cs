@@ -1,13 +1,6 @@
 ﻿using Real.Time.Chat.Shared.Kernel.Entity;
-using Real.Time.Chat.Shared.Kernel.MessageBroker;
 using Real.Time.Chat.MessageHandler.Contracts;
 using MassTransit;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Real.Time.Chat.MessageHandler.Consumers
 {
@@ -38,7 +31,7 @@ namespace Real.Time.Chat.MessageHandler.Consumers
             }
             catch(Exception e)
             {
-                _logger.LogError($"Failed to delivery the message to consumer: {context.Message.Consumer} - Message: {e.Message}");
+                _logger.LogError($"Failed to deliver the message to consumer: {context.Message.Consumer} - Message: {e.Message}");
 
                 await context.RespondAsync(e);
 

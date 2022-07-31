@@ -49,11 +49,11 @@ namespace Real.Time.Chat.Domain.Commands.User
                             context.AddFailure("Repeat the password");
 
                         if (x.Password.Length < 6)
-                            context.AddFailure("The password must have minimum 6 characters");
+                            context.AddFailure("The password must have minimum of 6 characters");
 
-                        if(!string.IsNullOrEmpty(x.Password) && !string.IsNullOrEmpty(x.SecondPassword))
-                            if(!x.Password.Equals(x.SecondPassword))
-                                context.AddFailure("The passwords are not equals");
+                        if(!string.IsNullOrEmpty(x.Password) && !string.IsNullOrEmpty(x.SecondPassword) 
+                            && !x.Password.Equals(x.SecondPassword))
+                                context.AddFailure("The passwords are not equal");
                     });
             }
         }

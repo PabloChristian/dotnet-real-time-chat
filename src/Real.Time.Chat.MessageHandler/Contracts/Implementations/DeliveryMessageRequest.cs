@@ -1,23 +1,17 @@
 ﻿using Real.Time.Chat.Shared.Kernel.Entity;
-using Microsoft.Extensions.Logging;
 using Polly;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Real.Time.Chat.MessageHandler.Contracts.Implementations
 {
     public class DeliveryMessageRequest : IDeliveryMessageRequest
     {
         private readonly ILogger<DeliveryMessageRequest> _logger;
-        private readonly IChatService _financialChatService;
+        private readonly IChatService _realtimeChatService;
 
-        public DeliveryMessageRequest(ILogger<DeliveryMessageRequest> logger, IChatService financialChatService)
+        public DeliveryMessageRequest(ILogger<DeliveryMessageRequest> logger, IChatService realtimeChatService)
         {
             _logger = logger;
-            _financialChatService = financialChatService;
+            _realtimeChatService = realtimeChatService;
         }
 
         public async Task<ApiOkReturn> DeliveryMessageAsync(MessageDto message) =>
@@ -30,6 +24,6 @@ namespace Real.Time.Chat.MessageHandler.Contracts.Implementations
                     {
                         _logger.LogWarning(exception.Message + " - retrycount: " + retryCount);
                     })
-                .ExecuteAsync(() => _financialChatService.CreateApi().DeliveryMessage(message));
+                .ExecuteAsync(() => _realtimeChatService.CreateApi().DeliveryMessage(message));
     }
 }

@@ -46,6 +46,13 @@ can.</li>
 	<li>✔ Feel free to use small helper libraries.</li>
 </ul>
 
+##### Bugs not resolved
+The following bugs were yet not resolved.
+<ul>
+	<li>❌ When sending message to the other user, an error is being registered on console.</li>
+	<li>❌ When executing the API from docker container and opening the swagger page, it is not loading the routes. If its executed from the project IDE it works.</li>
+</ul>
+
 ## Demonstrations
 I have recorded some GIFs to demonstrate how the application works:
 

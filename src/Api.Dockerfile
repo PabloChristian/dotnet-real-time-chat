@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/dotnet/aspnet:6.0-alpine3.13-amd64 AS base
+FROM mcr.microsoft.com/dotnet/aspnet:6.0-alpine3.15-amd64 AS base
 WORKDIR /app
 EXPOSE 5001/tcp
 
@@ -9,7 +9,7 @@ ENV DOTNET_SYSTEM_GLOBALIZATION_INVARIANT false
 ENV ASPNETCORE_ENVIRONMENT=Production
 #ENV ConnectionStrings:RealTimeChatConnection="server=realtime-db;database=realtime;user=sa;password=dev@1234;convert zero datetime=True;"s
 
-FROM mcr.microsoft.com/dotnet/sdk:6.0-alpine3.13-amd64 AS build-env
+FROM mcr.microsoft.com/dotnet/sdk:6.0-alpine3.15-amd64 AS build-env
 COPY ["./Real.Time.Chat.sln", "./"]
 COPY ["./Real.Time.Chat.Bot/Real.Time.Chat.Bot.csproj", "./Real.Time.Chat.Bot/" ]
 COPY ["./Real.Time.Chat.Shared.Kernel/Real.Time.Chat.Shared.Kernel.csproj", "./Real.Time.Chat.Shared.Kernel/" ]

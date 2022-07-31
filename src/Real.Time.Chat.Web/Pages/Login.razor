@@ -6,22 +6,23 @@
 @inject NavigationManager UriHelper;
 
 @page "/login"
-
+<div class="p-3 mb-2 bg-dark text-white">
 <div class="container">
-    Real Time Chat Application
+    <h3>Real Time Chat Application</h3>
     <div class="form-group">
-        <label for="username">Username</label>
+        <label for="username"><b>Username</b></label>
         <input type="text" name="username" class="form-control" @bind="@username" />
     </div>
 
     <div class="form-group">
-        <label for="password">Password</label>
+        <label for="password"><b>Password</b></label>
         <input type="password" class="form-control" name="password" @bind="@password" />
     </div>
 
-    <button class="btn btn-primary" @onclick="DoLogin">Log In</button>
+    <button class="btn btn-primary" @onclick="DoLogin">Login</button>
     <button class="btn btn-secondary" @onclick="NavigatetoNextComponent">Register</button>
     <span class="text-danger">@loginErrorMessage</span>
+</div>
 </div>
 
 @code {
