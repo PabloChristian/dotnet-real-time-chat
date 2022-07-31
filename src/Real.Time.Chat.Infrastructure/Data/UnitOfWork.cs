@@ -7,11 +7,11 @@ namespace Real.Time.Chat.Infrastructure.Data
     {
         private readonly RealTimeChatContext _realtimeChatContext;
 
-        public UnitOfWork(RealTimeChatContext realtimeChatContext)
-        {
-            _realtimeChatContext = realtimeChatContext;
-        }
+        public UnitOfWork(RealTimeChatContext realtimeChatContext) => _realtimeChatContext = realtimeChatContext;
 
         public bool Commit() => _realtimeChatContext.SaveChanges() > 0;
+
+        public async Task<bool> CommitAsync(CancellationToken cancellationToken) => 
+            await _realtimeChatContext.SaveChangesAsync(cancellationToken) > 0;
     }
 }

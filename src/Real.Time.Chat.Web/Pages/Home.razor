@@ -10,7 +10,9 @@
 <div class="container">
     <nav class="nav navbar-default">
         <div class="navbar-brand">
-            <span><b>User logged:</b> @sender</span>
+            <span><b>User logged:</b> @sender (Name: @name)</span>
+            <br />
+            <button class="btn btn-primary" @onclick="DoLogOut">Leave Chat</button>
         </div>
     </nav>
     <br />
@@ -19,7 +21,7 @@
 
     </div>
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-10">
             <div class="form-group">
                 <label for="users"><b>Select user to send message:</b></label>
                 <select @bind="@consumer" name="users" class="form-control">
@@ -29,28 +31,37 @@
                         <option value="@item.UserName">@item.Name</option>
                     }
                 </select>
+                <label for="usersTotal"><b>Total of connected users: @usersCount</b></label>
             </div>
             <div class="form-group">
                 <b>Message to send:</b> <input type="text" name="txtmsg" id="txtmsg" @bind="@message" class="form-control" />
             </div>
             <div class="form-group">
                 <input type="button" value="Send Message" class="btn btn-success" @onclick="SendMessage" name="btnsend" id="btnsend" />
-                <br /><br />
-                <button class="btn btn-primary" @onclick="DoLogOut">Leave Chat</button>
+                <br />
             </div>
 
             <div class="panel panel-success">
                 <div class="panel-heading">
                     <div class="panel-title">
                         <b>Messages History</b>
+                        <br />(showing the last 50 messages and ordered by timestamp)
                     </div>
                     <br />
-                    <div class="panel-footer" style="min-height:400px;">
+                    <div class="panel-footer border-primary" style="min-height:400px;">
                         <div id="divmsg">
                             <span class="border border-dark">
-                            @foreach (var message in messages.Take(50))
+                            @foreach (var message in messages.OrderByDescending(x => x.Date).Take(50))
                             {
-                                <span><b>@message.Sender</b> : @message.Message</span>
+                                string name = @message.Sender.Equals("Bot") ? @message.Sender : users.Where(x => x.UserName.Equals(@message.Sender)).FirstOrDefault().Name;
+                                if (@message.Sender.Equals(@sender))
+                                {
+                                    <font color="green"><span><b>@name</b>: @message.Message</span> </font>    
+                                }
+                                else
+                                {
+                                    <span><b>@name</b>: @message.Message</span>      
+                                }
                                 <br />
                             }
                             </span>
@@ -69,6 +80,8 @@
     public string consumer = "";
     public string message = "";
     public string sender = "";
+    public string name = "";
+    public long usersCount = 0;
     private List<MessageDto> messages = new List<MessageDto>();
 
     protected async override Task OnInitializedAsync()
@@ -98,6 +111,7 @@
         hubConnection.On<UserDto>("NewUserRegistered", (userDto) =>
         {
             users.Insert(0, userDto);
+            usersCount = users.Count();
             InvokeAsync(StateHasChanged);
         });
 
@@ -128,6 +142,8 @@
             {
                 users = await new ChatService().GetUser(token);
                 messages = await new ChatService().GetUseMessages(token, sender);
+                usersCount = users.Count();
+                name = users.Where(x => x.UserName.Equals(sender)).FirstOrDefault()?.Name;
             }
         }
         catch
@@ -152,6 +168,9 @@
 
     public async Task DoLogOut()
     {
+        var token = await GetTokenAsync();
+        using (var chat = new ChatService())
+            await chat.Logout(token, @sender);
         await LocalStore.ClearAsync();
         UriHelper.NavigateTo("/login");
     }

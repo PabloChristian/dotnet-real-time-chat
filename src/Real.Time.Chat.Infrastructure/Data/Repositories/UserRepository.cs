@@ -1,8 +1,6 @@
 ﻿using Real.Time.Chat.Domain.Entity;
 using Real.Time.Chat.Domain.Interfaces;
 using Real.Time.Chat.Infrastructure.Data.Context;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace Real.Time.Chat.Infrastructure.Data.Repositories
 {
@@ -11,6 +9,7 @@ namespace Real.Time.Chat.Infrastructure.Data.Repositories
         public UserRepository(RealTimeChatContext realtimeChatContext) : base(realtimeChatContext) {}
 
         public void Add(Messages messages) => Db.Messages.Add(messages);
-        public IEnumerable<Messages> GetMessages() => Db.Messages.Take(50);
+        public async Task AddAsync(Messages messages, CancellationToken cancellationToken) => await Db.Messages.AddAsync(messages, cancellationToken);
+        public IEnumerable<Messages> GetMessages() => Db.Messages.OrderByDescending(x => x.Date).Take(50);
     }
 }

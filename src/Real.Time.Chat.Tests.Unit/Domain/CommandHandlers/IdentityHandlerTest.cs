@@ -1,6 +1,4 @@
-﻿using AutoMapper;
-using Real.Time.Chat.Application.AutoMapper;
-using Real.Time.Chat.Application.Services;
+﻿using Real.Time.Chat.Application.Services;
 using Real.Time.Chat.Domain.CommandHandlers;
 using Real.Time.Chat.Domain.Entity;
 using Real.Time.Chat.Domain.Interfaces;
@@ -23,7 +21,7 @@ namespace Real.Time.Chat.Tests.Domain.CommandHandlers
         private readonly IUnitOfWork _unitOfWork;
         private readonly Mock<IMediatorHandler> _mockMediator;
         private readonly IUserRepository _userRepository;
-        private readonly ILoginService _loginService;
+        private readonly IIdentityService _identityService;
         private readonly DomainNotificationHandler _domainNotificationHandler;
         private readonly IdentityHandler handler;
 
@@ -52,8 +50,8 @@ namespace Real.Time.Chat.Tests.Domain.CommandHandlers
             mockConfig.Setup(x => x[It.Is<string>(s => s.Equals("Jwt:Duration"))]).Returns("120");
             mockConfig.Setup(x => x[It.Is<string>(s => s.Equals("Jwt:Key"))]).Returns("IZpipYfLNJro403p");
 
-            _loginService = new IdentityService(_userRepository, mockConfig.Object);
-            handler = new IdentityHandler(_unitOfWork, _mockMediator.Object, _loginService);
+            _identityService = new IdentityService(_userRepository, mockConfig.Object);
+            handler = new IdentityHandler(_unitOfWork, _mockMediator.Object, _identityService);
         }
 
         [Fact]
@@ -95,7 +93,37 @@ namespace Real.Time.Chat.Tests.Domain.CommandHandlers
 
             //Assert
             result.Should().NotBeNull();
+            result.Token.Should().NotBeNullOrEmpty();
             _domainNotificationHandler.HasNotifications().Should().BeFalse();
+        }
+
+        [Fact]
+        public async Task Should_get_logged_out()
+        {
+            //Arrange
+            var userLogout = new LogoutUserCommand { UserName = "test" };
+
+            //Act
+            var result = await handler.Handle(userLogout, CancellationToken.None);
+
+            //Assert
+            result.Should().NotBeNull();
+            result.Token.Should().NotBeNullOrEmpty();
+            _domainNotificationHandler.HasNotifications().Should().BeFalse();
+        }
+
+        [Fact]
+        public async Task Should_not_get_logged_out()
+        {
+            //Arrange
+            var userLogout = new LogoutUserCommand { UserName = "" };
+
+            //Act
+            var result = await handler.Handle(userLogout, CancellationToken.None);
+
+            //Assert
+            result.Token.Should().BeNullOrEmpty();
+            _domainNotificationHandler.HasNotifications().Should().BeTrue();
         }
     }
 }

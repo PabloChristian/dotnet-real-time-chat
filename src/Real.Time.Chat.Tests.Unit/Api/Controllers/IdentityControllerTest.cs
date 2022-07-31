@@ -10,6 +10,7 @@ using Xunit;
 using FluentAssertions;
 using Real.Time.Chat.Api.Controllers;
 using Real.Time.Chat.Tests.Fixture;
+using Microsoft.Extensions.Logging;
 
 namespace Real.Time.Chat.Tests.Api.Controllers
 {
@@ -17,6 +18,7 @@ namespace Real.Time.Chat.Tests.Api.Controllers
     {
         private readonly Mock<IMediatorHandler> _mockMediator;
         private readonly DomainNotificationHandler _domainNotificationHandler;
+        private readonly Mock<ILogger<IdentityController>> _mockLogger;
 
         public IdentityControllerTest()
         {
@@ -26,6 +28,7 @@ namespace Real.Time.Chat.Tests.Api.Controllers
             {
                 _domainNotificationHandler.Handle(x, CancellationToken.None);
             });
+            _mockLogger = new Mock<ILogger<IdentityController>>();
         }
 
         [Fact]
@@ -36,7 +39,7 @@ namespace Real.Time.Chat.Tests.Api.Controllers
             _mockMediator.Setup(x => x.SendCommandResult(It.IsAny<GenericCommandResult<bool>>())).Returns(Task.FromResult(false));
             
             //Act
-            var result = await new IdentityController(_domainNotificationHandler, _mockMediator.Object).LoginAsync(obj) as UnauthorizedResult;
+            var result = await new IdentityController(_domainNotificationHandler, _mockMediator.Object, _mockLogger.Object).LoginAsync(obj) as UnauthorizedResult;
 
             //Assert
             result?.StatusCode.Should().Be((int)HttpStatusCode.Unauthorized);
@@ -55,7 +58,7 @@ namespace Real.Time.Chat.Tests.Api.Controllers
             )));
 
             //Act
-            var result = (await new IdentityController(_domainNotificationHandler, _mockMediator.Object).LoginAsync(obj) as OkObjectResult)?.Value as ApiOkReturn;
+            var result = (await new IdentityController(_domainNotificationHandler, _mockMediator.Object, _mockLogger.Object).LoginAsync(obj) as OkObjectResult)?.Value as ApiOkReturn;
             var token = result?.Data as TokenJWT;
 
             //Assert

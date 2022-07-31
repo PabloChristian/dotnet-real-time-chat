@@ -11,7 +11,7 @@ using System.Text;
 
 namespace Real.Time.Chat.Application.Services
 {
-    public class IdentityService : ILoginService
+    public class IdentityService : IIdentityService
     {
         private readonly IUserRepository _userRepository;
         private readonly IConfiguration _config;
@@ -26,6 +26,14 @@ namespace Real.Time.Chat.Application.Services
             _userRepository.GetByExpression(
                 x => x.UserName == username && x.Password == Cryptography.PasswordEncrypt(password)
             )?.FirstOrDefault();
+
+        public User Logout(string username)
+        {
+            var user = _userRepository.GetByExpression(x => x.UserName == username).FirstOrDefault();
+
+            if(user != null) _userRepository.Remove(user);
+            return user;
+        }
 
 
         public TokenJWT GetToken(Guid id, string username)

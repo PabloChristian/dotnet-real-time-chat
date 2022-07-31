@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using Real.Time.Chat.Domain.Interfaces;
+﻿using Real.Time.Chat.Domain.Interfaces;
 using Real.Time.Chat.Domain.Interfaces.Services;
 using Real.Time.Chat.Shared.Kernel.Entity;
 using Real.Time.Chat.Shared.Kernel.Handler;
@@ -11,17 +10,17 @@ namespace Real.Time.Chat.Domain.CommandHandlers
     public class IdentityHandler : IRequestHandler<AuthenticateUserCommand, TokenJWT>
     {
         private readonly IUnitOfWork _unitOfWork;
-        private readonly ILoginService _loginService;
+        private readonly IIdentityService _identityService;
         private readonly IMediatorHandler _mediatorHandler;
 
-        public IdentityHandler(IUnitOfWork unitOfWork, IMediatorHandler mediatorHandler, ILoginService loginService)
+        public IdentityHandler(IUnitOfWork unitOfWork, IMediatorHandler mediatorHandler, IIdentityService loginService)
         {
             _unitOfWork = unitOfWork;
             _mediatorHandler = mediatorHandler;
-            _loginService = loginService;
+            _identityService = loginService;
         }
 
-        public Task<TokenJWT> Handle(AuthenticateUserCommand request, CancellationToken cancellationToken)
+        public async Task<TokenJWT> Handle(AuthenticateUserCommand request, CancellationToken cancellationToken)
         {
             TokenJWT token = new(true,string.Empty);
 
@@ -29,26 +28,56 @@ namespace Real.Time.Chat.Domain.CommandHandlers
             {
                 try
                 {
-                    var user = _loginService.Authenticate(request.UserName, request.Password);
+                    var user = _identityService.Authenticate(request.UserName, request.Password);
 
                     if (user != null)
                     {
-                        token = _loginService.GetToken(user.Id, user.UserName);
-                        _unitOfWork.Commit();
+                        token = _identityService.GetToken(user.Id, user.UserName);
+                        await _unitOfWork.CommitAsync(cancellationToken);
                     }
                     else
-                        _mediatorHandler.RaiseEvent(new DomainNotification("Error", Properties.Resources.User_NotFound));
+                        await _mediatorHandler.RaiseEvent(new DomainNotification("Error", Properties.Resources.User_NotFound));
                 }
                 catch (Exception e)
                 {
-                    _mediatorHandler.RaiseEvent(new DomainNotification("Exception", e.Message));
+                    await _mediatorHandler.RaiseEvent(new DomainNotification("Exception", e.Message));
                 }
             }
             else
                 foreach (var error in request.GetErrors())
-                    _mediatorHandler.RaiseEvent(new DomainNotification(error.ErrorCode, error.ErrorMessage));
+                    await _mediatorHandler.RaiseEvent(new DomainNotification(error.ErrorCode, error.ErrorMessage));
 
-            return Task.FromResult(token);
+            return await Task.FromResult(token);
+        }
+
+        public async Task<TokenJWT> Handle(LogoutUserCommand request, CancellationToken cancellationToken)
+        {
+            TokenJWT token = new(true, string.Empty);
+
+            if (request.IsValid())
+            {
+                try
+                {
+                    var userLoggedout = _identityService.Logout(request.UserName);
+
+                    if (userLoggedout != null)
+                    {
+                        token = _identityService.GetToken(userLoggedout.Id, userLoggedout.UserName);
+                        await _unitOfWork.CommitAsync(cancellationToken);
+                    }
+                    else
+                        await _mediatorHandler.RaiseEvent(new DomainNotification("Error", Properties.Resources.User_NotFound));
+                }
+                catch (Exception e)
+                {
+                    await _mediatorHandler.RaiseEvent(new DomainNotification("Exception", e.Message));
+                }
+            }
+            else
+                foreach (var error in request.GetErrors())
+                    await _mediatorHandler.RaiseEvent(new DomainNotification(error.ErrorCode, error.ErrorMessage));
+
+            return await Task.FromResult(token);
         }
     }
 }

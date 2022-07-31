@@ -31,7 +31,7 @@ namespace Real.Time.Chat.Domain.CommandHandlers
             _mapper = mapper;
         }
 
-        public Task<bool> Handle(UserAddCommand request, CancellationToken cancellationToken)
+        public async Task<bool> Handle(UserAddCommand request, CancellationToken cancellationToken)
         {
             if (request.IsValid())
             {
@@ -45,49 +45,49 @@ namespace Real.Time.Chat.Domain.CommandHandlers
 
                     user.Password = Cryptography.PasswordEncrypt(user.Password);
 
-                    _userRepository.Add(user);
-                    var success = _unitOfWork.Commit();
+                    await _userRepository.AddAsync(user, cancellationToken);
+                    var success = await _unitOfWork.CommitAsync(cancellationToken);
 
-                    return Task.FromResult(success);
+                    return await Task.FromResult(success);
                 }
                 catch(Exception e)
                 {
-                    _mediatorHandler.RaiseEvent(new DomainNotification("exception", e.Message));
+                    await _mediatorHandler.RaiseEvent(new DomainNotification("exception", e.Message));
                 }
             }
             else
             {
                 foreach (var error in request.GetErrors())
-                    _mediatorHandler.RaiseEvent(new DomainNotification(error.ErrorCode, error.ErrorMessage));
+                    await _mediatorHandler.RaiseEvent(new DomainNotification(error.ErrorCode, error.ErrorMessage));
             }
 
-            return Task.FromResult(false);
+            return await Task.FromResult(false);
         }
 
-        public Task<bool> Handle(MessageAddCommand request, CancellationToken cancellationToken)
+        public async Task<bool> Handle(MessageAddCommand request, CancellationToken cancellationToken)
         {
             if (request.IsValid())
             {
                 try
                 {
                     var message = _mapper.Map<Messages>(request);
-                    _userRepository.Add(message);
-                    var success = _unitOfWork.Commit();
+                    await _userRepository.AddAsync(message, cancellationToken);
+                    var success = await _unitOfWork.CommitAsync(cancellationToken);
 
-                    return Task.FromResult(success);
+                    return await Task.FromResult(success);
                 }
                 catch (Exception e)
                 {
-                    _mediatorHandler.RaiseEvent(new DomainNotification("exception", e.Message));
+                    await _mediatorHandler.RaiseEvent(new DomainNotification("exception", e.Message));
                 }
             }
             else
             {
                 foreach (var error in request.GetErrors())
-                    _mediatorHandler.RaiseEvent(new DomainNotification(error.ErrorCode, error.ErrorMessage));
+                    await _mediatorHandler.RaiseEvent(new DomainNotification(error.ErrorCode, error.ErrorMessage));
             }
 
-            return Task.FromResult(false);
+            return await Task.FromResult(false);
         }
     }
 }

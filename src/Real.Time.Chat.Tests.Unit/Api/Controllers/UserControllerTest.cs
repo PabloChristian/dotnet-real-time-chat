@@ -17,6 +17,7 @@ using Real.Time.Chat.Domain.Interfaces.Messaging;
 using Xunit;
 using FluentAssertions;
 using Real.Time.Chat.Tests.Fixture;
+using Microsoft.Extensions.Logging;
 
 namespace Real.Time.Chat.Tests.Api.Controllers
 {
@@ -29,6 +30,7 @@ namespace Real.Time.Chat.Tests.Api.Controllers
         private readonly IUserRepository _userRepository;
         private readonly DomainNotificationHandler _domainNotificationHandler;
         private readonly IMapper _mapper;
+        private readonly Mock<ILogger<UserController>> _mockLogger;
         private UserController _controller;
 
         public UserControllerTest()
@@ -45,6 +47,7 @@ namespace Real.Time.Chat.Tests.Api.Controllers
             });
             _mockQueue = new Mock<IQueueMessageService>();
             _mockQueue.Setup(x => x.SendMessageAsync(It.IsAny<MessageDto>())).Returns(Task.CompletedTask);
+            _mockLogger = new Mock<ILogger<UserController>>();
 
             _mapper = AutoMapperConfig.RegisterMappings().CreateMapper();
         }
@@ -53,7 +56,9 @@ namespace Real.Time.Chat.Tests.Api.Controllers
         public async Task Should_not_return_list_of_users()
         {
             //Arrange
-            _controller = new UserController(new UserService(_userRepository, _mapper), _mockChat.Object, _mockQueue.Object, _domainNotificationHandler, _mockMediator.Object); ;
+            _controller = new UserController(
+                new UserService(_userRepository, _mapper), _mockChat.Object, _mockQueue.Object, _domainNotificationHandler, _mockMediator.Object, _mockLogger.Object
+            ); ;
 
             //Act
             var result = (await _controller.Get() as OkObjectResult)?.Value as ApiOkReturn;
@@ -80,11 +85,14 @@ namespace Real.Time.Chat.Tests.Api.Controllers
                 Name = "test2"
             };
 
-            _userRepository.Add(user);
-            _userRepository.Add(userTwo);
-            _unitOfWork.Commit();
+            var cancellationToken = new CancellationToken();
+            await _userRepository.AddAsync(user, cancellationToken);
+            await _userRepository.AddAsync(userTwo, cancellationToken);
+            await _unitOfWork.CommitAsync(cancellationToken);
 
-            _controller = new UserController(new UserService(_userRepository, _mapper), _mockChat.Object, _mockQueue.Object, _domainNotificationHandler, _mockMediator.Object);
+            _controller = new UserController(
+                new UserService(_userRepository, _mapper), _mockChat.Object, _mockQueue.Object, _domainNotificationHandler, _mockMediator.Object, _mockLogger.Object
+            );
 
             //Act
             var result = (await _controller.Get() as OkObjectResult)?.Value as ApiOkReturn;
@@ -98,7 +106,9 @@ namespace Real.Time.Chat.Tests.Api.Controllers
         public async Task Should_not_return_a_user()
         {
             //Arrange
-            _controller = new UserController(new UserService(_userRepository, _mapper), _mockChat.Object, _mockQueue.Object, _domainNotificationHandler, _mockMediator.Object);
+            _controller = new UserController(
+                new UserService(_userRepository, _mapper), _mockChat.Object, _mockQueue.Object, _domainNotificationHandler, _mockMediator.Object, _mockLogger.Object
+            );
 
             //Act
             var result = (await _controller.Get(Guid.NewGuid()) as OkObjectResult)?.Value as ApiOkReturn;
@@ -124,11 +134,14 @@ namespace Real.Time.Chat.Tests.Api.Controllers
                 Name = "test two"
             };
 
-            _userRepository.Add(user);
-            _userRepository.Add(userTwo);
-            _unitOfWork.Commit();
+            var cancellationToken = new CancellationToken();
+            await _userRepository.AddAsync(user, cancellationToken);
+            await _userRepository.AddAsync(userTwo, cancellationToken);
+            await _unitOfWork.CommitAsync(cancellationToken);
 
-            _controller = new UserController(new UserService(_userRepository, _mapper), _mockChat.Object, _mockQueue.Object, _domainNotificationHandler, _mockMediator.Object);
+            _controller = new UserController(
+                new UserService(_userRepository, _mapper), _mockChat.Object, _mockQueue.Object, _domainNotificationHandler, _mockMediator.Object, _mockLogger.Object
+            );
 
             //Act
             var result = (await _controller.Get(user.Id) as OkObjectResult)?.Value as ApiOkReturn;
@@ -141,7 +154,9 @@ namespace Real.Time.Chat.Tests.Api.Controllers
         [Fact]
         public async Task Should_not_return_list_of_messages()
         {
-            _controller = new UserController(new UserService(_userRepository, _mapper), _mockChat.Object, _mockQueue.Object, _domainNotificationHandler, _mockMediator.Object);
+            _controller = new UserController(
+                new UserService(_userRepository, _mapper), _mockChat.Object, _mockQueue.Object, _domainNotificationHandler, _mockMediator.Object, _mockLogger.Object
+            );
 
             //Act
             var result = (await _controller.GetMessages() as OkObjectResult)?.Value as ApiOkReturn;
@@ -169,11 +184,14 @@ namespace Real.Time.Chat.Tests.Api.Controllers
                 Date = DateTime.Now
             };
 
-            _userRepository.Add(message);
-            _userRepository.Add(messageTwo);
-            _unitOfWork.Commit();
+            var cancellationToken = new CancellationToken();
+            await _userRepository.AddAsync(message, cancellationToken);
+            await _userRepository.AddAsync(messageTwo, cancellationToken);
+            await _unitOfWork.CommitAsync(cancellationToken);
 
-            _controller = new UserController(new UserService(_userRepository, _mapper), _mockChat.Object, _mockQueue.Object, _domainNotificationHandler, _mockMediator.Object);
+            _controller = new UserController(
+                new UserService(_userRepository, _mapper), _mockChat.Object, _mockQueue.Object, _domainNotificationHandler, _mockMediator.Object, _mockLogger.Object
+            );
 
             var result = (await _controller.GetMessages() as OkObjectResult)?.Value as ApiOkReturn;
             var list = result?.Data as List<Messages>;

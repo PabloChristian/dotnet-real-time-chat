@@ -7,7 +7,7 @@ namespace Real.Time.Chat.Domain.Commands.User
         public string UserName { get; set; } = string.Empty;
         public string Password { get; set; } = string.Empty;
 
-        public override bool IsValid() => throw new System.NotImplementedException();
+        public override bool IsValid() => throw new NotImplementedException();
 
         internal class LoginValidator<T> : AbstractValidator<T> where T : LoginCommand<TResult>
         {

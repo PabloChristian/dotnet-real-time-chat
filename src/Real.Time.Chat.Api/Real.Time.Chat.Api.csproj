@@ -7,6 +7,10 @@
     <Configurations>Debug;Release;Production</Configurations>
   </PropertyGroup>
 
+  <PropertyGroup>
+    <NoWarn>$(NoWarn);CA2254;</NoWarn>
+  </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="MassTransit" Version="8.0.5" />
     <PackageReference Include="MassTransit.Extensions.DependencyInjection" Version="7.3.1" />

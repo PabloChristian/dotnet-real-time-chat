@@ -22,13 +22,21 @@ namespace Real.Time.Chat.Api.Controllers
         private readonly IUserService _userService;
         private readonly IHubContext<MessageChatHub> _chatHub;
         private readonly IQueueMessageService _queueMessageService;
+        private readonly ILogger<UserController> _logger;
 
-        public UserController(IUserService userService, IHubContext<MessageChatHub> chatHub, IQueueMessageService queueMessageService, INotificationHandler<DomainNotification> notifications, IMediatorHandler mediator) 
+        public UserController(
+            IUserService userService, 
+            IHubContext<MessageChatHub> chatHub,
+            IQueueMessageService queueMessageService,
+            INotificationHandler<DomainNotification> notifications,
+            IMediatorHandler mediator,
+            ILogger<UserController> logger)
             : base(notifications, mediator)
         {
             _userService = userService;
             _chatHub = chatHub;
             _queueMessageService = queueMessageService;
+            _logger = logger;
         }
 
         [HttpGet]
@@ -65,15 +73,17 @@ namespace Real.Time.Chat.Api.Controllers
         [Authorize]
         public async Task<IActionResult> SendMessage([FromBody]MessageAddCommand messageAddCommand)
         {
-            if (!string.IsNullOrWhiteSpace(messageAddCommand.Consumer))
+            if (!string.IsNullOrWhiteSpace(messageAddCommand.Consumer) || BotHelper.IsStockCall(messageAddCommand.Message))
             {
-                await _queueMessageService.SendMessageAsync(new MessageDto
+                var message = new MessageDto
                 {
                     Consumer = messageAddCommand.Consumer,
                     Date = DateTime.Now,
                     Message = messageAddCommand.Message,
                     Sender = messageAddCommand.Sender
-                });
+                };
+                await _queueMessageService.SendMessageAsync(message);
+                _logger.LogInformation($"Sender {message.Sender} sent message to Consumer: {message.Consumer} - {message.Message}");
             }
             else
                 await _chatHub.Clients
@@ -89,12 +99,17 @@ namespace Real.Time.Chat.Api.Controllers
         {
             if (BotHelper.IsStockCall(message.Message))
             {
+                _logger.LogInformation("Bot call activated");
                 using BotCall bot = new();
                 var msg = bot.CallServiceStock(message.Message[7..]);
                 await _chatHub.Clients.Groups(message.Sender).SendAsync("ReceiveMessage", "Bot", msg);
+                _logger.LogInformation($"Bot sent message to Sender: {message.Sender} - {msg}");
 
                 if (!string.IsNullOrEmpty(message.Consumer) && bot.VerifyResponse())
+                {
                     await _chatHub.Clients.Groups(message.Consumer).SendAsync("ReceiveMessage", "Bot", msg);
+                    _logger.LogInformation($"Bot sent message to Consumer: {message.Consumer} - {msg}");
+                }
             }
             else
             {
