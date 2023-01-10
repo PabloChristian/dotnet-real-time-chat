@@ -127,7 +127,7 @@ To execute the project, follow the steps below:
 2. If for any reason you receive error sending message to RabbitMQ, it is because the port couldnt be opened or is in use. To solve the problem go on docker-compose on 'rabbitmq-service', change port number and run the commands again.
 
 **Option 01: Run in Containers**
-1. Run Docker Desktop.
+1. Run Docker Desktop
 2. Open the command prompt (cmd), navigate inside the project "\src" folder, and type: "docker-compose build" to build the containers (this is only necessary the first time).
 3. Type "docker-compose up -d" to start the application containers.
 4. Now you can view the application:
